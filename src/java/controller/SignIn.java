@@ -15,10 +15,10 @@ import jakarta.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author admin
+ * @author nguye
  */
-@WebServlet(name="TestServlet", urlPatterns={"/TestServlet"})
-public class TestServlet extends HttpServlet {
+@WebServlet(name="SignIn", urlPatterns={"/signin"})
+public class SignIn extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -35,10 +35,10 @@ public class TestServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet TestServlet</title>");  
+            out.println("<title>Servlet SignIn</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet TestServlet at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet SignIn at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
