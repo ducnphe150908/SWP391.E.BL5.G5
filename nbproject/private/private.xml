@@ -5,6 +5,12 @@
         <group>
             <file>file:/C:/Users/admin/Documents/GitHub/SWP391.E.BL5.G55/web/Dashboard.jsp</file>
             <file>file:/C:/Users/admin/Documents/GitHub/SWP391.E.BL5.G55/web/index.html</file>
+            <file>file:/D:/SWP391.E.BL5.G55/web/ResetPassword.jsp</file>
+            <file>file:/D:/SWP391.E.BL5.G55/web/SignUp.jsp</file>
+            <file>file:/D:/SWP391.E.BL5.G55/src/java/controller/SignUp.java</file>
+            <file>file:/D:/SWP391.E.BL5.G55/src/java/controller/SignIn.java</file>
+            <file>file:/D:/SWP391.E.BL5.G55/src/java/controller/ResetPassword.java</file>
+            <file>file:/D:/SWP391.E.BL5.G55/web/SignIn.jsp</file>
         </group>
     </open-files>
 </project-private>
