@@ -4,8 +4,22 @@
         <servlet-name>count</servlet-name>
         <servlet-class>count</servlet-class>
     </servlet>
+<<<<<<< Updated upstream
+=======
+    <servlet>
+        <servlet-name>Homedashboard</servlet-name>
+        <servlet-class>controller.Homedashboard</servlet-class>
+    </servlet>
+>>>>>>> Stashed changes
     <servlet-mapping>
         <servlet-name>count</servlet-name>
         <url-pattern>/count</url-pattern>
     </servlet-mapping>
+<<<<<<< Updated upstream
+=======
+    <servlet-mapping>
+        <servlet-name>Homedashboard</servlet-name>
+        <url-pattern>/Homedashboard</url-pattern>
+    </servlet-mapping>
+>>>>>>> Stashed changes
 </web-app>
