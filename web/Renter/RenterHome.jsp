@@ -78,7 +78,7 @@
         <div class="container">
             <div class="row justify-content-center align-items-center">
                 <div class="col-lg-9 text-center">
-                    <h1 class="heading" data-aos="fade-up">Welcome to Hoa Lac Motel</h1>
+                    <h1 class="heading" data-aos="fade-up">Welcome to Hoa Lac Apartment</h1>
                 </div>
             </div>
         </div>

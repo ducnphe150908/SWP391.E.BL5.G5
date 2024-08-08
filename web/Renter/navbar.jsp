@@ -51,7 +51,7 @@
                     <li><a href="#">Penalty</a></li>
                 </ul>
             </li>              
-            <li class="${param.service == "paymentList" ? "active" : ''}"><a href="WalletController">Wallet</a></li>
+            <li class="active"><a href="WalletController">Wallet</a></li>
             <li><a href="rentercontroller?service=request">Contact Us</a></li>
             <li><a href="logout">Logout</a></li>
             <li>
