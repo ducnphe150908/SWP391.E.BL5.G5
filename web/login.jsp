@@ -1,8 +1,3 @@
-<%-- 
-    Document   : login
-    Created on : Jan 9, 2024, 10:22:56 AM
-    Author     : yetvv.piacom
---%>
 
 <% String error = (String) request.getAttribute("error"); %>
 
