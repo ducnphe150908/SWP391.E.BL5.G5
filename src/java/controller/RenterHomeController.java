@@ -11,7 +11,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-
 @WebServlet(name="RenterHomeController", urlPatterns={"/renterhome"})
 public class RenterHomeController extends HttpServlet {
 
