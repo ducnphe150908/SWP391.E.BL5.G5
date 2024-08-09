@@ -88,7 +88,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
-                    <a href="#" class="feature-link">
+                    <a href="rentercontroller?service=news" class="feature-link">
                         <div class="box-feature">
                             <span class="flaticon-house"></span>
                             <h3 class="mb-3">News</h3>
