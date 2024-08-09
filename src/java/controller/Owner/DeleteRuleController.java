@@ -25,7 +25,7 @@ public class DeleteRuleController extends HttpServlet {
         String raw_id = req.getParameter("id");
         int id = Integer.parseInt(raw_id);
         RuleDAO dbRule = new RuleDAO();
-        dbRule.deleteRule(id);
+//        dbRule.deleteRule(id);
         resp.sendRedirect("ruleList");
     }
 
