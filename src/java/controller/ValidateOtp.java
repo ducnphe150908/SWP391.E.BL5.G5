@@ -29,7 +29,7 @@ public class ValidateOtp extends HttpServlet {
             if(cooky.getName().equals("otpR")){
                 otpR = cooky.getValue();
                 break;
-            }
+            }//kiki
         }
         RequestDispatcher dispatcher = null;
 
