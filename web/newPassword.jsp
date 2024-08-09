@@ -93,9 +93,9 @@
                 <input type="password" name="newpassword" required>
                 <div id="repasswordError"></div>
             </div>
-            <div class="note-text">
+<!--            <div class="note-text">
                 Hint: To make your password stronger, use upper and lower case letters, numbers, and symbols like !"? $ % ^ &).
-            </div>
+            </div>-->
             <div class="reset">
                 <input type="submit" value="Reset Password" id="submitButton">
             </div>
