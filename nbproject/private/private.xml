@@ -2,15 +2,11 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+
         <group>
-            <file>file:/C:/Users/admin/Documents/GitHub/SWP391.E.BL5.G55/web/Dashboard.jsp</file>
-            <file>file:/C:/Users/admin/Documents/GitHub/SWP391.E.BL5.G55/web/index.html</file>
-            <file>file:/D:/SWP391.E.BL5.G55/web/ResetPassword.jsp</file>
-            <file>file:/D:/SWP391.E.BL5.G55/web/SignUp.jsp</file>
-            <file>file:/D:/SWP391.E.BL5.G55/src/java/controller/SignUp.java</file>
-            <file>file:/D:/SWP391.E.BL5.G55/src/java/controller/SignIn.java</file>
-            <file>file:/D:/SWP391.E.BL5.G55/src/java/controller/ResetPassword.java</file>
-            <file>file:/D:/SWP391.E.BL5.G55/web/SignIn.jsp</file>
+            <file>file:/D:/New%20folder/1/SWP391.E.BL5.G5/src/java/controller/Owner/GuildeLinesController.java</file>
+            <file>file:/D:/New%20folder/1/SWP391.E.BL5.G5/src/java/controller/ForgotPassword.java</file>
         </group>
+
     </open-files>
 </project-private>
