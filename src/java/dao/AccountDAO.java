@@ -76,4 +76,33 @@ public class AccountDAO extends MyDAO {
         }
         return null;
     }
+
+        public Account findByEmail(String email) {
+        try {
+            PreparedStatement ps;
+            ResultSet rs;
+            String sql = "SELECT * FROM [HL_Motel].[dbo].[Account] WHERE userMail = ?";
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, email);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Account a = new Account();
+                a.setUserID(rs.getInt(1));
+                a.setUserMail(rs.getString(2));
+                a.setUserPassword(rs.getString(3));
+                a.setUserRole(rs.getInt(4));
+                return a;
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public void updatePassword(Account accountInDb) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+ 
 }
