@@ -17,7 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Account;
 
-@WebServlet(name="LoginController", urlPatterns={"/login"})
+@WebServlet(name = "LoginController", urlPatterns = {"/login"})
 public class LoginController extends HttpServlet {
 
     @Override
@@ -46,13 +46,22 @@ public class LoginController extends HttpServlet {
                 session.setAttribute("password", password);
                 request.setAttribute("message", "Login successfully");
 
-                
-
                 int role = a.getUserRole(email, password);
 
                 switch (role) {
+                    case 0:
+                        response.sendRedirect(request.getContextPath() + "/error.jsp");
                     case 1:
                         response.sendRedirect(request.getContextPath() + "/renterhome");
+                        break;
+                    case 2:
+                        response.sendRedirect(request.getContextPath() + "/OwnerController");
+                        break;
+                    case 3:
+                        response.sendRedirect(request.getContextPath() + "/chartServlet");
+                        break;
+                    case 4:
+                        response.sendRedirect(request.getContextPath() + "/manage");
                         break;
                     default:
                         request.setAttribute("message", "Login failed"); // or handle other roles as needed

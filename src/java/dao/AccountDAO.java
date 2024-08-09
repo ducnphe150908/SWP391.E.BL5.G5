@@ -18,12 +18,43 @@ import java.util.logging.Logger;
  * @author ASUS
  */
 public class AccountDAO extends MyDAO {
+
+    public boolean checkMailRegister(String email) {
+        boolean check = false;
+
+        try {
+            final String sql = "select * from [account]\n"
+                    + "  where usermail = ?";
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, email);
+            final ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                check = true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return check;
+    }
     
+    public static void main(String[] args) {
+        AccountDAO dao = new AccountDAO();
+       boolean check = dao.checkMailRegister("cuongntthe173555@fpt.edu.vn");
+        System.out.println(check);
+    }
+
     public boolean updateUserPassword(String email, String password) {
         try {
             PreparedStatement ps;
             ResultSet rs;
             String sql = "update [Account] set userPassword = ? where userMail = ?";
+    
             ps = connection.prepareStatement(sql);
             ps.setString(2, email);
             ps.setString(1, password);
@@ -76,4 +107,33 @@ public class AccountDAO extends MyDAO {
         }
         return null;
     }
+
+        public Account findByEmail(String email) {
+        try {
+            PreparedStatement ps;
+            ResultSet rs;
+            String sql = "SELECT * FROM [HL_Motel].[dbo].[Account] WHERE userMail = ?";
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, email);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Account a = new Account();
+                a.setUserID(rs.getInt(1));
+                a.setUserMail(rs.getString(2));
+                a.setUserPassword(rs.getString(3));
+                a.setUserRole(rs.getInt(4));
+                return a;
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public void updatePassword(Account accountInDb) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+ 
 }
