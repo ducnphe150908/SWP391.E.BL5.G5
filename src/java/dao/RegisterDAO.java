@@ -22,6 +22,7 @@ public class RegisterDAO extends DBContext {
                 + "           ,[userPhone]\n"
                 + "           ,[userAvatar])\n"
                 + "     VALUES (?,?,?,?,?,?,?)";
+   
         try {
             PreparedStatement pre = connection.prepareStatement(sql);
             pre.setInt(1, userID);
@@ -45,6 +46,7 @@ public class RegisterDAO extends DBContext {
                 + "           ,[userPassword]\n"
                 + "           ,[userRole])\n"
                 + "     VALUES (?,?,?)";
+
         try {
             PreparedStatement pre = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             pre.setString(1, account.getUserMail());
@@ -67,6 +69,7 @@ public class RegisterDAO extends DBContext {
     public List<Account> getListAccount() {
         List<Account> listAccount = new ArrayList<>();
         String sql = "select * from account";
+      
         try {
             PreparedStatement pre = connection.prepareStatement(sql);
             ResultSet rs = pre.executeQuery();

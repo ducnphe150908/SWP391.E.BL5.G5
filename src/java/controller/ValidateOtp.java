@@ -14,7 +14,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebServlet(name="ValidateOtp", urlPatterns={"/ValidateOtp"})
+@WebServlet(name = "ValidateOtp", urlPatterns = {"/ValidateOtp"})
 public class ValidateOtp extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
@@ -26,7 +26,7 @@ public class ValidateOtp extends HttpServlet {
         Cookie[] cookies = request.getCookies();
         String otpR = "";
         for (Cookie cooky : cookies) {
-            if(cooky.getName().equals("otpR")){
+            if (cooky.getName().equals("otpR")) {
                 otpR = cooky.getValue();
                 break;
             }
