@@ -32,13 +32,12 @@
         <div class="container">
             <div class="title">Register</div>
             <div class="content">
+                <% if (error != null) { %>
+                <h3 id="message" style="color: #FF0E0E; margin-top: 20px;"><%= error %></h3>
+                <% } %>
+                <h3 id="message" style="color: #FF0E0E; margin-top: 20px;">${message}</h3>
+                
                 <form id="registerForm" action="emailSender" method="post">
-
-                    <% if (error != null) { %>
-                    <h3 id="message" style="color: #FF0E0E; margin-top: 20px;"><%= error %></h3>
-                    <% } %>
-                    <h3 id="message" style="color: #FF0E0E; margin-top: 20px;">${message}</h3>
-
                     <div class="user-details">
                         <div class="input-box">
                             <span class="details">Username</span>
