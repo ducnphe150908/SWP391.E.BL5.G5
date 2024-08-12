@@ -17,18 +17,24 @@ import java.util.List;
  */
 public class NewDAO extends DBContext {
 
-    public List<News> getNewsList() {
+    public List<News> getNewsList(int pageIndex, int pageSize) {
         List<News> news = new ArrayList<>();
-        String sql = "SELECT [newID]\n"
-                + "      ,[newTitle]\n"
-                 + "      ,[description]\n"
-                + "      ,[creatAt]\n"
-                + "      ,[img]\n"
-                + "  FROM [HL_Motel].[dbo].[news]";
+        String sql = "SELECT [newId],\n"
+                + "      [newTitle],\n"
+                + "      [description],\n"
+                + "      [creatAt],\n"
+                + "      [img]\n"
+                + "  FROM [HL_Motel].[dbo].[news]\n"
+                + "ORDER BY [newID]\n"
+                + "OFFSET ? ROWS\n"
+                + "FETCH NEXT ? ROWS ONLY";
 
         try {
             java.sql.Connection conn = connection;
             PreparedStatement ps = conn.prepareStatement(sql);
+            int offset = (pageIndex - 1) * pageSize;
+            ps.setInt(1, offset);
+            ps.setInt(2, pageSize);
 
             ResultSet rs = ps.executeQuery();
 
@@ -37,7 +43,7 @@ public class NewDAO extends DBContext {
                 News.setNewId(rs.getInt("newId"));
                 News.setCreateAt(rs.getString("creatAt"));
                 News.setNewTitle(rs.getString("newTitle"));
-                News.setDescription(rs.getString ("description"));
+                News.setDescription(rs.getString("description"));
                 News.setImg(rs.getString("img"));
                 news.add(News);
             }
@@ -46,9 +52,8 @@ public class NewDAO extends DBContext {
         }
         return news;
     }
-    
-    
-     public int insertNews(News news) {
+
+    public int insertNews(News news) {
         int n = 0;
         String query = "INSERT INTO [dbo].[news]\n"
                 + "           ([newTitle]\n"
@@ -57,22 +62,22 @@ public class NewDAO extends DBContext {
                 + "           ,[creatAt])\n"
                 + "     VALUES\n"
                 + "           (?,?,?,?)";
-         try {
+        try {
             java.sql.Connection conn = connection;
             PreparedStatement ps = conn.prepareStatement(query);
-             ps.setString(1, news.getNewTitle());
-             ps.setString(2, news.getDescription());
-             ps.setString(3, news.getImg());
-             ps.setString(4, news.getCreateAt());
-        
-         n = ps.executeUpdate();
+            ps.setString(1, news.getNewTitle());
+            ps.setString(2, news.getDescription());
+            ps.setString(3, news.getImg());
+            ps.setString(4, news.getCreateAt());
+
+            n = ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }
         return n;
     }
-     
-     public int updateNews(News news) {
+
+    public int updateNews(News news) {
         int n = 0;
         String query = "String query = \"UPDATE [dbo].[news]\\n\"\n"
                 + "                 + \"SET [newTitle] = ?,\\n\"\n"
@@ -153,14 +158,10 @@ public class NewDAO extends DBContext {
         }
         return news;
     }
+    
+ 
+    
 
-    public static void main(String[] args) {
-        NewDAO NewDAO = new NewDAO();
-        List<News> news = NewDAO.getNewsList();
-        
-        for (News aNew : news) {
-            System.out.println(aNew.getNewId());
-        }
-    }
+    
 }
-//getNewsDetails("1");
+
