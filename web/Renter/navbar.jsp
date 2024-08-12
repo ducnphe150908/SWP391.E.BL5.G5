@@ -42,7 +42,7 @@
                     <li><a href="#">List Of Rooms</a></li>
                     <li><a href="#">Guide and Rule</a></li>
                     <li><a href="#">My Room</a></li>
-                    <li><a href="#">News</a></li>
+                    <li><a href="rentercontroller?service=news">News</a></li>
                     <li><a href="#">Penalty</a></li>
                 </ul>
             </li>              
