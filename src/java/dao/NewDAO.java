@@ -159,7 +159,42 @@ public class NewDAO extends DBContext {
         return news;
     }
     
- 
+  public List<News> searchByText(int pageIndex, int pageSize, String search) {
+        List<News> news = new ArrayList<>();
+        String sql = "SELECT [newId],\n"
+                + "      [newTitle],\n"
+                + "      [description],\n"
+                + "      [creatAt],\n"
+                + "      [img]\n"
+                + "  FROM [HL_Motel].[dbo].[news]\n where newTitle like ? "
+                + "ORDER BY [newID]\n"
+                + "OFFSET ? ROWS\n"
+                + "FETCH NEXT ? ROWS ONLY";
+
+        try {
+            java.sql.Connection conn = connection;
+            PreparedStatement ps = conn.prepareStatement(sql);
+            int offset = (pageIndex - 1) * pageSize;
+            ps.setString(1, "%" + search + "%");
+            ps.setInt(2, offset);
+            ps.setInt(3, pageSize);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                News News = new News();
+                News.setNewId(rs.getInt("newId"));
+                News.setCreateAt(rs.getString("creatAt"));
+                News.setNewTitle(rs.getString("newTitle"));
+                News.setDescription(rs.getString("description"));
+                News.setImg(rs.getString("img"));
+                news.add(News);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return news;
+    }
     
 
     
