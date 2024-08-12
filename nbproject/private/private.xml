@@ -8,5 +8,14 @@
             <file>file:/D:/SWP_Block/SWP391.E.BL5.G5/src/java/controller/hello.java</file>
             <file>file:/D:/SWP_Block/SWP391.E.BL5.G5/src/java/controller/HEllo1.java</file>
         </group>
+        <group name="SWP391">
+            <file>file:/D:/SWP391/New%20folder/SWP391.E.BL5.G5/src/java/model/Room.java</file>
+            <file>file:/D:/SWP391/New%20folder/SWP391.E.BL5.G5/src/java/controller/Owner/DeleteRuleController.java</file>
+            <file>file:/D:/SWP391/New%20folder/SWP391.E.BL5.G5/src/java/dao/DBContext.java</file>
+            <file>file:/D:/SWP391/New%20folder/SWP391.E.BL5.G5/src/java/controller/LoginController.java</file>
+            <file>file:/D:/SWP391/New%20folder/SWP391.E.BL5.G5/src/java/util/Sendmail.java</file>
+            <file>file:/D:/SWP391/New%20folder/SWP391.E.BL5.G5/src/java/model/User.java</file>
+            <file>file:/D:/SWP391/New%20folder/SWP391.E.BL5.G5/src/java/dao/RoomDAO.java</file>
+        </group>
     </open-files>
 </project-private>
