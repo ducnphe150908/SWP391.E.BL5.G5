@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import model.Penalty;
 
 /**
  *
@@ -112,6 +112,25 @@ public class RuleDAO extends DBContext {
             ps.setInt(3, rule.getScoreChange());
             ps.setDouble(4, rule.getPenMoney());
             ps.setInt(5, rule.getRuleID());
+            ps.executeUpdate();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(RuleDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void deleteRule(int ruleId) {
+        try {
+            String sql = "delete from [Rule] where ruleID = ?";
+            PreparedStatement ps;
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, ruleId);
+            
+            PenaltyDao dbPenalty = new PenaltyDao();
+            List<Penalty> penaltys = dbPenalty.findByRuleId(ruleId);
+            for (Penalty penalty : penaltys) {
+                dbPenalty.remove(penalty.getPenID());
+            }
             ps.executeUpdate();
 
         } catch (SQLException ex) {

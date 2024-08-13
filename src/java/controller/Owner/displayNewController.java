@@ -37,7 +37,7 @@ public class displayNewController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         NewDAO newsDAO = new NewDAO(); // Assuming NewsDAO handles database operations
-        List<News> newsList = newsDAO.getNewsList(0, 100);// Fetch news list from DAO
+        
 
         String indexParam = request.getParameter("index");
         int index = 1;
@@ -64,7 +64,7 @@ public class displayNewController extends HttpServlet {
 
         SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
         SimpleDateFormat sds = new SimpleDateFormat("dd-MM-yyyy ");
-        for (News news : newsList) {
+        for (News news : ListN) {
             Date date = null;
             String formattedDate = news.getCreateAt();
 
@@ -79,7 +79,7 @@ public class displayNewController extends HttpServlet {
             }
         }
 
-        request.setAttribute("newsList", newsList); // Set newsList attribute for JSP
+        request.setAttribute("newsList", ListN); // Set newsList attribute for JSP
 
         request.getRequestDispatcher("Owner/DisplayNews.jsp").forward(request, response); // Forward to JSP for display
     }

@@ -1,3 +1,9 @@
+<%-- 
+    Document   : header.jsp
+    Created on : Jun 10, 2024, 10:05:17 PM
+    Author     : DAT
+--%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <% String service = (String) request.getParameter("service"); %>
 <!DOCTYPE html>

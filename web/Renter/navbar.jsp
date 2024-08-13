@@ -1,3 +1,8 @@
+<%-- 
+    Document   : navbar
+    Created on : 25 thg 5, 2024, 15:32:37
+    Author     : phuc
+--%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -23,7 +28,7 @@
         <link rel="stylesheet" href="../css/tiny-slider.css">
         <link rel="stylesheet" href="../css/aos.css">
         <link rel="stylesheet" href="../css/style.css">
-
+        
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.css" />
 
@@ -33,20 +38,20 @@
     </head>
     <body>        
         <ul class="js-clone-nav d-none d-lg-inline-block text-start site-menu float-end">
-            <li class="active">
-                <a href="#">Home</a>
+            <li class="${param.service == null || param.service == 'renterhome' ? 'active' : ''}">
+                <a href="rentercontroller?service=renterhome">Home</a>
             </li>
-            <li class="has-children active">
+            <li class="has-children ${(param.service == 'listRoom') || (param.service == 'guideandrule') || (param.service == 'RenterRoomDetail') ? 'active' : ''}">
                 <a href="#">View</a>
                 <ul class="dropdown">
-                    <li><a href="#">List Of Rooms</a></li>
-                    <li><a href="#">Guide and Rule</a></li>
-                    <li><a href="#">My Room</a></li>
+                    <li><a href="RenterRoomController?service=listRoom&index=1">List Of Rooms</a></li>
+                    <li><a href="guidelines">Guide and Rule</a></li>
+                    <li><a href="RenterRoomDetail?service=RenterRoomDetail">My Room</a></li>
                     <li><a href="rentercontroller?service=news">News</a></li>
-                    <li><a href="#">Penalty</a></li>
+                    <li><a href="penaltys">Penalty</a></li>
                 </ul>
-            </li>              
-            <li class="active"><a href="WalletController">Wallet</a></li>
+            </li>               
+            <li class="${param.service == "paymentList" ? "active" : ''}"><a href="WalletController">Wallet</a></li>
             <li><a href="rentercontroller?service=request">Contact Us</a></li>
             <li><a href="logout">Logout</a></li>
             <li>

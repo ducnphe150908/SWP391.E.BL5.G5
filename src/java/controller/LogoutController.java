@@ -31,7 +31,7 @@ public class LogoutController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
          HttpSession session = request.getSession(false); // Fetch session if exists
         if (session != null) {
             session.invalidate(); // Invalidate the session
@@ -51,11 +51,7 @@ public class LogoutController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         HttpSession session = request.getSession(false); // Fetch session if exists
-        if (session != null) {
-            session.invalidate(); // Invalidate the session
-        }
-        response.sendRedirect("login.jsp");
+        processRequest(request, response);
     }
 
     /**
