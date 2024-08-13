@@ -8,7 +8,7 @@ package model;
 
 /**
  *
- * @author ASUS
+ * @author quan
  */
 public class News {
 

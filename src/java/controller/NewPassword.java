@@ -36,11 +36,10 @@ public class NewPassword extends HttpServlet {
                 && (confPassword.length() >= 6 && confPassword.length() <= 32)) 
         {
             try {
-                AccountDAO udbc = new AccountDAO();
-                udbc.updateUserPassword(email, newPassword);
-                request.setAttribute("status", "Reset Success");
-                dispatcher = request.getRequestDispatcher("login.jsp");
-                dispatcher.forward(request, response);
+                AccountDAO dao = new AccountDAO();
+                dao.updateUserPassword(email, newPassword);
+                request.setAttribute("message", "Reset Success");
+                request.getRequestDispatcher("login.jsp").forward(request, response);
             } catch (Exception e) {
                 e.printStackTrace();
             }

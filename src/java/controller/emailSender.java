@@ -1,5 +1,6 @@
 package controller;
 
+import dao.AccountDAO;
 import dao.RegisterDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -10,6 +11,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -20,6 +24,7 @@ import javax.mail.*;
 import javax.mail.internet.*;
 import model.Account;
 import model.User;
+import util.Sendmail;
 
 @WebServlet(name = "emailSender", urlPatterns = {"/emailSender"})
 public class emailSender extends HttpServlet {
@@ -28,6 +33,7 @@ public class emailSender extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
         response.setContentType("text/html;charset=UTF-8");
         RegisterDAO dao = new RegisterDAO();
         String email = request.getParameter("email");
@@ -44,80 +50,65 @@ public class emailSender extends HttpServlet {
         Matcher matcher = phone_number_pattern.matcher(phone);
         if (!matcher.matches()) {
             request.setAttribute("error", "Invalid phone number!!!");
-            request.getRequestDispatcher("register.jsp").forward(request, response);            
+            request.getRequestDispatcher("register.jsp").forward(request, response);
+            return;
+        }
+
+        try {
+            LocalDate birthDate = LocalDate.parse(dob);
+            LocalDate today = LocalDate.now();
+            Period age = Period.between(birthDate, today);
+
+            if (age.getYears() < 18) {
+                request.setAttribute("error", "You must be at least 18 years old to register.");
+                request.getRequestDispatcher("register.jsp").forward(request, response);
+                return;
+            }
+        } catch (DateTimeParseException e) {
+            request.setAttribute("error", "Invalid date format. Please use yyyy-MM-dd.");
+            request.getRequestDispatcher("register.jsp").forward(request, response);
+            return;
         }
 
         // check exist email
         for (Account account : listAccount) {
             if (email.equals(account.getUserMail())) {
                 request.setAttribute("error", "Email already exists!!!");
-                request.getRequestDispatcher("register.jsp").forward(request, response);              
+                request.getRequestDispatcher("register.jsp").forward(request, response);
             }
         }
 
-        // random otp
-        String code = generateRandomCode();
-        // send email
-        boolean emailSent = sendEmail(email, code);
+        AccountDAO acc = new AccountDAO();
+        boolean check = acc.checkMailRegister(email);
+        
+        if (!check) {
+            // random otp
+            String code = generateRandomCode();
+            // send email
+            boolean emailSent = Sendmail.sendEmail(email, code);
 
-        if (emailSent) {
-            // Save the confirmation code and send to session
-            HttpSession session = request.getSession();
-            session.setAttribute("authCode", code);
-            session.setAttribute("codeGeneratedTime", System.currentTimeMillis());
+            if (emailSent) {
+                // Save the confirmation code and send to session
+                
+                session.setAttribute("authCode", code);
+                session.setAttribute("codeGeneratedTime", System.currentTimeMillis());
 
-            session.setAttribute("email", email);
-            session.setAttribute("phone", phone);
-            session.setAttribute("username", username);
-            session.setAttribute("gender", gender);
-            session.setAttribute("dob", dob);
-            session.setAttribute("password", password);
-            session.setAttribute("address", address);
+                session.setAttribute("email", email);
+                session.setAttribute("phone", phone);
+                session.setAttribute("username", username);
+                session.setAttribute("gender", gender);
+                session.setAttribute("dob", dob);
+                session.setAttribute("password", password);
+                session.setAttribute("address", address);
 
-            // sendRedirect verify page
-            request.getRequestDispatcher("verifyCode.jsp").forward(request, response);
-        } else {
-            response.getWriter().println("Sending email failed. Please try again.");
-        }
-
-    }
-
-    private boolean sendEmail(String recipient, String code) throws UnsupportedEncodingException {
-        // email account information
-        String email = "ngtatricuong2003@gmail.com";
-        String appPassword = "ckpe rukz brui pvef";
-        String smtpHost = "smtp.gmail.com";
-        int smtpPort = 587;
-
-        Properties props = new Properties();
-        props.put("mail.smtp.host", smtpHost);
-        props.put("mail.smtp.port", smtpPort);
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.starttls.enable", "true");
-
-        Authenticator auth = new Authenticator() {
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(email, appPassword);
+                // sendRedirect verify page
+                request.getRequestDispatcher("verifyCode.jsp").forward(request, response);
+            } else {
+                session.setAttribute("error", "Sending email failed. Please try again.");
+                request.getRequestDispatcher("register.jsp").forward(request, response);
             }
-        };
-
-        Session session = Session.getInstance(props, auth);
-
-        try {
-            Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(email, "Admin"));
-            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipient));
-            message.setSubject("Verification");
-            message.setText("Your verification code is: " + code);
-
-            Transport.send(message);
-
-            return true;
-        } catch (MessagingException e) {
-            e.printStackTrace(); // Log error details to the console
-            log("Error sending email: " + e.getMessage(), e); // Write errors to the servlet log
-            return false;
         }
+
     }
 
     private String generateRandomCode() {
