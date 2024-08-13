@@ -1,7 +1,7 @@
 <%-- 
     Document   : Addnews
-    Created on : Jun 28, 2024, 9:28:01 AM
-    Author     : pc
+    Created on : Jul 8, 2024, 3:13:13 PM
+    Author     : quan
 --%>
 
 <!doctype html>
@@ -121,14 +121,19 @@
                 </div>
                 <div class="mb-3">
                     <label for="image" class="form-label">Upload Image</label>
-                    <input type="file" class="form-control" name="image">
+                    <input type="file" class="form-control" id="image" name="image" accept="image/jpeg, image/png">
+                     <c:if test="${not empty error}">
+                                    <span style="color: red;">${error}</span>
+                                </c:if>
+                                <span id="fileError" style="color: red;"></span>
                 </div>
                 <div class="mb-3">
                     <label for="createAt" class="form-label">Create at:</label>
                     <input type="date" class="form-control" id="createAt" name="createAt" required readonly="">
+                    
                 </div>
 
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary" onclick="return validateFile()">Submit</button>
                 <a href="displayNews" class="btn btn-primary"> Back to list</a>
             </form>
             <script>
@@ -137,6 +142,46 @@
 
                 document.getElementById('createAt').value = today;
             </script>
+             <script>
+                    function validateFile() {
+                        const fileInput = document.getElementById('image');
+                        const fileError = document.getElementById('fileError');
+                        fileError.textContent = ''; // Clear previous errors
+
+                        if (!fileInput.files || fileInput.files.length === 0) {
+                            fileError.textContent = 'Please select a file.';
+                            return false;
+                        }
+
+                        const file = fileInput.files[0];
+                        const allowedTypes = ['image/jpeg', 'image/png'];
+                        const maxSize = 1 * 1024 * 1024; // 5 MB
+
+                        if (!allowedTypes.includes(file.type)) {
+                            fileError.textContent = 'Only JPEG and PNG files are allowed.';
+                            return false;
+                        }
+
+                        if (file.size > maxSize) {
+                            fileError.textContent = 'File size must be less than 1 MB.';
+                            return false;
+                        }
+
+                        return true;
+                    }
+                </script>
+                <script>
+                    function checkImageFile() {
+                        var fileInput = document.getElementById('files');
+                        var filePath = fileInput.value;
+                        var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+                        if (!allowedExtensions.exec(filePath)) {
+                            alert('Ch? cho phép t?i lên các file có ??nh d?ng: .jpeg/.jpg/.png/.gif');
+                            fileInput.value = '';
+                            return false;
+                        }
+                    }
+                </script>
         </div>
         <div class="site-footer">
             <div class="container">

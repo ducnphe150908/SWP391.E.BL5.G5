@@ -1,7 +1,7 @@
 <%-- 
-    Document   : Addnews
-    Created on : Jun 28, 2024, 9:28:01 AM
-    Author     : pc
+     Document   : EditNews
+    Created on : August 9, 2024, 9:31:14 PM
+    Author     : quan
 --%>
 <%@page import="model.News"%>
 
@@ -67,7 +67,16 @@
         </style>
     </head>
     <body>
-
+        <%
+        String error = (String) request.getAttribute("error");
+        if (error != null && !error.isEmpty()) {
+    %>
+        <div style="color: red; font-weight: bold;">
+            <%= error %>
+        </div>
+    <%
+        }
+    %>
         <div class="site-mobile-menu site-navbar-target">
             <div class="site-mobile-menu-header">
                 <div class="site-mobile-menu-close">
@@ -104,28 +113,26 @@
                     </div>
                 </div>
             </div>
-        <%
-            News newDetail = (News) request.getAttribute("news");
-        %>
+       
         <div class="container my-5">
             <h2>Edit News</h2>
-            <form action="UpdateNewsController" method="post" enctype="multipart/form-data">
-                <input type="hidden" name="id" value="<%= newDetail.getNewId() %>" />
+            <form action="editNews" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="id" value="${news.newId}"/>
                 <div class="form-group mb-3">
                     <label for="title">Title</label>
-                    <input type="text" class="form-control" name="newTitle" value="<%= newDetail.getNewTitle() %>"  required>
+                    <input type="text" class="form-control" name="title" value="${news.newTitle}" required>
                 </div>
                 <div class="form-group mb-3">
                     <label for="description">Description</label>
-                    <textarea class="form-control" id="description" name="description"  required><%= newDetail.getDescription() %></textarea>
+                    <textarea class="form-control" id="description" name="description" required>${news.description} </textarea>
                 </div>
                 <div class="form-group mb-3">
                     <label for="img">Image URL</label>
-                    <input type="file" class="form-control" id="img" name="img"   required>
+                    <input type="file" class="form-control" id="img" name="img" required>
                 </div>
                 <div class="form-group mb-3">
                     <label for="createAt">Create At</label>
-                    <input type="text" class="form-control" id="createAt" name="createAt" value="<%= newDetail.getCreateAt() %>" required>
+                    <input type="text" class="form-control" id="createAt" name="createAt" value="${news.createAt}" required>
                 </div>
                 <button type="submit" class="btn btn-primary">Update</button>
             </form>

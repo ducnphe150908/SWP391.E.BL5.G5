@@ -17,7 +17,7 @@ import model.News;
 
 /**
  *
- * @author pc
+ * @author quan
  */
 @WebServlet(name="EditNewsController", urlPatterns={"/formeditnews"})
 public class EditNewsFormController extends HttpServlet {
