@@ -4,12 +4,17 @@
  */
 package dao;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import model.Account;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Base64;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -42,11 +47,12 @@ public class AccountDAO extends MyDAO {
         }
         return check;
     }
+
     
+
     public static void main(String[] args) {
-        AccountDAO dao = new AccountDAO();
-       boolean check = dao.checkMailRegister("cuongntthe173555@fpt.edu.vn");
-        System.out.println(check);
+        
+
     }
 
     public boolean updateUserPassword(String email, String password) {
@@ -54,7 +60,7 @@ public class AccountDAO extends MyDAO {
             PreparedStatement ps;
             ResultSet rs;
             String sql = "update [Account] set userPassword = ? where userMail = ?";
-    
+
             ps = connection.prepareStatement(sql);
             ps.setString(2, email);
             ps.setString(1, password);
@@ -108,7 +114,7 @@ public class AccountDAO extends MyDAO {
         return null;
     }
 
-        public Account findByEmail(String email) {
+    public Account findByEmail(String email) {
         try {
             PreparedStatement ps;
             ResultSet rs;
@@ -135,5 +141,4 @@ public class AccountDAO extends MyDAO {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
- 
 }
