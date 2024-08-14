@@ -45,10 +45,10 @@
                 <a href="#">View</a>
                 <ul class="dropdown">
                     <li><a href="RenterRoomController?service=listRoom&index=1">List Of Rooms</a></li>
-                    <li><a href="guidelines">Guide and Rule</a></li>
+                    <li><a href="renterguideline?service=guideandrule">Guide and Rule</a></li>
                     <li><a href="RenterRoomDetail?service=RenterRoomDetail">My Room</a></li>
                     <li><a href="rentercontroller?service=news">News</a></li>
-                    <li><a href="penaltys">Penalty</a></li>
+                    <li><a href="renpen">Penalty</a></li>
                 </ul>
             </li>               
             <li class="${param.service == "paymentList" ? "active" : ''}"><a href="WalletController">Wallet</a></li>

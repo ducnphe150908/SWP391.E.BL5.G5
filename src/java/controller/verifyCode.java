@@ -52,7 +52,7 @@ public class verifyCode extends HttpServlet {
         String address = (String) session.getAttribute("address");
         RegisterDAO dao = new RegisterDAO();
 
-        Path defaultImg = Paths.get("images/default.jpg");
+       Path defaultImg = Paths.get("D:\\New folder\\1\\SWP391.E.BL5.G5\\web\\images\\default.jpg");
         byte[] userAvatar_raw = convertPathToByteArray(defaultImg);
         String userAvatar = Base64.getEncoder().encodeToString(userAvatar_raw);
 

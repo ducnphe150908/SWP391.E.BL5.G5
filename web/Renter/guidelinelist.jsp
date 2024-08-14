@@ -1,7 +1,7 @@
 <%-- 
-    Document   : list
-    Created on : Jun 10, 2024, 9:56:50 PM
-    Author     : DAT
+    Document   : guidelinelist
+    Created on : Aug 14, 2024, 7:59:32 PM
+    Author     : nguye
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -193,7 +193,7 @@
             </nav>
 
 
-                        <div  class="container light-style flex-grow-1 container-p-y">
+            <div  class="container light-style flex-grow-1 container-p-y">
                 <h4 class="font-weight-bold py-3 mb-4">
 
                 </h4>
