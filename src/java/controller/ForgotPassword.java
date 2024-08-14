@@ -24,6 +24,7 @@ import jakarta.servlet.http.HttpSession;
 import javax.mail.Authenticator;
 import util.Sendmail;
 //doaiwjdoajdawijodaw
+
 @WebServlet(name = "ForgotPassword", urlPatterns = {"/forgotPassword"})
 public class ForgotPassword extends HttpServlet {
 
@@ -37,35 +38,33 @@ public class ForgotPassword extends HttpServlet {
         AccountDAO dao = new AccountDAO();
         String email = request.getParameter("email");
         boolean checkmail = dao.checkMailRegister(email);
-        RequestDispatcher dispatcher = null;
-
+        HttpSession mySession = request.getSession();
+        
         int otpvalueLength = 6;
-
         Random rand = new Random();
         String string = "0123456789";
         String randomOtp = "";
-        HttpSession mySession = request.getSession();
 
         if (checkmail) {
             for (int i = 0; i < otpvalueLength; i++) {
                 char c = string.charAt(rand.nextInt(string.length()));
                 randomOtp = randomOtp + c;
             }
-            
+
             Cookie cookie = new Cookie("otpR", randomOtp);
             cookie.setMaxAge(5 * 60);
             response.addCookie(cookie);
-            
+
             String to = email;
             Sendmail.sendMailForgotPassword(to, randomOtp);
-            
+
             request.setAttribute("message", "OTP is sent to your email id");
             mySession.setAttribute("otp", randomOtp);
             mySession.setAttribute("email", email);
             request.getRequestDispatcher("forgotPassword.jsp").forward(request, response);
-        }else{
-             request.setAttribute("message", "Email have not register");
-             request.getRequestDispatcher("forgotPassword.jsp").forward(request, response);
+        } else {
+            request.setAttribute("message", "Email have not register");
+            request.getRequestDispatcher("forgotPassword.jsp").forward(request, response);
         }
     }
 }
