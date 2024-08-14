@@ -1,8 +1,4 @@
-<%-- 
-    Document   : navbar
-    Created on : Aug 13, 2024, 5:28:54 PM
-    Author     : quanb
---%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -44,11 +40,10 @@
             <li class="has-children ${(param.service == 'listRoom') || (param.service == 'guideandrule') || (param.service == 'RenterRoomDetail') ? 'active' : ''}">
                 <a href="#">View</a>
                 <ul class="dropdown">
-                    <li><a href="RenterRoomController?service=listRoom&index=1">List Of Rooms</a></li>
-                    <li><a href="renterguideline?service=guideandrule">Guide and Rule</a></li>
+                    <li><a href="guidelines">Guide and Rule</a></li>
                     <li><a href="RenterRoomDetail?service=RenterRoomDetail">My Room</a></li>
                     <li><a href="rentercontroller?service=news">News</a></li>
-                    <li><a href="renpen">Penalty</a></li>
+                    <li><a href="penaltys">Penalty</a></li>
                 </ul>
             </li>               
             <li class="${param.service == "paymentList" ? "active" : ''}"><a href="WalletController">Wallet</a></li>
