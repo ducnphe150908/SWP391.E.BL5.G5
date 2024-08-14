@@ -1,24 +1,42 @@
 <%-- 
-    Document   : DisplayNews
-    Created on : August 9, 2024, 3:32:14 PM
-    Author     : quan
+    Document   : NewsList
+    Created on : Jul 8, 2024, 4:13:13 PM
+    Author     : pc
 --%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%@page import="model.News"%>
+<%@page import="java.util.List"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<%
+    List<News> newsDetail = (List<News>) request.getAttribute("news");
+   
+%>
+<!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="author" content="Untree.co">
-        <link rel="shortcut icon" href="favicon.png">
 
-        <meta name="description" content="" />
-        <meta name="keywords" content="bootstrap, bootstrap5" />
+        <meta name="description" content="">
+        <meta name="author" content="">
 
+        <title>Tooplate's Little Fashion</title>
+
+        <!-- CSS FILES -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;700;900&display=swap" rel="stylesheet">
+
+        <link href="RenterCSS/css/bootstrap.min.css" rel="stylesheet">
+        <link href="RenterCSS/css/bootstrap-icons.css" rel="stylesheet">
+
+        <link rel="stylesheet" href="css/slick.css"/>
+
+        <link href="RenterCSS/css/tooplate-little-fashion.css" rel="stylesheet">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -30,31 +48,12 @@
         <link rel="stylesheet" href="css/tiny-slider.css">
         <link rel="stylesheet" href="css/aos.css">
         <link rel="stylesheet" href="css/style.css">
-
-
-
-
-
-        <!-- Favicons -->
-        <link rel="shortcut icon" href="images/favicon.png">
-        <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
-
-        <!-- Google Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
-
-        <!-- Bootstrap CSS File -->
-        <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-        <!-- Libraries CSS Files -->
-        <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-        <link href="lib/animate/animate.min.css" rel="stylesheet">
-        <link href="lib/ionicons/css/ionicons.min.css" rel="stylesheet">
-        <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-
-        <!-- Main Stylesheet File -->
-        <link href="css/style_owner.css" rel="stylesheet">
-
-        <title>HoLa Motel</title>
+        <title>JSP Page</title>
+        <script>
+            .card {
+            margin - top: 20px;
+            }
+        </script>
     </head>
     <body>
         <div class="site-mobile-menu site-navbar-target">
@@ -87,64 +86,57 @@
                 <div class="container">
                     <div class="row justify-content-center align-items-center">
                         <div class="col-lg-9 text-center mt-5">
-                            <h1 class="heading" data-aos="fade-up">List News</h1>
+                            <h1 class="heading" data-aos="fade-up">News Detail</h1>
 
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Main Content -->
-            <div class="container my-5">
-                <div class="d-flex justify-content-between align-items-center mb-4">
-                <c:if test="${not empty message}">
-                    <div class="alert alert-success">
-                        <c:out value="${message}" />
-                    </div>
-                </c:if>
-                <h2 class="mb-0">News List</h2>
-                <a href="addnews" class="btn btn-primary">ADD NEWS</a>
-            </div>
-            <div class="row">
-                <form class="form-control" method="post" action="displayNews">
-                    <input class="input-box" type="text" name="search" placeholder="Enter data for search" value="${search}"/>
-                    <button class="btn-primary">Search</button>
-                </form>
-            </div>
-                     <div class="text-black row mb-3">
-                                    <form id="myform" action="displayNews" class="form-inline">
-                                        <label for="page-size-select" class="ps-3">Products per page:</label>
-                                        <select name="pageSize" id="page-size-select" class="form-control" onchange="document.getElementById('myform').submit()">
-                                            <option value="5" <c:if test="${pageSize == 5}">selected</c:if>>5</option>
-                                            <option value="10" <c:if test="${pageSize == 10}">selected</c:if>>10</option>
-                                            <option value="15" <c:if test="${pageSize == 15}">selected</c:if>>15</option>
-                                            <option value="20" <c:if test="${pageSize == 20}">selected</c:if>>20</option>
-                                            </select>
-                                            <input type="hidden" name="index" value="1" />
-                                            <input type="hidden" name="blogName" value="${pi}" />
-                                        <noscript>
-                                        <button type="submit" class="btn btn-primary">Go</button>
-                                        </noscript>
-                                    </form>
 
-                                </div>   
-            <ul class="list-group">
-                <c:forEach var="news" items="${newsList}">
-                    <li class="list-group-item"><span style="margin-right: 10px;">${news.createAt}</span><a href="newsDetail?id=${news.newId}" style="color: blue">${news.newTitle}</a> 
-                        <form action="deleteNews" method="post" style="float: right; margin: 0;">
-                            <input type="hidden" name="newsId" value="${news.newId}" />
-                            <input type="submit" class="btn btn-primary" value="Delete" onclick="confirmDelete(event)" />
-                        </form>
-                    </li>
-                </c:forEach>
-            </ul>
-        </div>
-        <script>
-            function confirmDelete(event) {
-                if (!confirm("Are you sure you want to delete this post?")) {
-                    event.preventDefault();
-                }
-            }
-        </script>
+        <c:forEach var="news" items="${news}">
+            <section class="product-detail section-padding">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-lg-6 col-12">
+                            <div class="product-thumb">
+                                <img class="img-fluid product-image" src="data:image/jpg;base64,${news.img}" >
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-12">
+                            <div class="product-info d-flex">
+                                <div>
+                                    <h2 class="product-title mb-0">${news.newTitle}</h2>
+                                   <p class="product-p">${news.createAt}</p>
+
+                                </div>
+
+                            </div>
+
+                            <div class="product-description">
+
+                                <strong class="d-block mt-4 mb-2">Description</strong>
+
+                                <p class="lead mb-5">${news.description}</p>
+                            </div>
+
+                            <div class="product-cart-thumb row">
+
+
+                                <div class="col-lg-6 col-12 mt-4 mt-lg-0">
+                                    <button type="button" class="btn custom-btn cart-btn" onclick="location.href = 'displayNews'">Back To List</button>
+                                    <button type="button" class="btn custom-btn cart-btn" onclick="location.href = 'formeditnews?id=${news.newId}'" style="margin-top: 10px">Edit News</button>
+                                </div>
+                                <p></br></p>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+        </c:forEach>
 
         <div class="site-footer">
             <div class="container">
@@ -220,8 +212,45 @@ Please don't remove this copyright link unless you buy the license here https://
             </div> <!-- /.container -->
         </div> <!-- /.site-footer -->
 
+        <!--        <table border="1">
+        
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="container">
+        
+        <%
+           for(News news: newsDetail){
+           String img = news.getImg();
+        %>
+
+        <div class="card row">
+
+            <div class="card-body col-md-6">
+                <h1 class="card-title"><%= news.getNewTitle()%></h1>
+                <hr>
+                <p class="card-text"><%= news.getDescription()%></p>
+            </div>
+            <div class="card-body col-md-6">
+                <img class="card-img-top" src="data:image/jpg;base64,<%= img %>" >
+            </div>
+
+            <a href="displayNews">Back to list</a>
+        </div>
+        <%}%>
+    </div> 
+</td>
+</tr>
+</tbody>
+</table>-->
         <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
         <div id="preloader"></div>
+        <script src="RenterCSS/js/jquery.min.js"></script>
+        <script src="RenterCSS/js/bootstrap.bundle.min.js"></script>
+        <script src="RenterCSS/js/Headroom.js"></script>
+        <script src="RenterCSS/js/jQuery.headroom.js"></script>
+        <script src="RenterCSS/js/slick.min.js"></script>
+        <script src="RenterCSS/js/custom.js"></script>
         <script src="js/bootstrap.bundle.min.js"></script>
         <script src="js/tiny-slider.js"></script>
         <script src="js/aos.js"></script>
@@ -229,18 +258,5 @@ Please don't remove this copyright link unless you buy the license here https://
         <script src="js/counter.js"></script>
         <script src="js/custom.js"></script>
 
-
-        <!-- JavaScript Libraries -->
-        <script src="lib/jquery/jquery.min.js"></script>
-        <script src="lib/jquery/jquery-migrate.min.js"></script>
-        <script src="lib/popper/popper.min.js"></script>
-        <script src="lib/bootstrap/js/bootstrap.min.js"></script>
-        <script src="lib/easing/easing.min.js"></script>
-        <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-        <script src="lib/scrollreveal/scrollreveal.min.js"></script>
-
-
-        <!-- Template Main Javascript File -->
-        <script src="js/main_owner.js"></script>
     </body>
 </html>

@@ -1,35 +1,20 @@
-<%@page contentType="text/html" pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
+<%@page import="dao.RoomDAO,java.util.List"%>
+<%@page import="model.RoomDetailSe"%>
+<%@ page import="java.util.Base64" %>
+<%@ page import="java.text.DecimalFormat" %>
+
+<% RoomDetailSe roomDetail = (RoomDetailSe) request.getAttribute("roomDetail"); %>
+
+<!doctype html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>HL_Motel</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">        
+        <link rel="shortcut icon" href="favicon.png">
 
+        <meta name="description" content="" />
+        <meta name="keywords" content="bootstrap, bootstrap5" />
 
-
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="Free HTML5 Template by FREEHTML5.CO" />
-        <meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive" />
-        <meta name="author" content="FREEHTML5.CO" />
-
-        <!-- Facebook and Twitter integration -->
-        <meta property="og:title" content=""/>
-        <meta property="og:image" content=""/>
-        <meta property="og:url" content=""/>
-        <meta property="og:site_name" content=""/>
-        <meta property="og:description" content=""/>
-        <meta name="twitter:title" content="" />
-        <meta name="twitter:image" content="" />
-        <meta name="twitter:url" content="" />
-        <meta name="twitter:card" content="" />
-
-        <link rel="shortcut icon" href="./images/favicon.png">
-
-        <!-- Google Webfonts -->
-        <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,100,500' rel='stylesheet' type='text/css'>
-        <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -41,23 +26,20 @@
         <link rel="stylesheet" href="css/tiny-slider.css">
         <link rel="stylesheet" href="css/aos.css">
         <link rel="stylesheet" href="css/style.css">
-        <!-- Animate.css -->
-        <link rel="stylesheet" href="RenterCSS/css/animate.css">
-        <!-- Icomoon Icon Fonts-->
-        <link rel="stylesheet" href="RenterCSS/css/icomoon.css">
-        <!-- Magnific Popup -->
-        <link rel="stylesheet" href="RenterCSS/css/magnific-popup.css">
-        <!-- Salvattore -->
-        <link rel="stylesheet" href="RenterCSS/css/salvattore.css">
-        <!-- Theme Style -->
-        <link rel="stylesheet" href="RenterCSS/css/style.css">
-        <!-- Modernizr JS -->
-        <script src="RenterCSS/js/modernizr-2.6.2.min.js"></script>
-        <!-- FOR IE9 below -->
-        <!--[if lt IE 9]>
-        <script src="js/respond.min.js"></script>
-        <![endif]-->
-        
+
+        <title>Room Detail</title>
+
+        <style>
+            .textDetail {
+                position: relative;
+                color: #2e2a2a;
+                font-family: "Be Vietnam Pro", sans-serif, sans-serif;
+                font-style: normal;
+                font-weight: 300;
+                font-size: 15px;
+                line-height: 1.5;
+            }
+        </style>
     </head>
     <body>
 
@@ -74,42 +56,91 @@
             <div class="container">
                 <div class="menu-bg-wrap">
                     <div class="site-navigation">
-                        <a href="rentercontroller?service=renterhome" class="logo m-0 float-start">Renter</a>
-                        <jsp:include page="navbar.jsp"></jsp:include>
+                        <a href="#" class="logo m-0 float-start">Room Detail</a>
+
+                        <jsp:include page = "navbar.jsp"></jsp:include>
+
                             <a href="#" class="burger light me-auto float-end mt-1 site-menu-toggle js-menu-toggle d-inline-block d-lg-none" data-toggle="collapse" data-target="#main-navbar">
                                 <span></span>
                             </a>
+
                         </div>
                     </div>
                 </div>
             </nav>
-            <div class="hero page-inner overlay" style="background-image: url('images/hero_bg_1.jpg');">
+
+
+            <div class="hero page-inner overlay" style="background-image: url('images/slide-1.jpg');">
 
                 <div class="container">
                     <div class="row justify-content-center align-items-center">
                         <div class="col-lg-9 text-center mt-5">
-                            <h1 class="heading" >News</h1>
+                            <h1 class="heading" data-aos="fade-up">Room Detail</h1>
 
-                            <nav aria-label="breadcrumb"  data-aos-delay="200">
-
+                            <nav aria-label="breadcrumb" data-aos="fade-up" data-aos-delay="200">
+                                <ol class="breadcrumb text-center justify-content-center">
+                                    <li class="breadcrumb-item "><a href="rentercontroller?service=renterhome">Home</a></li>                               
+                                </ol>
                             </nav>
+
+
                         </div>
                     </div>
+
+
                 </div>
             </div>
 
-            <div id="fh5co-main">
+
+            <div class="section">
                 <div class="container">
-                    <div class="row">
-                        <div class="text-center pb-3">
-                            <h2>${n.newTitle}</h2>
-                        <h5>Publish: ${n.createAt}</h5>
-                    </div>
-                    <div class="flex-column">
-                        <div class="col-lg-4">
-                            <a href="images/img_1.jpg" class="image-popup fh5co-board-img" title="${n.description}"><img style="width: 100%; height: 100%" src="data:image/jpg;base64,${n.img}" alt="No IMG"></a>
+                    <div class="row justify-content-between">
+                        <div class="col-lg-7">
+                            <div class="img-property-slide-wrap">
+                                <div class="img-property-slide">
+                                <% String base64Image = roomDetail.getRoomImg(); %>
+
+                                <img style="margin-top: 50px;" src="data:image/jpg;base64, <%= base64Image %>" alt="Image" class="img-fluid">
+
+                            </div>
                         </div>
-                        <div class="fh5co-desc col-lg-8">${n.description}</div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="d-block agent-box p-5">
+                            <h2 class="heading text-primary" style="font-weight: 700"> Room <%= roomDetail.getRoomNumber()%></h2>
+                            <%
+                               DecimalFormat df = new DecimalFormat("#.##");
+                               String formattedFee = df.format(roomDetail.getRoomFee());
+                            %>
+                            <p class="meta" style="color: #c90927; font-size: 18px; font-weight: 600"><%= formattedFee %>k VND/Month</p>
+                            <label class="textDetail" style="font-size: 20px; font-weight: 500">Detailed description</label>
+                            <p class="textDetail">Area: 22m²</p>
+                            <p class="textDetail">Room Floor: <%= roomDetail.getRoomFloor()%></p>
+                            <p class="textDetail">Room Size: <%= roomDetail.getRoomSize()%></p>
+                            <p class="textDetail">Facilities: There is air conditioning, private toilet, comfortable living hours</p>
+                            <p class="textDetail">In the room are available: </p>
+                            <% 
+                            String[] itemNames = roomDetail.getItemName(); 
+                            int[] quantities = roomDetail.getQuantity(); 
+
+                            if (itemNames != null && quantities != null && itemNames.length == quantities.length) {
+                                for (int i = 0; i < itemNames.length; i++) {
+                                    String itemName = itemNames[i];
+                                    int quantity = quantities[i];
+                            %>
+                            <p class="textDetail"><%= quantity %> <%= itemName %></p>
+                            <%
+                                    }
+                                }
+                            %>
+                            <p class="textDetail">Address: Thon 3, Tan Xa, Thach That, Ha Noi</p>
+                            <p class="textDetail">Contact Info: 0123456789</p>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <a class="btn btn-info " href="GuestController?service=rentRoom">Rent</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -117,6 +148,7 @@
 
         <div class="site-footer">
             <div class="container">
+
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="widget">
@@ -171,35 +203,15 @@
                     </div> <!-- /.col-lg-4 -->
                 </div> <!-- /.row -->
 
-                <div class="row mt-5">
-                    <div class="col-12 text-center">
-
-                        <p>Copyright &copy;<script>document.write(new Date().getFullYear());</script>. All Rights Reserved. &mdash; Designed with love by <a href="https://untree.co">Untree.co</a> <!-- License information: https://untree.co/license/ -->
-                        </p>
-
-                    </div>
-                </div>
             </div> <!-- /.container -->
         </div> <!-- /.site-footer -->
 
 
-        <!-- jQuery -->
-        <script src="RenterCSS/js/jquery.min.js"></script>
-        <!-- jQuery Easing -->
-        <script src="RenterCSS/js/jquery.easing.1.3.js"></script>
-        <!-- Bootstrap -->
-        <script src="RenterCSS/js/bootstrap.min.js"></script>
-        <!-- Waypoints -->
-        <script src="RenterCSS/js/jquery.waypoints.min.js"></script>
-        <!-- Magnific Popup -->
-        <script src="RenterCSS/js/jquery.magnific-popup.min.js"></script>
-        <!-- Salvattore -->
-        <script src="RenterCSS/js/salvattore.min.js"></script>
-        <!-- Main JS -->
-        <script src="RenterCSS/js/main.js"></script>
-
-
-
-
+        <script src="js/bootstrap.bundle.min.js"></script>
+        <script src="js/tiny-slider.js"></script>
+        <script src="js/aos.js"></script>
+        <script src="js/navbar.js"></script>
+        <script src="js/counter.js"></script>
+        <script src="js/custom.js"></script>
     </body>
 </html>

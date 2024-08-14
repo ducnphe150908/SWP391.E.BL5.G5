@@ -1,7 +1,7 @@
 <%-- 
-    Document   : SeNews
-    Created on : Jan 18, 2024, 2:59:38 PM
-    Author     : ASUS
+    Document   : quan
+    Created on : August 10, 2024, 2:59:38 PM
+    Author     : MSI
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
