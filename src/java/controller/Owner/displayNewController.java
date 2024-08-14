@@ -19,7 +19,7 @@ import model.News;
 
 /**
  *
- * @author pc
+ * @author quan
  */
 @WebServlet(name = "displayNewController", urlPatterns = {"/displayNews"})
 public class displayNewController extends HttpServlet {
