@@ -1,4 +1,8 @@
-
+<%-- 
+    Document   : navbar
+    Created on : 25 thg 5, 2024, 15:32:37
+    Author     : phuc
+--%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -40,6 +44,7 @@
             <li class="has-children ${(param.service == 'listRoom') || (param.service == 'guideandrule') || (param.service == 'RenterRoomDetail') ? 'active' : ''}">
                 <a href="#">View</a>
                 <ul class="dropdown">
+                    <li><a href="RenterRoomController?service=listRoom&index=1">List Of Rooms</a></li>
                     <li><a href="guidelines">Guide and Rule</a></li>
                     <li><a href="RenterRoomDetail?service=RenterRoomDetail">My Room</a></li>
                     <li><a href="rentercontroller?service=news">News</a></li>
