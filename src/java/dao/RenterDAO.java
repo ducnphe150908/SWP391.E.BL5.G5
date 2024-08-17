@@ -23,7 +23,11 @@ import model.RentDetail;
 /**
  * Data Access Object for Renter-related operations.
  *
+ * <<<<<<< HEAD
+ * Author: creep
+ * =======
  * Author: quan
+ * >>>>>>> 2a0387b3f6d95583e3685990571598ac36e5b7ea
  */
 public class RenterDAO extends MyDAO {
 
@@ -84,9 +88,8 @@ public class RenterDAO extends MyDAO {
         }
         return list;
     }
-    
+
     // ve sua lai
-    
     public List<Renter> getRenterDetail(String accountInput, String passwordInput) {
         List<Renter> list = new ArrayList<>();
         String sql = "SELECT DISTINCT "
@@ -295,6 +298,7 @@ public class RenterDAO extends MyDAO {
         }
     }
 
+
     public UserDetail RenterBasicDetail(String accountInput, String passwordInput) {
         UserDetail userDetail = null;
         String sql = "SELECT \n"
@@ -332,10 +336,7 @@ public class RenterDAO extends MyDAO {
         }
         return userDetail;
     }
-    
-    
 
-    //ThienAnh RenterDAO
     public List<RenterList> getRenters() {
         List<RenterList> renters = new ArrayList<>();
         String sql = "SELECT userName\n"
@@ -383,8 +384,8 @@ public class RenterDAO extends MyDAO {
                 int roomFloor = rs.getInt("roomFloor");
                 double balance = rs.getDouble("balance");
                 int userID = rs.getInt("userID");
-                
-                RenterList renterList = new RenterList(roomID, userName, balance, 
+
+                RenterList renterList = new RenterList(roomID, userName, balance,
                         roomNumber, roomFloor, userID);
                 renters.add(renterList);
             }
@@ -486,7 +487,7 @@ public class RenterDAO extends MyDAO {
         }
         return n;
     }
-    
+
     public List<RentDetail> rentDetail(int renterID) {
         List<RentDetail> rentDetails = new ArrayList<>();
         String sql = "SELECT "
@@ -525,34 +526,34 @@ public class RenterDAO extends MyDAO {
         }
         return rentDetails;
     }
+
     public List<RenterList> getAllRentersExcel() {
-    List<RenterList> renters = new ArrayList<>();
-    String sql = "SELECT u.userName, r.roomNumber, r.roomFloor, r.roomDepartment\n" +
-                 "FROM renter rt\n" +
-                 "JOIN room r ON rt.roomID = r.roomID\n" +
-                 "JOIN [user] u ON rt.userID = u.userID";
+        List<RenterList> renters = new ArrayList<>();
+        String sql = "SELECT u.userName, r.roomNumber, r.roomFloor, r.roomDepartment\n"
+                + "FROM renter rt\n"
+                + "JOIN room r ON rt.roomID = r.roomID\n"
+                + "JOIN [user] u ON rt.userID = u.userID";
 
-    try (Connection conn = connection; 
-         PreparedStatement ps = conn.prepareStatement(sql); 
-         ResultSet rs = ps.executeQuery()) {
+        try (Connection conn = connection; PreparedStatement ps = conn.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
 
-        while (rs.next()) {
-            String userName = rs.getString("userName");
-            int roomNumber = rs.getInt("roomNumber");
-            int roomFloor = rs.getInt("roomFloor");
-            String department = rs.getString("roomDepartment");
+            while (rs.next()) {
+                String userName = rs.getString("userName");
+                int roomNumber = rs.getInt("roomNumber");
+                int roomFloor = rs.getInt("roomFloor");
+                String department = rs.getString("roomDepartment");
 
-            // Adjust the constructor call to match the data selected
-            RenterList renterList = new RenterList(userName, roomNumber, roomFloor, department);
-            renters.add(renterList);
+                // Adjust the constructor call to match the data selected
+                RenterList renterList = new RenterList(userName, roomNumber, roomFloor, department);
+                renters.add(renterList);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-    } catch (SQLException e) {
-        e.printStackTrace();
+
+        return renters;
     }
 
-    return renters;
-}
-public static void main(String[] args) {
+    public static void main(String[] args) {
         // Create an instance of RenterDAO
         RenterDAO dao = new RenterDAO();
 
