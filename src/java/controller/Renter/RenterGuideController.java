@@ -16,10 +16,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import model.Guideline;
 
-/**
- *
- * @author DAT
- */
 @WebServlet(name = "RenterGuideController", urlPatterns = {"/renterguideline"})
 public class RenterGuideController extends HttpServlet {
     
