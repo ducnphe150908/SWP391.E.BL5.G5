@@ -46,7 +46,8 @@ public class RenterRoomController extends HttpServlet {
             listRoom(request, response);
         } else if (service.equals("roomDetail")) {
             roomDetail(request, response);
-        } else if (service.equals("rentRoom")) {
+        } 
+        else if (service.equals("rentRoom")) {
             rentRoom(request, response, 0);
         } else if (service.equals("cancelRoom")) {
             rentRoom(request, response, 1);
@@ -98,11 +99,11 @@ public class RenterRoomController extends HttpServlet {
     }
 
     private void rentRoom(HttpServletRequest request, HttpServletResponse response, int flag) throws ServletException, IOException {
-        
+        request.getRequestDispatcher("Renter/roomDetail.jsp").forward(request, response);
     }
 
     private void confirmRentRoom(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-       
+       request.getRequestDispatcher("Renter/roomDetail.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

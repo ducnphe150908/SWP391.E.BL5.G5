@@ -17,11 +17,7 @@ import java.util.Date;
 import java.util.List;
 import model.News;
 
-/**
- *
- * @author quan
- */
-@WebServlet(name = "ListNewController", urlPatterns = {"/news"})
+@WebServlet(name = "ListNewController", urlPatterns = {"/renterupdate"})
 public class ListNewController extends HttpServlet {
 
     /**

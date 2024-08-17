@@ -48,10 +48,7 @@ public class AccountDAO extends MyDAO {
         return check;
     }
 
-    
-
     public static void main(String[] args) {
-        
 
     }
 
@@ -137,8 +134,17 @@ public class AccountDAO extends MyDAO {
         return null;
     }
 
-    public void updatePassword(Account accountInDb) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    public void updatePassword(Account a) {
+        String sql = "UPDATE Account SET [userPassword] = ? WHERE userID = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, a.getUserPassword());
+            st.setInt(2, a.getUserID());
 
+            st.executeUpdate();
+        } catch (SQLException e) {
+            // Handle the exception appropriately, e.g., log it
+            e.printStackTrace();
+        }
+    }
 }
