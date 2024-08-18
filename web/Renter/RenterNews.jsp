@@ -1,7 +1,7 @@
 <%-- 
-    Document   : SeNews
-    Created on : Jan 18, 2024, 2:59:38 PM
-    Author     : ASUS
+    Document   : quan
+    Created on : August 10, 2024, 2:59:38 PM
+    Author     : MSI
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -205,6 +205,21 @@
                         </c:forEach>
                     </tbody>
                 </table>
+                     <c:set var="page" value="${requestScope.page}"/>
+                <div class="clearfix">
+                    <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
+                    <ul class="pagination">
+                        <c:if test="${page > 1}">
+                            <li class="page-item"><a href="manager-product?page=${page-1}" class="page-link">Previous</a></li>
+                            </c:if>
+                            <c:forEach begin="1" end="${requestScope.num}" var="i">
+                            <li class="page-item ${page == i ? 'active' : ''}"><a href="manager-product?page=${i}" class="page-link">${i}</a></li>
+                            </c:forEach>
+                            <c:if test="${page < requestScope.num}">
+                            <li class="page-item"><a href="manager-product?page=${page+1}" class="page-link">Next</a></li>
+                            </c:if>
+                    </ul>
+                </div>
             </div>
         </div>
 

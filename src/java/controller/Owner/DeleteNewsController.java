@@ -3,8 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package controller;
+package controller.Owner;
 
+import dao.EditNewsDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -12,13 +13,14 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.News;
 
 /**
  *
- * @author quanb
+ * @author pc
  */
-@WebServlet(name="HEllo1", urlPatterns={"/HEllo1"})
-public class HEllo1 extends HttpServlet {
+@WebServlet(name="deleteNewsController", urlPatterns={"/deleteNews"})
+public class DeleteNewsController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -35,10 +37,10 @@ public class HEllo1 extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet HEllo1</title>");  
+            out.println("<title>Servlet deleteNewsController</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet HEllo1 at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet deleteNewsController at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -68,7 +70,15 @@ public class HEllo1 extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+       int newsId = Integer.parseInt(request.getParameter("newsId"));
+        
+        News news = new News();
+        news.setNewId(newsId);
+        
+       
+        EditNewsDAO dao = new EditNewsDAO();
+        int result = dao.DeleteNews(news);
+        request.getRequestDispatcher("displayNews").forward(request, response);
     }
 
     /** 

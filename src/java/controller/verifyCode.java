@@ -36,6 +36,8 @@ public class verifyCode extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -50,18 +52,22 @@ public class verifyCode extends HttpServlet {
         String address = (String) session.getAttribute("address");
         RegisterDAO dao = new RegisterDAO();
 
-        Path defaultImg = Paths.get("images/default.jpg");
+       Path defaultImg = Paths.get("D:\\New folder\\1\\SWP391.E.BL5.G5\\web\\images\\default.jpg");
         byte[] userAvatar_raw = convertPathToByteArray(defaultImg);
         String userAvatar = Base64.getEncoder().encodeToString(userAvatar_raw);
 
         String authCode = (String) session.getAttribute("authCode");
         Long codeGeneratedTime = (Long) session.getAttribute("codeGeneratedTime");
-
+        
+        int checkfailed = 0; 
+        
         if (authCode != null && codeGeneratedTime != null) {
             long currentTime = System.currentTimeMillis();
             long timeElapsed = (currentTime - codeGeneratedTime) / 1000;
 
             if (timeElapsed > 120) {
+                checkfailed = 1;
+                request.setAttribute("checkfailed", checkfailed);
                 request.setAttribute("message","Verification code expired");
                 request.getRequestDispatcher("verifyCode.jsp").forward(request, response);
             } else if (authCode.equals(code)) {
@@ -72,6 +78,8 @@ public class verifyCode extends HttpServlet {
                 request.setAttribute("error", "Successful account registration");
                 request.getRequestDispatcher("login.jsp").forward(request, response);
             } else {
+                checkfailed = 1;
+                request.setAttribute("checkfailed", checkfailed);
                 request.setAttribute("message", "Confirmation code is incorrect");
                 request.getRequestDispatcher("verifyCode.jsp").forward(request, response);
             }
