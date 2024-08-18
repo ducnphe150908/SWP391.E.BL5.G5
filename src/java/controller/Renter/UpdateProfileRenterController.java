@@ -18,10 +18,6 @@ import java.util.Base64;
 import model.User;
 import model.UserDetail;
 
-/**
- *
- * @author quocp
- */
 @WebServlet(name = "UpdateProfileRenterController", urlPatterns = {"/UpdateProfileRenterController"})
 @MultipartConfig
 public class UpdateProfileRenterController extends HttpServlet {
@@ -52,7 +48,6 @@ public class UpdateProfileRenterController extends HttpServlet {
     private void formRenterUpdateProfile(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Retrieve the session object
         HttpSession session = request.getSession();
-
         // Retrieve email and password from the session attributes
         String email = (String) session.getAttribute("email");
         String password = (String) session.getAttribute("password");

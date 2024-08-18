@@ -1,9 +1,3 @@
-<%-- 
-    Document   : formOwnerProfile
-    Created on : 28 thg 5, 2024, 00:13:35
-    Author     : quocp
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="model.Rooms, model.User" %>
 <%@page import="dao.RoomDAO, dao.RenterDAO, java.util.List,java.util.Vector"%>

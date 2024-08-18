@@ -134,7 +134,7 @@
                                 }
                             %>
                             <p class="textDetail">Address: Thon 3, Tan Xa, Thach That, Ha Noi</p>
-                            <p class="textDetail">Contact Info: 0123456789</p>
+                            <p class="textDetail">Contact Info: 0395866168</p>
                             <div class="row">
                                 <div class="col-sm-12">
                                     <a class="btn btn-info " href="RenterRoomController?service=rentRoom&roomID=<%= roomDetail.getRoomID()%>">Rent</a>
