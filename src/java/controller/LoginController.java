@@ -30,6 +30,7 @@ public class LoginController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
+            //get data from jsp
             String email = request.getParameter("email");
             String password = request.getParameter("password");
             AccountDAO a = new AccountDAO();
@@ -40,6 +41,7 @@ public class LoginController extends HttpServlet {
                 request.getRequestDispatcher("login.jsp").forward(request, response);
             } else {
                 HttpSession session = request.getSession();
+                // set session attribute for details
                 session.setAttribute("userID", account.getUserID());
                 session.setAttribute("user", account);
                 session.setAttribute("email", email);
@@ -48,6 +50,7 @@ public class LoginController extends HttpServlet {
 
                 int role = a.getUserRole(email, password);
 
+                // switch role
                 switch (role) {
                     case 0:
                         response.sendRedirect(request.getContextPath() + "/error.jsp");
