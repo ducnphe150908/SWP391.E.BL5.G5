@@ -181,7 +181,15 @@ public class OwnerController extends HttpServlet {
         }
     }
 
+    private void deleteItem(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RoomDAO dao = new RoomDAO();
+        int roomID = Integer.parseInt(request.getParameter("roomID"));
+        int itemID = Integer.parseInt(request.getParameter("itemID"));
+        int remove = dao.deleteRoomItem(roomID, itemID);
+        request.getRequestDispatcher("OwnerController?service=editRoom").forward(request, response);
+    }
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+
     /**
      * Handles the HTTP <code>GET</code> method.
      *
