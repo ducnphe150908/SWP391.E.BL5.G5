@@ -1,9 +1,3 @@
-<%-- 
-    Document   : test
-    Created on : 27 thg 5, 2024, 20:04:34
-    Author     : quocp
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="dao.RoomDAO, dao.RenterDAO, java.util.List,java.util.Vector"%>
