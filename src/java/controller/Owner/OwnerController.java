@@ -75,6 +75,10 @@ public class OwnerController extends HttpServlet {
             roomDetail(request, response, 0);
         } else if (service.equals("editRoom")) {
             roomDetail(request, response, 1);
+        } else if (service.equals("deleteItem")) {
+            deleteItem(request, response);
+        } else if (service.equals("addItem")) {
+            addItem(request, response);
         }
     }
 
@@ -186,6 +190,27 @@ public class OwnerController extends HttpServlet {
         int roomID = Integer.parseInt(request.getParameter("roomID"));
         int itemID = Integer.parseInt(request.getParameter("itemID"));
         int remove = dao.deleteRoomItem(roomID, itemID);
+        request.getRequestDispatcher("OwnerController?service=editRoom").forward(request, response);
+    }
+
+    private void addItem(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RoomDAO dao = new RoomDAO();
+        String itemName = request.getParameter("itemName");
+        int roomID = Integer.parseInt(request.getParameter("roomID"));
+        int quantity = Integer.parseInt(request.getParameter("quantity").trim());
+        int itemID = dao.getItemIDOrQuantityByItemName(itemName, 0, 0);
+        RoomDetailSe roomDetail = dao.getRoomDetail(roomID);
+
+        String[] listItemName = roomDetail.getItemName();
+        for (String string : listItemName) {
+            if (string.equalsIgnoreCase(itemName)) {
+                int newQuantity = dao.getItemIDOrQuantityByItemName(itemName, 1, roomID) + quantity;
+                int updateQuantity = dao.updateItemQuantity(roomID, itemID, newQuantity);
+                request.getRequestDispatcher("OwnerController?service=editRoom").forward(request, response);
+                return;
+            }
+        }
+        int addItem = dao.addRoomItem(roomID, itemID, quantity);
         request.getRequestDispatcher("OwnerController?service=editRoom").forward(request, response);
     }
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
