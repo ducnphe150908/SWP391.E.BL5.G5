@@ -13,9 +13,21 @@ import java.sql.Date;
  */
 public class Penalty {
 
+    /**
+     * pen id
+     */
     private int penID;
+    /**
+     * room id
+     */
     private Room roomID;
+    /**
+     * description
+     */
     private String description;
+    /**
+     * date
+     */
     private Date penDate;
     private Rule ruleID;
     private int penStatus;
