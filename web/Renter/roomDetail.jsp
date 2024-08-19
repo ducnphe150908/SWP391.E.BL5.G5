@@ -99,7 +99,6 @@
                             <div class="img-property-slide-wrap">
                                 <div class="img-property-slide">
                                 <% String base64Image = roomDetail.getRoomImg(); %>
-
                                 <img style="margin-top: 50px;" src="data:image/jpg;base64, <%= base64Image %>" alt="Image" class="img-fluid">
 
                             </div>
