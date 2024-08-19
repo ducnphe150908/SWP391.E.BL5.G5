@@ -32,6 +32,7 @@ public class newDetailController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        //set detail of news and get this from db
         response.setContentType("text/html;charset=UTF-8");
        NewDAO dao = new NewDAO();
        String newId_raw = request.getParameter("id");

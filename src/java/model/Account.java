@@ -11,7 +11,13 @@ package model;
  */
 public class Account {
 
+    /**
+     * user id
+     */
     private int userID;
+    /**
+     * user mail
+     */
     private String userMail;
     private String userPassword;
     private int userRole;
