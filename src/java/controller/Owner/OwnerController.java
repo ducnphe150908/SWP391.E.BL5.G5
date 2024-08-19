@@ -79,6 +79,8 @@ public class OwnerController extends HttpServlet {
             deleteItem(request, response);
         } else if (service.equals("addItem")) {
             addItem(request, response);
+        } else if (service.equals("updateRoomDetail")) {
+            updateRoomDetail(request, response);
         }
     }
 
@@ -213,6 +215,68 @@ public class OwnerController extends HttpServlet {
         int addItem = dao.addRoomItem(roomID, itemID, quantity);
         request.getRequestDispatcher("OwnerController?service=editRoom").forward(request, response);
     }
+
+    private void updateRoomDetail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RoomDAO dao = new RoomDAO();
+        List<Rooms> listRoom = dao.getRooms();
+        int roomID = Integer.parseInt(request.getParameter("roomID"));
+        RoomDetailSe roomDetail = dao.getRoomDetail(roomID);
+        int currentRoomNumber = roomDetail.getRoomNumber();
+        double roomFee = 0;
+        int roomNumber = 0;
+
+        try {
+            roomNumber = Integer.parseInt(request.getParameter("roomNumber").trim());
+            if (roomNumber <= 0) {
+                request.setAttribute("error", "Invalid room number");
+                request.getRequestDispatcher("OwnerController?service=editRoom&roomID=" + roomID).forward(request, response);
+                return;
+            }
+            if (!dao.isExistRoomNumber(roomNumber)) {
+                if (roomNumber != dao.getCurrentRoomNumber(roomID)) {
+                    request.setAttribute("error", "Room number is exist!!!");
+                    request.getRequestDispatcher("OwnerController?service=editRoom&roomID=" + roomID).forward(request, response);
+                    return;
+                }
+            }
+
+        } catch (NumberFormatException e) {
+            request.setAttribute("error", "Invalid room number");
+            request.getRequestDispatcher("OwnerController?service=editRoom&roomID=" + roomID).forward(request, response);
+            return;
+        }
+
+        try {
+            roomFee = Double.parseDouble(request.getParameter("roomFee").trim());
+            if (roomFee <= 0) {
+                request.setAttribute("error", "Room Fee have to great than 0!!!");
+                request.getRequestDispatcher("OwnerController?service=editRoom&roomID=" + roomID).forward(request, response);
+                return;
+            }
+        } catch (NumberFormatException e) {
+            request.setAttribute("error", "Invalid room fee");
+            request.getRequestDispatcher("OwnerController?service=editRoom&roomID=" + roomID).forward(request, response);
+            return;
+        }
+
+        Part photo = request.getPart("roomImg");
+        String contentType = photo.getContentType();
+        byte[] roomImg_raw = null;
+        String roomImg = null;
+        if (!contentType.equals("image/jpeg")) {
+            request.setAttribute("error", "Invalid room image");
+            request.getRequestDispatcher("OwnerController?service=editRoom&roomID=" + roomID).forward(request, response);
+            return;
+        } else {
+            roomImg_raw = convertInputStreamToByteArray(photo.getInputStream());
+            roomImg = Base64.getEncoder().encodeToString(roomImg_raw);
+        }
+
+        int updateRoomDetail = dao.updateRoomDetail(roomID, roomFee, roomImg, roomNumber);
+        request.getRequestDispatcher("OwnerController?service=roomDetail").forward(request, response);
+    }
+    
+    
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
 
     /**
