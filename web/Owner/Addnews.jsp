@@ -1,8 +1,4 @@
-<%-- 
-    Document   : Addnews
-    Created on : Jul 8, 2024, 3:13:13 PM
-    Author     : quan
---%>
+
 
 <!doctype html>
 <html lang="en">

@@ -13,7 +13,7 @@ import model.RenterList;
 
 /**
  *
- * @author quan
+ * @author quocp
  */
 @WebServlet(name="ListRenterController", urlPatterns={"/ListRenterController"})
 public class ListRenterController extends HttpServlet {

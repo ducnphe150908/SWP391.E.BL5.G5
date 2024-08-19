@@ -145,7 +145,7 @@ public class PenaltyDao extends DBContext {
 
     public int insert(Penalty model) {
         try {
-            String sql = "insert into penaltys(roomID, description, penDate, ruleID, penStatus, evidenceImg) values (?,?,?,?,?,?)";
+            String sql = "insert into penalty(roomID, description, penDate, ruleID, penStatus, evidenceImg) values (?,?,?,?,?,?)";
             PreparedStatement ps;
             ps = connection.prepareStatement(sql);
             ps.setInt(1, model.getRoomID().getRoomID());
@@ -254,7 +254,7 @@ public class PenaltyDao extends DBContext {
     public ArrayList<Penalty> findAll() {
         ArrayList<Penalty> penaltys = new ArrayList<>();
         try {
-            String sql = "select * from penaltys";
+            String sql = "select * from penalty";
             PreparedStatement ps;
             ResultSet rs;
             ps = connection.prepareStatement(sql);
@@ -264,7 +264,7 @@ public class PenaltyDao extends DBContext {
                 penaltys.add(toPenalty(rs));
             }
         } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
+
         }
         return penaltys;
     }
