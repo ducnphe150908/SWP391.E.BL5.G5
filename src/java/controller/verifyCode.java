@@ -40,6 +40,8 @@ public class verifyCode extends HttpServlet {
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        //set data type
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
         String code = request.getParameter("code");
@@ -52,6 +54,8 @@ public class verifyCode extends HttpServlet {
         String address = (String) session.getAttribute("address");
         RegisterDAO dao = new RegisterDAO();
 
+        
+        // upload image
        Path defaultImg = Paths.get("D:\\New folder\\1\\SWP391.E.BL5.G5\\web\\images\\default.jpg");
         byte[] userAvatar_raw = convertPathToByteArray(defaultImg);
         String userAvatar = Base64.getEncoder().encodeToString(userAvatar_raw);
