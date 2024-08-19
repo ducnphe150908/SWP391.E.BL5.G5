@@ -9,8 +9,17 @@ package model;
  * @author Creep
  */
 public class Guideline {
+    /**
+     * id
+     */
     private int guideID;
+    /**
+     * name
+     */
     private String guideName;
+    /**
+     * image
+     */
     private String img;
 
 
