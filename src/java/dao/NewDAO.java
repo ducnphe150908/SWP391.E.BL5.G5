@@ -77,14 +77,14 @@ public class NewDAO extends DBContext {
         return n;
     }
 
-    public int updateNews(News news) {
+     public int updateNews(News news) {
         int n = 0;
-        String query = "String query = \"UPDATE [dbo].[news]\\n\"\n"
-                + "                 + \"SET [newTitle] = ?,\\n\"\n"
-                + "                 + \"    [description] = ?,\\n\"\n"
-                + "                 + \"    [img] = ?,\\n\"\n"
-                + "                 + \"    [creatAt] = ?\\n\"\n"
-                + "                 + \"WHERE [newID] = ?\";\n";
+        String query = "UPDATE [dbo].[news] \n"
+                + "SET [newTitle] = ?, \n"
+                + "    [description] = ?, \n"
+                + "    [img] = ?, \n"
+                + "    [creatAt] = ? \n"
+                + "WHERE [newID] = ?";
 
         try {
             java.sql.Connection conn = connection;
@@ -97,6 +97,8 @@ public class NewDAO extends DBContext {
 
             n = ps.executeUpdate();
         } catch (Exception e) {
+            e.printStackTrace();  // In thông báo lỗi ra console để dễ dàng gỡ lỗi
+            System.out.println(e.getMessage());
         }
         return n;
     }
@@ -194,6 +196,11 @@ public class NewDAO extends DBContext {
             e.printStackTrace();
         }
         return news;
+    }
+  
+    public static void main(String[] args) {
+        NewDAO dbNew = new NewDAO();
+        dbNew.updateNews(new News(44, "hiihih", "hoho", "abc","2024-12-12"));
     }
     
 

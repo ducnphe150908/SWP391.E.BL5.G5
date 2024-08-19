@@ -6,24 +6,21 @@
 package controller.Owner;
 
 import dao.EditNewsDAO;
-import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.News;
 
-/** 
+/**
  *
  * @author pc
  */
-@WebServlet(name="editNewController", urlPatterns={"/editNews"})
-@MultipartConfig
-public class editNewController extends HttpServlet {
+@WebServlet(name="EditNewsController", urlPatterns={"/formeditnews"})
+public class EditNewsFormController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -40,20 +37,14 @@ public class editNewController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet EditNews</title>");  
+            out.println("<title>Servlet EditNewsController</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet EditNews at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet EditNewsController at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
     } 
-      private EditNewsDAO newsDAO;
-
-    public void init() {
-        newsDAO = new EditNewsDAO();
-    }
-
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 
@@ -66,11 +57,13 @@ public class editNewController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
-        News news = newsDAO.getNewsById(id);
+        int id =Integer.parseInt( request.getParameter("id"));
+        EditNewsDAO dao = new EditNewsDAO();
+        News news = dao.getNewsById(id);
+        
         request.setAttribute("news", news);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("EditNews.jsp");
-        dispatcher.forward(request, response);
+        request.getRequestDispatcher("Owner/Editnews.jsp").forward(request, response);
+     
     } 
 
     /** 
@@ -83,28 +76,7 @@ public class editNewController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String raw_id = request.getParameter("id");
-        int id = Integer.parseInt(raw_id);
-        String title = request.getParameter("title");
-        String description = request.getParameter("description");
-        String img = request.getParameter("img");
-        String createAt = request.getParameter("creatAt");
-        News news = new News();
-        news.setNewId(id);
-        news.setNewTitle(title);
-        news.setDescription(description);
-        news.setImg(img);
-        news.setCreateAt(createAt);
-       
-        int result = newsDAO.updateNews(news);
-        
-        if (result > 0) {
-            response.sendRedirect("NewsList.jsp");
-        } else {
-            request.setAttribute("errorMessage", "Error updating news");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("Owner/Editnews.jsp");
-            dispatcher.forward(request, response);
-        }
+        processRequest(request, response);
     }
 
     /** 

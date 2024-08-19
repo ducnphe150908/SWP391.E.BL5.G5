@@ -116,7 +116,7 @@
        
         <div class="container my-5">
             <h2>Edit News</h2>
-            <form action="editNews" method="post" enctype="multipart/form-data">
+            <form action="UpdateNewsController" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="id" value="${news.newId}"/>
                 <div class="form-group mb-3">
                     <label for="title">Title</label>
