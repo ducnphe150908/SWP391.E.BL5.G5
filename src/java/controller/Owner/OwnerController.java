@@ -4,6 +4,7 @@
  */
 package controller.Owner;
 
+import dao.RenterDAO;
 import dao.RoomDAO;
 import dao.UserDAO;
 import java.io.IOException;
@@ -18,6 +19,9 @@ import jakarta.servlet.http.Part;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.util.Base64;
+import java.util.List;
+import model.RoomDetailSe;
+import model.Rooms;
 import model.User;
 
 /**
@@ -65,13 +69,19 @@ public class OwnerController extends HttpServlet {
             updateOwnerProfile(request, response);
         } else if (service.equals("updateAvatar")) {
             updateAvatar(request, response);
+        } else if (service.equals("pagingRoom")) {
+            listRoom(request, response);
+        } else if (service.equals("roomDetail")) {
+            roomDetail(request, response, 0);
+        } else if (service.equals("editRoom")) {
+            roomDetail(request, response, 1);
         }
     }
-    
+
     private void OwnerHome(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher("Owner/OwnerHome.jsp").forward(request, response);
     }
-    
+
     private void getOwnerProfile(HttpServletRequest request, HttpServletResponse response, int flag) throws ServletException, IOException {
         RoomDAO dao = new RoomDAO();
         User ownerProfile = dao.getOwnerProfileByID(15);
@@ -91,7 +101,7 @@ public class OwnerController extends HttpServlet {
         int updateAvatar = dao.updateAvatar(new User(15, avatar));
         request.getRequestDispatcher("OwnerController?service=editOwnerProfile").forward(request, response);
     }
-    
+
     private void updateOwnerProfile(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RoomDAO dao = new RoomDAO();
 
@@ -119,7 +129,7 @@ public class OwnerController extends HttpServlet {
             request.getRequestDispatcher("OwnerController?service=ownerProfile").forward(request, response);
         }
     }
-    
+
     public byte[] convertInputStreamToByteArray(InputStream inputStream) throws IOException {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         byte[] buffer = new byte[4096]; // Sử dụng một buffer có kích thước lớn hơn cho hiệu suất tốt hơn
@@ -128,6 +138,47 @@ public class OwnerController extends HttpServlet {
             outputStream.write(buffer, 0, bytesRead);
         }
         return outputStream.toByteArray();
+    }
+
+    private void listRoom(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RoomDAO dao = new RoomDAO();
+        int index = Integer.parseInt(request.getParameter("index"));
+
+        List<Rooms> rooms = dao.pagingRoom(index, 1);
+        List<Rooms> allRooms = dao.getRooms();
+        int totalRoom = dao.getTotalRoom();
+        int totalPage = totalRoom / 6;
+        if (totalRoom % 6 != 0) {
+            totalPage++;
+        }
+
+        request.setAttribute("totalPage", totalPage);
+        request.setAttribute("index", index);
+        request.setAttribute("rooms", rooms);
+        request.setAttribute("allRooms", allRooms);
+
+        request.getRequestDispatcher("Owner/rooms.jsp").forward(request, response);
+    }
+
+    private void roomDetail(HttpServletRequest request, HttpServletResponse response, int flag) throws ServletException, IOException {
+        RoomDAO dao = new RoomDAO();
+        RenterDAO daoRenter = new RenterDAO();
+        HttpSession session = request.getSession();
+        int roomID = Integer.parseInt(request.getParameter("roomID"));
+        RoomDetailSe roomDetail = dao.getRoomDetail(roomID);
+        List<String> listNameRenter = daoRenter.getRenterName(roomID);
+        request.setAttribute("roomDetail", roomDetail);
+        request.setAttribute("listNameRenter", listNameRenter);
+        session.setAttribute("roomID", roomID);
+
+        if (flag == 0) {
+            request.getRequestDispatcher("Owner/roomDetail.jsp").forward(request, response);
+        } else if (flag == 1) {
+            List<String> listItemNames = dao.getItemName();
+            String[] listItem = listItemNames.toArray(new String[0]);
+            request.setAttribute("listItem", listItem);
+            request.getRequestDispatcher("Owner/editRoom.jsp").forward(request, response);
+        }
     }
 
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
