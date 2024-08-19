@@ -17,17 +17,12 @@ import model.*;
 /**
  * @author DAT
  */
-
-//sSqsSs
-
-
 @WebServlet(name = "ChangePasswordController", urlPatterns = {"/changePassword"})
 public class ChangePasswordController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Account account = (Account) req.getSession().getAttribute("user");
-        // check account is valid
         if (account == null) {
             req.getRequestDispatcher("GuestController").forward(req, resp);
         } else {
@@ -37,9 +32,7 @@ public class ChangePasswordController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // get session
         HttpSession session = req.getSession();
-        // get user from session
         Account account = (Account) req.getSession().getAttribute("user");
         AccountDAO dbAccount = new AccountDAO();
         if (account == null) {
@@ -49,7 +42,6 @@ public class ChangePasswordController extends HttpServlet {
             System.out.println(account.getUserMail());
             Account accountInDb = dbAccount.findByEmail(account.getUserMail());
             String oldPassword = req.getParameter("oldPassword");
-            //validate data
             if (!oldPassword.equals(accountInDb.getUserPassword())) {
                 req.setAttribute("message", "Your old password is wrong");
                 req.getRequestDispatcher("change-password.jsp").forward(req, resp);

@@ -17,7 +17,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Account;
 
-@WebServlet(name = "LoginController", urlPatterns = {"/login"})
+/**
+ *
+ * @author yetvv.piacom
+ */
+
 public class LoginController extends HttpServlet {
 
     @Override
@@ -30,7 +34,6 @@ public class LoginController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            //get data from jsp
             String email = request.getParameter("email");
             String password = request.getParameter("password");
             AccountDAO a = new AccountDAO();
@@ -41,16 +44,16 @@ public class LoginController extends HttpServlet {
                 request.getRequestDispatcher("login.jsp").forward(request, response);
             } else {
                 HttpSession session = request.getSession();
-                // set session attribute for details
                 session.setAttribute("userID", account.getUserID());
                 session.setAttribute("user", account);
                 session.setAttribute("email", email);
                 session.setAttribute("password", password);
                 request.setAttribute("message", "Login successfully");
 
+                
+
                 int role = a.getUserRole(email, password);
 
-                // switch role
                 switch (role) {
                     case 0:
                         response.sendRedirect(request.getContextPath() + "/error.jsp");

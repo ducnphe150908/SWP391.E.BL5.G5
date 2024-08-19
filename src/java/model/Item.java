@@ -11,17 +11,8 @@ import model.*;
  * @author ASUS
  */
 public class Item {
-    /**
-     * item ID
-     */
     private int itemID;
-    /**
-     * name
-     */
     private String itemName;
-    /**
-     * image
-     */
     private String itemImg;
 
     public Item(int itemID, String itemName, String itemImg) {

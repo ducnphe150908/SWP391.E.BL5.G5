@@ -11,25 +11,10 @@ package model;
  */
 public class Account {
 
-    /**
-     * user id
-     */
     private int userID;
-    /**
-     * user mail
-     */
     private String userMail;
-    /**
-     * password
-     */
     private String userPassword;
-    /**
-     * role
-     */
     private int userRole;
-    /**
-     * user link to account
-     */
     private User user;
 
     public Account() {

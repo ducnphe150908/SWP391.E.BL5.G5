@@ -5,6 +5,7 @@ import model.*;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.Random;
+
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
@@ -20,50 +21,85 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import javax.mail.Authenticator;
-import util.Sendmail;
-//doaiwjdoajdawijodaw
 
-@WebServlet(name = "ForgotPassword", urlPatterns = {"/forgotPassword"})
+@WebServlet("/forgotPassword")
 public class ForgotPassword extends HttpServlet {
-
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    throws ServletException, IOException {
         request.getRequestDispatcher("forgotPassword.jsp").forward(request, response);
-    }
+    } 
+    
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        AccountDAO dao = new AccountDAO();
+
         String email = request.getParameter("email");
-        boolean checkmail = dao.checkMailRegister(email);
-        HttpSession mySession = request.getSession();
+        
+        RequestDispatcher dispatcher = null;
         
         int otpvalueLength = 6;
+        
         Random rand = new Random();
+        
         String string = "0123456789";
+        
         String randomOtp = "";
-
-        if (checkmail) {
+        
+        HttpSession mySession = request.getSession();
+        
+        
+        
+        if (email != null || !email.equals("")) {
             for (int i = 0; i < otpvalueLength; i++) {
                 char c = string.charAt(rand.nextInt(string.length()));
-                randomOtp = randomOtp + c;
+                randomOtp = randomOtp + c;    
             }
-
             Cookie cookie = new Cookie("otpR", randomOtp);
-            cookie.setMaxAge(5 * 60);
+            
+            cookie.setMaxAge(5*60);
+            
             response.addCookie(cookie);
-
+            
             String to = email;
-            Sendmail.sendMailForgotPassword(to, randomOtp);
-
+            
+            
+            // Get the session object
+            Properties props = new Properties();
+            props.put("mail.smtp.host", "smtp.gmail.com");
+            props.put("mail.smtp.socketFactory.port", "465");
+            props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+            props.put("mail.smtp.auth", "true");
+            props.put("mail.smtp.port", "465");
+            Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
+                protected PasswordAuthentication getPasswordAuthentication() {
+                    return new PasswordAuthentication("bnvqm1721@gmail.com", "tgqwyawkaytmqvka");
+                }
+            });
+            try {
+                MimeMessage message = new MimeMessage(session);
+                message.setFrom(new InternetAddress(email, "Admin"));
+                message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+                message.setSubject("Request to reset password ");
+                message.setText("Please don't share OTP code with anyone, OTP code exist in 5 minute");
+                message.setText("Hi, for security, please verify your account with the OPT below. " 
+                        + "Your OTP is ==========> " + randomOtp + ". " + " <========== Click the link to enter otp: " + "http://localhost:8080/HL_Motel/enterotp.jsp");
+                Transport.send(message);
+                System.out.println("message sent successfully");
+            } catch (MessagingException e) {
+                e.printStackTrace();
+            }
+            //=======================================================
+            
+            
+            
+            dispatcher = request.getRequestDispatcher("forgotPassword.jsp");
             request.setAttribute("message", "OTP is sent to your email id");
             mySession.setAttribute("otp", randomOtp);
             mySession.setAttribute("email", email);
-            request.getRequestDispatcher("forgotPassword.jsp").forward(request, response);
-        } else {
-            request.setAttribute("message", "Email have not register");
-            request.getRequestDispatcher("forgotPassword.jsp").forward(request, response);
-        }
+            dispatcher.forward(request, response);
+        } 
+
     }
+
 }
