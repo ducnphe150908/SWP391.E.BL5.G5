@@ -2,9 +2,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package controller.Renter;
+package controller.Owner;
 
-import controller.Owner.*;
 import com.google.gson.Gson;
 import dao.GuideLineDAO;
 import jakarta.servlet.ServletException;
@@ -16,8 +15,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import model.Guideline;
 
-@WebServlet(name = "RenterGuideController", urlPatterns = {"/renterguideline"})
-public class RenterGuideController extends HttpServlet {
+/**
+ *
+ * @author DAT
+ */
+@WebServlet(name = "GuildeLinesController", urlPatterns = {"/guidelines"})
+public class GuildeLinesController extends HttpServlet {
     
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -25,8 +28,11 @@ public class RenterGuideController extends HttpServlet {
         ArrayList<Guideline> guideLines = dbGuideline.findAll();
         
         req.setAttribute("guidelines", guideLines);
+          Gson gson = new Gson();
+        String jsonData = gson.toJson(guideLines);
         
-        req.getRequestDispatcher("Renter/guidelinelist.jsp").forward(req, resp);
+        req.setAttribute("dataList", jsonData);
+        req.getRequestDispatcher("Owner/guidelines-list.jsp").forward(req, resp);
     }
     
     @Override

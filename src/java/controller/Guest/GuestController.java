@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller;
+package controller.Guest;
 
 import dao.RoomDAO;
 import java.io.IOException;
@@ -18,6 +18,10 @@ import model.RoomDetailSe;
 import model.Rooms;
 import model.UserDetail;
 
+/**
+ *
+ * @author quocp
+ */
 @WebServlet(name = "GuestController", urlPatterns = {"/GuestController"})
 public class GuestController extends HttpServlet {
 

@@ -4,7 +4,7 @@
  */
 package controller.Owner;
 
-
+import dao.GuideLineDAO;
 import dao.RuleDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-
+import model.Guideline;
 import model.Rule;
 
 /**
@@ -37,7 +37,7 @@ public class UpdateRuleController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String raw_id = req.getParameter("id");
         int id = Integer.parseInt(raw_id);
-      
+        GuideLineDAO dbGuideLine = new GuideLineDAO();
         RuleDAO dbRule = new RuleDAO();
         Rule rule = dbRule.findById(id);
         String ruleName = req.getParameter("ruleName");

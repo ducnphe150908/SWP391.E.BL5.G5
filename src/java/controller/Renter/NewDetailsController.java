@@ -15,10 +15,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.News;
 
-/**
- *
- * @author quanb
- */
 @WebServlet(name="NewDetailsController", urlPatterns={"/newDetails"})
 public class NewDetailsController extends HttpServlet {
    

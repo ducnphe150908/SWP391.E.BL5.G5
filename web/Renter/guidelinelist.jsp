@@ -28,10 +28,6 @@
         <link rel="stylesheet" href="css/aos.css">
         <link rel="stylesheet" href="css/style.css">
 
-
-
-
-
         <!-- Favicons -->
         <link rel="shortcut icon" href="images/favicon.png">
         <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
@@ -174,7 +170,7 @@
             <div class="container">
                 <div class="menu-bg-wrap">
                     <div class="site-navigation">
-                        <a href="OwnerHome.jsp" class="logo m-0 float-start">Room</a>
+                        <a href="renterguideline" class="logo m-0 float-start">GuideLine</a>
                         <jsp:include page = "navbar.jsp"></jsp:include>
 
                             <a href="#" class="burger light me-auto float-end mt-1 site-menu-toggle js-menu-toggle d-inline-block d-lg-none" data-toggle="collapse" data-target="#main-navbar">

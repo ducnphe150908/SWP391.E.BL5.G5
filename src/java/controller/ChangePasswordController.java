@@ -17,10 +17,6 @@ import model.*;
 /**
  * @author DAT
  */
-
-//sSqsSs
-
-
 @WebServlet(name = "ChangePasswordController", urlPatterns = {"/changePassword"})
 public class ChangePasswordController extends HttpServlet {
 

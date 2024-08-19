@@ -17,7 +17,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@WebServlet(name="NewPassword", urlPatterns={"/newPassword"})
+@WebServlet("/newPassword")
 public class NewPassword extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
@@ -36,10 +36,11 @@ public class NewPassword extends HttpServlet {
                 && (confPassword.length() >= 6 && confPassword.length() <= 32)) 
         {
             try {
-                AccountDAO dao = new AccountDAO();
-                dao.updateUserPassword(email, newPassword);
-                request.setAttribute("message", "Reset Success");
-                request.getRequestDispatcher("login.jsp").forward(request, response);
+                AccountDAO udbc = new AccountDAO();
+                udbc.updateUserPassword(email, newPassword);
+                request.setAttribute("status", "Reset Success");
+                dispatcher = request.getRequestDispatcher("login.jsp");
+                dispatcher.forward(request, response);
             } catch (Exception e) {
                 e.printStackTrace();
             }
