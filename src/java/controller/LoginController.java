@@ -21,7 +21,7 @@ import model.Account;
  *
  * @author yetvv.piacom
  */
-
+@WebServlet(name = "LoginController", urlPatterns = {"/login"})
 public class LoginController extends HttpServlet {
 
     @Override
