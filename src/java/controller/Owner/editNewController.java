@@ -19,7 +19,7 @@ import model.News;
 
 /** 
  *
- * @author pc
+ * @author quan
  */
 @WebServlet(name="editNewController", urlPatterns={"/editNews"})
 @MultipartConfig
