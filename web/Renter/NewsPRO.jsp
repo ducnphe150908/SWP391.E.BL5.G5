@@ -6,9 +6,9 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>HL_Motel</title>
-        
-        
-        
+
+
+
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="Free HTML5 Template by FREEHTML5.CO" />
         <meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive" />
@@ -25,7 +25,7 @@
         <meta name="twitter:url" content="" />
         <meta name="twitter:card" content="" />
 
-      <link rel="shortcut icon" href="./images/favicon.png">
+        <link rel="shortcut icon" href="./images/favicon.png">
 
         <!-- Google Webfonts -->
         <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,100,500' rel='stylesheet' type='text/css'>
@@ -57,7 +57,13 @@
         <!--[if lt IE 9]>
         <script src="js/respond.min.js"></script>
         <![endif]-->
-
+        <style>
+            .fh5co-board-img img {
+                width: 100%;
+                height: 200px; /* Chỉnh chiều cao phù hợp */
+                object-fit: cover; /* Đảm bảo ảnh không bị biến dạng */
+            }
+        </style>
     </head>
     <body>
 
@@ -101,41 +107,17 @@
             <div id="fh5co-main">
                 <div class="container">
                     <div class="row">
-                        <form class="form-control" method="post" action="news">
-                            <input class="input-box" type="text" name="search" placeholder="Enter data for search" value="${search}"/>
-                            <button class="btn-primary">Search</button>
-                        </form>
-                    </div>
-                    <div class="row">
-                       
-                         <div class="text-black row mb-3">
-                                    <form id="myform" action="news" class="form-inline">
-                                        <label for="page-size-select" class="ps-3">Products per page:</label>
-                                        <select name="pageSize" id="page-size-select" class="form-control" onchange="document.getElementById('myform').submit()">
-                                            <option value="5" <c:if test="${pageSize == 5}">selected</c:if>>5</option>
-                                            <option value="10" <c:if test="${pageSize == 10}">selected</c:if>>10</option>
-                                            <option value="15" <c:if test="${pageSize == 15}">selected</c:if>>15</option>
-                                            <option value="20" <c:if test="${pageSize == 20}">selected</c:if>>20</option>
-                                            </select>
-                                            <input type="hidden" name="index" value="1" />
-                                            <input type="hidden" name="blogName" value="${pi}" />
-                                        <noscript>
-                                        <button type="submit" class="btn btn-primary">Go</button>
-                                        </noscript>
-                                    </form>
-
-                                </div>   
                         <div id="fh5co-board" data-columns>
                         <c:forEach items="${ListN}" var="n">
                             <div class="item">
                                 <div class="animate-box">
-                                    <a href="newDetails?id=${n.newId}" class="fh5co-board-img" title="${n.description}"><img src="data:image/jpg;base64,${n.img}" alt="No IMG"></a>
+                                    <a href="data:image/jpg;base64,${n.img}" class="image-popup fh5co-board-img" title="${n.description}"><img src="data:image/jpg;base64,${n.img}" alt="No IMG"></a>
                                 </div>
                                 <div class="fh5co-desc">${n.newTitle}</div>
+                                <div class="fh5co-desc">${n.description}</div>
                                 <div class="fh5co-desc">${n.createAt}</div>
                             </div>        
                         </c:forEach>
-                            
                     </div>
                 </div>
             </div>
