@@ -83,7 +83,7 @@ public class ForgotPassword extends HttpServlet {
                 message.setSubject("Request to reset password ");
                 message.setText("Please don't share OTP code with anyone, OTP code exist in 5 minute");
                 message.setText("Hi, for security, please verify your account with the OPT below. " 
-                        + "Your OTP is ==========> " + randomOtp + ". " + " <========== Click the link to enter otp: " + "http://localhost:8080/HL_Motel/enterotp.jsp");
+                        + "Your OTP is ==========> " + randomOtp + ". " + " <========== Click the link to enter otp: " + "http://localhost:9999/SWP391.E.BL5.G5/enterotp.jsp");
                 Transport.send(message);
                 System.out.println("message sent successfully");
             } catch (MessagingException e) {
