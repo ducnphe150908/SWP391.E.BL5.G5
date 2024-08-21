@@ -1,9 +1,8 @@
 <%-- 
-     Document   : EditNews
-    Created on : August 9, 2024, 9:31:14 PM
-    Author     : quan
+    Document   : Addslider
+    Created on : Aug 21, 2024, 3:20:27 PM
+    Author     : quanb
 --%>
-<%@page import="model.News"%>
 
 <!doctype html>
 <html lang="en">
@@ -27,6 +26,10 @@
         <link rel="stylesheet" href="css/tiny-slider.css">
         <link rel="stylesheet" href="css/aos.css">
         <link rel="stylesheet" href="css/style.css">
+
+
+
+
 
         <!-- Favicons -->
         <link rel="shortcut icon" href="images/favicon.png">
@@ -67,16 +70,7 @@
         </style>
     </head>
     <body>
-        <%
-        String error = (String) request.getAttribute("error");
-        if (error != null && !error.isEmpty()) {
-    %>
-        <div style="color: red; font-weight: bold;">
-            <%= error %>
-        </div>
-    <%
-        }
-    %>
+
         <div class="site-mobile-menu site-navbar-target">
             <div class="site-mobile-menu-header">
                 <div class="site-mobile-menu-close">
@@ -90,7 +84,7 @@
             <div class="container">
                 <div class="menu-bg-wrap">
                     <div class="site-navigation">
-                        <a href="" class="logo m-0 float-start">Owner</a>
+                        <a href="addslider" class="logo m-0 float-start">Owner</a>
 
                         <jsp:include page = "navbar.jsp"></jsp:include>
 
@@ -107,79 +101,86 @@
                 <div class="container">
                     <div class="row justify-content-center align-items-center">
                         <div class="col-lg-9 text-center mt-5">
-                            <h1 class="heading" data-aos="fade-up">Edit News</h1>
+                            <h1 class="heading" data-aos="fade-up">Add Slider</h1>
 
                         </div>
                     </div>
                 </div>
             </div>
-       
-        <div class="container my-5">
-            <h2>Edit News</h2>
-            <form action="UpdateNewsController" method="post" enctype="multipart/form-data">
-                <input type="hidden" name="id" value="${news.newId}"/>
-                <div class="form-group mb-3">
-                    <label for="title">Title</label>
-                    <input type="text" class="form-control" name="title" value="${news.newTitle}" required>
-                </div>
-                <div class="form-group mb-3">
-                    <label for="description">Description</label>
-                    <textarea class="form-control" id="description" name="description" required>${news.description} </textarea>
-                </div>
-                <div class="form-group mb-3">
-                    <label for="img">Image URL</label>
-                    <input type="file" class="form-control" id="img" name="img" accept="image/jpeg, image/png" required>
-                    <c:if test="${not empty error}">
+            <div class="container my-5">
+                <h2>Add Slider</h2>
+                <form action="addslider" method="post" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name Slider</label>
+                        <input type="text" class="form-control" id="name"  name="name" required>
+                    </div>
+                   <div class="mb-3">
+                    <label for="image" class="form-label">Upload Image</label>
+                    <input type="file" class="form-control" id="image" name="image" accept="image/jpeg, image/png">
+                     <c:if test="${not empty error}">
                                     <span style="color: red;">${error}</span>
                                 </c:if>
                                 <span id="fileError" style="color: red;"></span>
                 </div>
-                <div class="form-group mb-3">
-                    <label for="createAt">Create At</label>
-                    <input type="text" class="form-control" id="createAt" name="createAt" value="${news.createAt}" required>
+<!--                <div class="mb-3">
+                        <label for="image" class="form-label">Name Slider</label>
+                        <input type="text" class="form-control" id="image"  name="image" required>
+                    </div>-->
+                <div class="mb-3">
+                    <label for="date" class="form-label">Slider Date:</label>
+                    <input type="date" class="form-control" id="date" name="date" required readonly="">
+
                 </div>
+
                 <button type="submit" class="btn btn-primary" onclick="return validateFile()">Submit</button>
+                <a href="displayslider" class="btn btn-primary"> Back to list</a>
             </form>
-                <script>
-                    function validateFile() {
-                        const fileInput = document.getElementById('img');
-                        const fileError = document.getElementById('fileError');
-                        fileError.textContent = ''; // Clear previous errors
+            <script>
 
-                        if (!fileInput.files || fileInput.files.length === 0) {
-                            fileError.textContent = 'Please select a file.';
-                            return false;
-                        }
+                const today = new Date().toISOString().split('T')[0];
 
-                        const file = fileInput.files[0];
-                        const allowedTypes = ['image/jpeg', 'image/png'];
-                        const maxSize = 1 * 1024 * 1024; // 5 MB
+                document.getElementById('date').value = today;
+            </script>
+            <script>
+                function validateFile() {
+                    const fileInput = document.getElementById('image');
+                    const fileError = document.getElementById('fileError');
+                    fileError.textContent = ''; // Clear previous errors
 
-                        if (!allowedTypes.includes(file.type)) {
-                            fileError.textContent = 'Only JPEG and PNG files are allowed.';
-                            return false;
-                        }
-
-                        if (file.size > maxSize) {
-                            fileError.textContent = 'File size must be less than 1 MB.';
-                            return false;
-                        }
-
-                        return true;
+                    if (!fileInput.files || fileInput.files.length === 0) {
+                        fileError.textContent = 'Please select a file.';
+                        return false;
                     }
-                </script>
-                <script>
-                    function checkImageFile() {
-                        var fileInput = document.getElementById('files');
-                        var filePath = fileInput.value;
-                        var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
-                        if (!allowedExtensions.exec(filePath)) {
-                            alert('Ch? cho phép tai lên các file có dinh dang: .jpeg/.jpg/.png/.gif');
-                            fileInput.value = '';
-                            return false;
-                        }
+
+                    const file = fileInput.files[0];
+                    const allowedTypes = ['image/jpeg', 'image/png'];
+                    const maxSize = 1 * 1024 * 1024; // 1 MB
+
+                    if (!allowedTypes.includes(file.type)) {
+                        fileError.textContent = 'Only JPEG and PNG files are allowed.';
+                        return false;
                     }
-                </script>
+
+                    if (file.size > maxSize) {
+                        fileError.textContent = 'File size must be less than 1 MB.';
+                        return false;
+                    }
+
+                    return true;
+                }
+            </script>
+            <script>
+                function checkImageFile() {
+                    var fileInput = document.getElementById('files');
+                    var filePath = fileInput.value;
+                    var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+                    if (!allowedExtensions.exec(filePath)) {
+                        alert('Cho cho phép tai lên các file có dinh dang: .jpeg/.jpg/.png/.gif');
+                        fileInput.value = '';
+                        return false;
+                    }
+                }
+            </script>
         </div>
         <div class="site-footer">
             <div class="container">
@@ -281,4 +282,3 @@ Please don't remove this copyright link unless you buy the license here https://
         <script src="js/main_owner.js"></script>
     </body>
 </html>
-
