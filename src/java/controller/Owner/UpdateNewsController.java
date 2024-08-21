@@ -42,7 +42,7 @@ public class UpdateNewsController extends HttpServlet {
         String title = request.getParameter("newTitle");
         String description = request.getParameter("description");
         Part imagePart = request.getPart("img");
-        String createAt = request.getParameter("creatAt");
+        String createAt = request.getParameter("createAt");
          if (title == null || title.isEmpty() || description == null || description.isEmpty() || imagePart == null || createAt == null || createAt.isEmpty()) {
             request.setAttribute("error", "All fields are required.");
             request.getRequestDispatcher("Owner/Editnews.jsp").forward(request, response);
@@ -54,6 +54,9 @@ public class UpdateNewsController extends HttpServlet {
         
          NewDAO dao = new NewDAO();
          News news = new News(title, description, imgBase64, createAt);
+         news.setNewId(id);
+         dao.updateNews(news);
+         response.sendRedirect("displayNews");
          dao.updateNews(news);
     } 
 
