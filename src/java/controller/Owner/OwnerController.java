@@ -26,10 +26,10 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.util.Base64;
 import model.*;
-//import org.json.simple.JSONArray;
-//import org.json.simple.JSONObject;
-//import org.json.simple.parser.JSONParser;
-//import org.json.simple.parser.ParseException;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 @WebServlet(name = "OwnerController", urlPatterns = {"/OwnerController"})
 @MultipartConfig
@@ -58,7 +58,7 @@ public class OwnerController extends HttpServlet {
             request.getRequestDispatcher("login.jsp").forward(request, response);
             return;
         }
-
+                        
         if (service == null) {
             service = "OwnerHome";
         }
@@ -86,8 +86,8 @@ public class OwnerController extends HttpServlet {
             addItem(request, response);
         } else if (service.equals("updateRoomDetail")) {
             updateRoomDetail(request, response);
-//        } else if (service.equals("updateRoomItem")) {
-//            updateRoomItem(request, response);
+        } else if (service.equals("updateRoomItem")) {
+            updateRoomItem(request, response);
         } else if (service.equals("listrequest")) {
             requestList(request, response, 0);
         } else if (service.equals("changereqstatus")) {
@@ -281,52 +281,53 @@ public class OwnerController extends HttpServlet {
         }
     }
 
-//    private void updateRoomItem(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        RoomDAO dao = new RoomDAO();
-//        HttpSession session = request.getSession();
-//        BufferedReader reader = request.getReader();
-//        StringBuilder sb = new StringBuilder();
-//        String line;
-//
-//        while ((line = reader.readLine()) != null) {
-//            sb.append(line);
-//        }
-//
-//        String json = sb.toString();
-//        System.out.println("Received JSON: " + json);
-//        int roomID_raw = (int) session.getAttribute("roomID");
-//
-//        try {
-//            if (!json.isEmpty()) {
-//                JSONParser parser = new JSONParser();
-//                JSONArray jsonArray = (JSONArray) parser.parse(json);
-//
-//                for (Object obj : jsonArray) {
-//                    JSONObject jsonObject = (JSONObject) obj;
-//                    String itemIDStr = (String) jsonObject.get("itemID");
-//                    String itemName = (String) jsonObject.get("itemName");
-//                    String quantityStr = (String) jsonObject.get("quantity");
-//                    String roomIDStr = (String) jsonObject.get("roomID");
-//
-//                    int itemID = Integer.parseInt(itemIDStr);
-//                    int quantity = Integer.parseInt(quantityStr);
-//                    int roomID = Integer.parseInt(roomIDStr);
-//                    if (quantity == 0) {
-//                        dao.deleteRoomItem(roomID, itemID);
-//                    } else {
-//                        dao.updateItemQuantity(roomID, itemID, quantity);
-//                    }
-//
-//                }
-//            } else {
-//                System.out.println("Received empty JSON.");
-//            }
-//
-//            response.sendRedirect("OwnerController?service=roomDetail&roomID=" + roomID_raw);
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-//    }
+    private void updateRoomItem(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RoomDAO dao = new RoomDAO();
+        HttpSession session = request.getSession();
+        BufferedReader reader = request.getReader();
+        StringBuilder sb = new StringBuilder();
+        String line;
+
+        while ((line = reader.readLine()) != null) {
+            sb.append(line);
+        }
+
+        String json = sb.toString();
+        System.out.println("Received JSON: " + json);
+        int roomID_raw = (int) session.getAttribute("roomID");
+
+        try {
+            if (!json.isEmpty()) {
+                JSONParser parser = new JSONParser();
+                JSONArray jsonArray = (JSONArray) parser.parse(json);
+
+                for (Object obj : jsonArray) {
+                    JSONObject jsonObject = (JSONObject) obj;
+                    String itemIDStr = (String) jsonObject.get("itemID");
+                    String itemName = (String) jsonObject.get("itemName");
+                    String quantityStr = (String) jsonObject.get("quantity");
+                    String roomIDStr = (String) jsonObject.get("roomID");
+
+                    int itemID = Integer.parseInt(itemIDStr);
+                    int quantity = Integer.parseInt(quantityStr);
+                    int roomID = Integer.parseInt(roomIDStr);
+                    if (quantity == 0) {
+                        dao.deleteRoomItem(roomID, itemID);
+                    } else {
+                        dao.updateItemQuantity(roomID, itemID, quantity);
+                    }
+
+                }
+            } else {
+                System.out.println("Received empty JSON.");
+            }
+
+            response.sendRedirect("OwnerController?service=roomDetail&roomID=" + roomID_raw);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
     public byte[] convertInputStreamToByteArray(InputStream inputStream) throws IOException {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         byte[] buffer = new byte[4096]; // Sử dụng một buffer có kích thước lớn hơn cho hiệu suất tốt hơn
@@ -377,54 +378,54 @@ public class OwnerController extends HttpServlet {
     }// </editor-fold>
 
     private void requestList(HttpServletRequest request, HttpServletResponse response, int flag) throws ServletException, IOException {
-        RequestDAO requestDAO = new RequestDAO();
+    RequestDAO requestDAO = new RequestDAO();
+    
+    if (flag == 0) {
+        // Get the list of all requests
+        List<RequestList> requests = requestDAO.getAllRequest();
+        // Store the list in the request scope
+        request.setAttribute("requests", requests);
+        // Forward to the JSP page
+        request.getRequestDispatcher("Owner/OwnerRequest.jsp").forward(request, response);
+    } else if (flag == 1) {
+        // REQUEST STATUS UPDATE
+        String rawRequestId = request.getParameter("requestId");
+        String status = request.getParameter("status");
 
-        if (flag == 0) {
-            // Get the list of all requests
-            List<RequestList> requests = requestDAO.getAllRequest();
-            // Store the list in the request scope
-            request.setAttribute("requests", requests);
-            // Forward to the JSP page
-            request.getRequestDispatcher("Owner/OwnerRequest.jsp").forward(request, response);
-        } else if (flag == 1) {
-            // REQUEST STATUS UPDATE
-            String rawRequestId = request.getParameter("requestId");
-            String status = request.getParameter("status");
+        if (rawRequestId != null && status != null && (status.equals("Accepted") || status.equals("Denied"))) {
+            try {
+                int requestId = Integer.parseInt(rawRequestId);
+                // Fetch the current request
+                RequestList currentRequest = requestDAO.getRequestByID(requestId);
 
-            if (rawRequestId != null && status != null && (status.equals("Accepted") || status.equals("Denied"))) {
-                try {
-                    int requestId = Integer.parseInt(rawRequestId);
-                    // Fetch the current request
-                    RequestList currentRequest = requestDAO.getRequestByID(requestId);
+                if (currentRequest != null && "Pending".equals(currentRequest.getResStatus())) {
+                    // Update the request status
+                    boolean updateSuccess = requestDAO.updateRequestStatus(status, requestId);
 
-                    if (currentRequest != null && "Pending".equals(currentRequest.getResStatus())) {
-                        // Update the request status
-                        boolean updateSuccess = requestDAO.updateRequestStatus(status, requestId);
-
-                        if (updateSuccess) {
-                            // Set success message
-                            // request.getSession().setAttribute("message", "Request status updated successfully.");
-                        } else {
-                            // Set failure message
-                            //request.getSession().setAttribute("message", "Failed to update request status.");
-                        }
+                    if (updateSuccess) {
+                        // Set success message
+                       // request.getSession().setAttribute("message", "Request status updated successfully.");
                     } else {
-                        // Set message if request was already updated
-                        // request.getSession().setAttribute("message", "Request has already been updated or does not exist.");
+                        // Set failure message
+                        //request.getSession().setAttribute("message", "Failed to update request status.");
                     }
-                } catch (NumberFormatException e) {
-                    // Handle invalid request ID format
-                    // request.getSession().setAttribute("message", "Invalid request ID format.");
+                } else {
+                    // Set message if request was already updated
+                   // request.getSession().setAttribute("message", "Request has already been updated or does not exist.");
                 }
-            } else {
-                // Set message if status is invalid
-                //  request.getSession().setAttribute("message", "Invalid status provided.");
+            } catch (NumberFormatException e) {
+                // Handle invalid request ID format
+               // request.getSession().setAttribute("message", "Invalid request ID format.");
             }
-
-            // Redirect back to the list page
-            request.getRequestDispatcher("OwnerController?service=listrequest").forward(request, response);
+        } else {
+            // Set message if status is invalid
+          //  request.getSession().setAttribute("message", "Invalid status provided.");
         }
+
+        // Redirect back to the list page
+         request.getRequestDispatcher("OwnerController?service=listrequest").forward(request, response);
     }
+}
 
     private void updateRoomStatus(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RoomDAO dao = new RoomDAO();

@@ -23,7 +23,7 @@ import model.RentDetail;
 /**
  * Data Access Object for Renter-related operations.
  *
- * Author: quan
+ * Author: creep
  */
 public class RenterDAO extends MyDAO {
 
@@ -552,21 +552,22 @@ public class RenterDAO extends MyDAO {
 
     return renters;
 }
-public static void main(String[] args) {
-        // Create an instance of RenterDAO
-        RenterDAO dao = new RenterDAO();
 
-        // Fetch the list of renters
-        List<RenterList> renterLists = dao.getListRenters();
-
-        for (RenterList renter : renterLists) {
-            System.out.println("Room ID: " + renter.getRoomID());
-            System.out.println("User Name: " + renter.getUserName());
-            System.out.println("Room Number: " + renter.getRoomNumber());
-            System.out.println("Room Floor: " + renter.getRoomFloor());
-            System.out.println("Balance: " + renter.getBalance());
-            System.out.println("User ID: " + renter.getUserID());
-            System.out.println("---------------------------");
-        }
+     public static void main(String[] args) {
+    // Create an instance of RenterDAO
+    RenterDAO dao = new RenterDAO();
+    
+    // Fetch the list of renters
+    List<RenterList> renterLists = dao.getAllRentersExcel();
+    
+    // Print the details of each RenterList object
+    for (RenterList renterList : renterLists) {
+        System.out.println("Renter Name: " + renterList.getUserName());
+        System.out.println("Room Number: " + renterList.getRoomNumber());
+        System.out.println("Room Floor: " + renterList.getRoomFloor());
+        System.out.println("Room Department" +renterList.getDepartment());
+        System.out.println("----------"); // Separator for readability
     }
+}
+
 }

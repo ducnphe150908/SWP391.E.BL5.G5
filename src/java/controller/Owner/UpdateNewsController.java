@@ -39,7 +39,7 @@ public class UpdateNewsController extends HttpServlet {
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         int id = Integer.parseInt(request.getParameter("id"));
-        String title = request.getParameter("title");
+        String title = request.getParameter("newTitle");
         String description = request.getParameter("description");
         Part imagePart = request.getPart("img");
         String createAt = request.getParameter("createAt");
@@ -57,6 +57,7 @@ public class UpdateNewsController extends HttpServlet {
          news.setNewId(id);
          dao.updateNews(news);
          response.sendRedirect("displayNews");
+         dao.updateNews(news);
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

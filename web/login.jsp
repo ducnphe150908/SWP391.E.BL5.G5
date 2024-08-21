@@ -1,4 +1,3 @@
-
 <% String error = (String) request.getAttribute("error"); %>
 
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>

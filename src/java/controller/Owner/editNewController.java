@@ -10,7 +10,6 @@ import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -19,9 +18,9 @@ import model.News;
 
 /** 
  *
- * @author quan
+ * @author pc
  */
-@WebServlet(name="editNewController", urlPatterns={"/editNews"})
+@WebServlet(name="UpdateNewsController", urlPatterns={"/editNews"})
 @MultipartConfig
 public class editNewController extends HttpServlet {
    
@@ -83,8 +82,10 @@ public class editNewController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String raw_id = request.getParameter("id");
-        int id = Integer.parseInt(raw_id);
+        response.setContentType("text/html;charset=UTF-8");
+        
+        int id = Integer.parseInt(request.getParameter("id"));
+        
         String title = request.getParameter("title");
         String description = request.getParameter("description");
         String img = request.getParameter("img");
@@ -102,7 +103,7 @@ public class editNewController extends HttpServlet {
             response.sendRedirect("NewsList.jsp");
         } else {
             request.setAttribute("errorMessage", "Error updating news");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("Owner/Editnews.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("Owner/DisplayNews.jsp");
             dispatcher.forward(request, response);
         }
     }

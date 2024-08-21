@@ -1,9 +1,3 @@
-<%-- 
-    Document   : navbar
-    Created on : 25 thg 5, 2024, 15:32:37
-    Author     : phuc
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
@@ -28,7 +22,7 @@
         <link rel="stylesheet" href="../css/tiny-slider.css">
         <link rel="stylesheet" href="../css/aos.css">
         <link rel="stylesheet" href="../css/style.css">
-        
+
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.css" />
 
@@ -54,9 +48,16 @@
             <li class="${param.service == "paymentList" ? "active" : ''}"><a href="WalletController">Wallet</a></li>
             <li><a href="rentercontroller?service=request">Contact Us</a></li>
             <li><a href="logout">Logout</a></li>
+            <!--            <li>
+                            <a href="rentercontroller?service=renterprofile">
+                                <img src="images/firefly.jpg" alt="Profile Image" width="30px" height="30px" style="border-radius: 10px;">
+                            </a>
+                        </li>-->
             <li>
                 <a href="rentercontroller?service=renterprofile">
-                    <img src="images/firefly.jpg" alt="Profile Image" width="30px" height="30px" style="border-radius: 10px;">
+
+                    <!-- data: image/jsp;base64  nó là mã hóa chuỗi imgAvata xong rr nhé   -->
+                    <img src="data:image/jpg;base64,${imgAvata}" alt="Profile Image" width="30px" height="30px" style="border-radius: 10px;">
                 </a>
             </li>
         </ul>
