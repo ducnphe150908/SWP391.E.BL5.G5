@@ -244,6 +244,7 @@ public class SliderDAO extends DBContext {
         }
         return false;
     }
+     
 
 //    public static void main(String[] args) {
 //        SliderDAO d = new SliderDAO();
@@ -257,43 +258,45 @@ public class SliderDAO extends DBContext {
 //            System.out.println("---------------------------");
 //        }
      
-//     public static void main(String[] args) {
-//    // Giả sử bạn đã tạo một instance của DAO chứa hàm searchByText
-//    SliderDAO sliderDAO = new SliderDAO();
-//
-//    // Gọi hàm searchByText để kiểm tra
-//    List<Slider> sliders = sliderDAO.searchByText(1, 2, "n");
-//
-//    // In ra kết quả
-//    for (Slider slider : sliders) {
-//        System.out.println("ID: " + slider.getSliderId());
-//        System.out.println("Name: " + slider.getSliderName());
-//        System.out.println("Image: " + slider.getSliderImg());
-//        System.out.println("Date: " + slider.getSliderDate());
-//        System.out.println("Status: " + slider.isSliderStatus());
-//        System.out.println("-----------------------------");
-//    }
-//     }  
-     
      public static void main(String[] args) {
-        // Tạo một đối tượng Slider với các thuộc tính cần thiết
-        Slider slider = new Slider();
-        slider.setSliderName("Test");
-        slider.setSliderImg("test_image.png");
-        slider.setSliderDate("2024-08-21"); // Định dạng ngày tháng theo yêu cầu của bạn
-        slider.setSliderStatus(true); // hoặc false, tùy thuộc vào trạng thái bạn muốn kiểm tra
+    // Giả sử bạn đã tạo một instance của DAO chứa hàm searchByText
+    SliderDAO sliderDAO = new SliderDAO();
 
-        // Khởi tạo đối tượng của lớp chứa phương thức insertSlider
-        SliderDAO sliderDAO = new SliderDAO();
+    // Gọi hàm searchByText để kiểm tra
+    List<Slider> sliders = sliderDAO.searchByText(1, 2, "n");
 
-        // Gọi phương thức insertSlider và lưu kết quả
-        int result = sliderDAO.insertSlider(slider);
-
-        // Kiểm tra kết quả trả về
-        if (result > 0) {
-            System.out.println("Slider inserted successfully!");
-        } else {
-            System.out.println("Failed to insert slider.");
-        }
+    // In ra kết quả
+    for (Slider slider : sliders) {
+        System.out.println("ID: " + slider.getSliderId());
+        System.out.println("Name: " + slider.getSliderName());
+        System.out.println("Image: " + slider.getSliderImg());
+        System.out.println("Date: " + slider.getSliderDate());
+        System.out.println("Status: " + slider.isSliderStatus());
+        System.out.println("-----------------------------");
     }
+     }  
+     
+//     public static void main(String[] args) {
+//        // Tạo một đối tượng Slider với các thuộc tính cần thiết
+//        Slider slider = new Slider();
+//        slider.setSliderName("Test");
+//        slider.setSliderImg("test_image.png");
+//        slider.setSliderDate("2024-08-21"); // Định dạng ngày tháng theo yêu cầu của bạn
+//        slider.setSliderStatus(true); // hoặc false, tùy thuộc vào trạng thái bạn muốn kiểm tra
+//
+//        // Khởi tạo đối tượng của lớp chứa phương thức insertSlider
+//        SliderDAO sliderDAO = new SliderDAO();
+//
+//        // Gọi phương thức insertSlider và lưu kết quả
+//        int result = sliderDAO.insertSlider(slider);
+//
+//        // Kiểm tra kết quả trả về
+//        if (result > 0) {
+//            System.out.println("Slider inserted successfully!");
+//        } else {
+//            System.out.println("Failed to insert slider.");
+//        }
+//    }
+     
+     
 }

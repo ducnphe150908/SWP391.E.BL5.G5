@@ -136,10 +136,16 @@
                 </div>
                 <div class="form-group mb-3">
                     <label for="createAt">Create At</label>
-                    <input type="text" class="form-control" id="createAt" name="createAt" value="${news.createAt}" required>
+                    <input type="text" class="form-control" id="createAt" name="createAt" value="${news.createAt}" readonly="">
                 </div>
                 <button type="submit" class="btn btn-primary" onclick="return validateFile()">Submit</button>
             </form>
+                <script>
+
+                const today = new Date().toISOString().split('T')[0];
+
+                document.getElementById('createAt').value = today;
+            </script>
                 <script>
                     function validateFile() {
                         const fileInput = document.getElementById('img');
