@@ -20,10 +20,6 @@ import model.RoomDetailSe;
 import model.Rooms;
 import model.UserDetail;
 
-/**
- *
- * @author quocp
- */
 @WebServlet(name = "RenterListRoom", urlPatterns = {"/RenterRoomController"})
 public class RenterRoomController extends HttpServlet {
 
@@ -46,8 +42,7 @@ public class RenterRoomController extends HttpServlet {
             listRoom(request, response);
         } else if (service.equals("roomDetail")) {
             roomDetail(request, response);
-        } 
-        else if (service.equals("rentRoom")) {
+        } else if (service.equals("rentRoom")) {
             rentRoom(request, response, 0);
         } else if (service.equals("cancelRoom")) {
             rentRoom(request, response, 1);
@@ -99,11 +94,35 @@ public class RenterRoomController extends HttpServlet {
     }
 
     private void rentRoom(HttpServletRequest request, HttpServletResponse response, int flag) throws ServletException, IOException {
-        request.getRequestDispatcher("Renter/roomDetail.jsp").forward(request, response);
+        RenterDAO daoRenter = new RenterDAO();
+        RoomDAO daoRoom = new RoomDAO();
+        HttpSession session = request.getSession();
+        int roomID = Integer.parseInt(request.getParameter("roomID"));
+        String email = (String) session.getAttribute("email");
+        String password = (String) session.getAttribute("password");
+
+        if (flag == 0) {
+            boolean lockRoom = daoRenter.lockRoom(roomID);
+            RoomDetailSe roomDetail = daoRoom.getRoomDetail(roomID);
+            UserDetail basicUserDetail = daoRenter.RenterBasicDetail(email, password);
+            int userID = basicUserDetail.getUserID();
+            request.setAttribute("userID", userID);
+            request.setAttribute("roomDetail", roomDetail);
+            request.getRequestDispatcher("Renter/confirmRentRoom.jsp").forward(request, response);
+        } else if (flag == 1) {
+            boolean unlockRoom = daoRenter.unlockRoom(roomID);
+            request.getRequestDispatcher("RenterRoomController?service=listRoom&index=1").forward(request, response);
+        }
     }
 
     private void confirmRentRoom(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-       request.getRequestDispatcher("Renter/roomDetail.jsp").forward(request, response);
+        RoomDAO dao = new RoomDAO();
+        HttpSession session = request.getSession();
+        int roomID = Integer.parseInt(request.getParameter("roomID"));
+        RoomDetailSe roomDetail = dao.getRoomDetail(roomID);
+        request.setAttribute("roomDetail", roomDetail);
+        session.setAttribute("roomID", roomID);
+        request.getRequestDispatcher("Renter/confirmRentRoom.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
