@@ -5,27 +5,22 @@
 
 package controller.Owner;
 
-import dao.RenterDAO;
-import dao.RoomDAO;
-import dao.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
-import model.Room;
-import model.Rooms;
-import model.User;
 
 /**
  *
- * @author quan
+ * @author quanb
  */
-@WebServlet(name="AddRenterController", urlPatterns={"/AddRenterController"})
-public class AddRenterController extends HttpServlet {
+@WebServlet(name="UpdateSliderController", urlPatterns={"/UpdateSliderController"})
+@MultipartConfig
+public class UpdateSliderController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -37,8 +32,18 @@ public class AddRenterController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet UpdateSliderController</title>");  
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet UpdateSliderController at " + request.getContextPath () + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -52,16 +57,7 @@ public class AddRenterController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        UserDAO userDAO = new UserDAO();
-        RoomDAO roomDAO = new RoomDAO();
-        
-        
-        List<Rooms> listRoomAvailable = roomDAO.getRoomsAvailable();
-        List<User> listUserAvailable = userDAO.getUserAvailable();
-        
-        request.setAttribute("listRoomAvailable", listRoomAvailable);
-        request.setAttribute("listUserAvailable", listUserAvailable);
-        request.getRequestDispatcher("Owner/addRenter.jsp").forward(request, response);
+        processRequest(request, response);
     } 
 
     /** 
@@ -74,36 +70,7 @@ public class AddRenterController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        RenterDAO renterDAO = new RenterDAO();
-        RoomDAO roomDAO = new RoomDAO();
-        
-        int roomID = Integer.parseInt(request.getParameter("roomID"));        
-        int userID = Integer.parseInt(request.getParameter("userID")); 
-        Room getRoomDetailByID = roomDAO.getRoomDetailByID(roomID);
-        
-        int addRenter = renterDAO.addRenter(userID, roomID);
-        boolean rentRoom = renterDAO.rentRoom(roomID);
-        
-        if (getRoomDetailByID.getRoomSize() == 1) {
-            roomDAO.updateRoomStatus(roomID, 0);
-            roomDAO.updateRoomOccupant(roomID);
-        } else if (getRoomDetailByID.getRoomSize() == 2) {
-            if (getRoomDetailByID.getRoomOccupant() == 0) {
-                
-                roomDAO.updateRoomStatus(roomID, 1);
-            } else if (getRoomDetailByID.getRoomOccupant() == 1) {
-                
-                roomDAO.updateRoomStatus(roomID, 0);
-            }
-        }
-        
-        if (addRenter > 0 && rentRoom) {
-            request.setAttribute("Add renter successfully!!", "message");
-        } else {
-            request.setAttribute("Add renter failed!!", "message");
-        }
-        
-        request.getRequestDispatcher("Owner/OwnerHome.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /** 
