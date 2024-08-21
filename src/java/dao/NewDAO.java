@@ -11,18 +11,20 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *
+ * @author Admin
+ */
 public class NewDAO extends DBContext {
-    public List<News> searchByText(int pageIndex, int pageSize, String search) {
+
+    public List<News> getNewsList() {
         List<News> news = new ArrayList<>();
-        String sql = "SELECT [newId],\n"
-                + "      [newTitle],\n"
-                + "      [description],\n"
-                + "      [creatAt],\n"
-                + "      [img]\n"
-                + "  FROM [HL_Motel].[dbo].[news]\n where newTitle like ? "
-                + "ORDER BY [newID]\n"
-                + "OFFSET ? ROWS\n"
-                + "FETCH NEXT ? ROWS ONLY";
+        String sql = "SELECT [newID]\n"
+                + "      ,[newTitle]\n"
+                 + "      ,[description]\n"
+                + "      ,[creatAt]\n"
+                + "      ,[img]\n"
+                + "  FROM [HL_Motel].[dbo].[news]";
 
         try {
             java.sql.Connection conn = connection;
@@ -39,7 +41,7 @@ public class NewDAO extends DBContext {
                 News.setNewId(rs.getInt("newId"));
                 News.setCreateAt(rs.getString("creatAt"));
                 News.setNewTitle(rs.getString("newTitle"));
-                News.setDescription(rs.getString("description"));
+                News.setDescription(rs.getString ("description"));
                 News.setImg(rs.getString("img"));
                 news.add(News);
             }
@@ -185,6 +187,5 @@ public class NewDAO extends DBContext {
         }
         return news;
     }
-
 }
 //getNewsDetails("1");
