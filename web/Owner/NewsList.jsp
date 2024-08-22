@@ -1,8 +1,4 @@
-<%-- 
-    Document   : NewsList
-    Created on : Jul 8, 2024, 4:13:13 PM
-    Author     : pc
---%>
+
 
 <%@page import="model.News"%>
 <%@page import="java.util.List"%>

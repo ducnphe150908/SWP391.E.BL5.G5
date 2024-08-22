@@ -1,8 +1,4 @@
-<%-- 
-    Document   : list
-    Created on : Jun 10, 2024, 9:56:50 PM
-    Author     : DAT
---%>
+
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

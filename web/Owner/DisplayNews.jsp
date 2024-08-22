@@ -1,8 +1,4 @@
-<%-- 
-    Document   : DisplayNews
-    Created on : August 9, 2024, 3:32:14 PM
-    Author     : quan
---%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>

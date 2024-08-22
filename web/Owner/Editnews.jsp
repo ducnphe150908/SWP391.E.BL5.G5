@@ -1,8 +1,4 @@
-<%-- 
-     Document   : EditNews
-    Created on : August 9, 2024, 9:31:14 PM
-    Author     : quan
---%>
+
 <%@page import="model.News"%>
 
 <!doctype html>

@@ -1,8 +1,4 @@
-<%-- 
-    Document   : listRenter
-    Created on : 14 thg 8, 2024, 23:21:05
-    Author     : quan
---%>
+
 
 <%@page import="dao.RoomDAO,java.util.List"%>
 <%@page import="model.Rooms, model.RenterList" %>
