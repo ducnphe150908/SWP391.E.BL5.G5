@@ -42,43 +42,42 @@ public class SliderDAO extends DBContext {
     }
 
     public List<Slider> searchByText(int pageIndex, int pageSize, String search) {
-    List<Slider> sliders = new ArrayList<>();
-    String sql = "SELECT [SliderId],\n"
-            + "      [SliderName],\n"
-            + "      [SliderImg],\n"
-            + "      [SliderDate],\n"
-            + "      [SliderStatus]\n"
-            + "  FROM [HL_Motel].[dbo].[Slider]\n where SliderName like ? "
-            + "ORDER BY [SliderId]\n"
-            + "OFFSET ? ROWS\n"
-            + "FETCH NEXT ? ROWS ONLY";
+        List<Slider> sliders = new ArrayList<>();
+        String sql = "SELECT [SliderId],\n"
+                + "      [SliderName],\n"
+                + "      [SliderImg],\n"
+                + "      [SliderDate],\n"
+                + "      [SliderStatus]\n"
+                + "  FROM [HL_Motel].[dbo].[Slider]\n where SliderName like ? "
+                + "ORDER BY [SliderId]\n"
+                + "OFFSET ? ROWS\n"
+                + "FETCH NEXT ? ROWS ONLY";
 
-    try {
-        java.sql.Connection conn = connection;
-        PreparedStatement ps = conn.prepareStatement(sql);
-        int offset = (pageIndex - 1) * pageSize;
-        ps.setString(1, "%" + search + "%");
-        ps.setInt(2, offset);
-        ps.setInt(3, pageSize);
+        try {
+            java.sql.Connection conn = connection;
+            PreparedStatement ps = conn.prepareStatement(sql);
+            int offset = (pageIndex - 1) * pageSize;
+            ps.setString(1, "%" + search + "%");
+            ps.setInt(2, offset);
+            ps.setInt(3, pageSize);
 
-        ResultSet rs = ps.executeQuery();
+            ResultSet rs = ps.executeQuery();
 
-        while (rs.next()) {
-            Slider slider = new Slider();
+            while (rs.next()) {
+                Slider slider = new Slider();
 
-            slider.setSliderId(rs.getInt("SliderId"));
-            slider.setSliderName(rs.getString("SliderName"));
-            slider.setSliderImg(rs.getString("SliderImg"));
-            slider.setSliderDate(rs.getString("SliderDate"));  // Đã sửa lỗi
-            slider.setSliderStatus(rs.getBoolean("SliderStatus"));
-            sliders.add(slider);
+                slider.setSliderId(rs.getInt("SliderId"));
+                slider.setSliderName(rs.getString("SliderName"));
+                slider.setSliderImg(rs.getString("SliderImg"));
+                slider.setSliderDate(rs.getString("SliderDate"));  // Đã sửa lỗi
+                slider.setSliderStatus(rs.getBoolean("SliderStatus"));
+                sliders.add(slider);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-    } catch (Exception e) {
-        e.printStackTrace();
+        return sliders;
     }
-    return sliders;
-}
-
 
     public List<Slider> getSliderDetails(int sliderId) {
         List<Slider> slider = new ArrayList<>();
@@ -135,14 +134,14 @@ public class SliderDAO extends DBContext {
         }
         return slider;
     }
+
     public int updateSlider(Slider slider) {
         int n = 0;
         String query = "UPDATE [dbo].[Slider] \n"
                 + "SET [SliderName] = ?, \n"
                 + "    [SliderImg] = ?, \n"
-                + "    [SliderDate] = ?, \n"
-                + "    [SliderStatus] = ? \n"
-                + "WHERE [newID] = ?";
+                + "    [SliderDate] = ? \n"
+                + "WHERE [SliderID] = ?";
 
         try {
             java.sql.Connection conn = connection;
@@ -150,8 +149,7 @@ public class SliderDAO extends DBContext {
             ps.setString(1, slider.getSliderName());
             ps.setString(2, slider.getSliderImg());
             ps.setString(3, slider.getSliderDate());
-            ps.setBoolean(4, slider.isSliderStatus());
-            ps.setInt(5, slider.getSliderId());
+            ps.setInt(4, slider.getSliderId());
             n = ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();  // In thông báo lỗi ra console để dễ dàng gỡ lỗi
@@ -159,6 +157,7 @@ public class SliderDAO extends DBContext {
         }
         return n;
     }
+
     public int insertSlider(Slider slider) {
         int n = 0;
         String query = "INSERT INTO [dbo].[Slider]\n"
@@ -182,8 +181,9 @@ public class SliderDAO extends DBContext {
         }
         return n;
     }
-     public List<Slider> getSliderList(int pageIndex, int pageSize) {
-        List<Slider> news = new ArrayList<>();
+
+    public List<Slider> getSliderList(int pageIndex, int pageSize) {
+        List<Slider> sliders = new ArrayList<>();
         String sql = "SELECT [SliderId],\n"
                 + "      [SliderName],\n"
                 + "      [SliderImg],\n"
@@ -210,14 +210,15 @@ public class SliderDAO extends DBContext {
                 slider.setSliderImg(rs.getString("SliderImg"));
                 slider.setSliderDate(rs.getString("SliderDate"));
                 slider.setSliderStatus(rs.getBoolean("SliderStatus"));
-                news.add(slider);
+                sliders.add(slider);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return news;
+        return sliders;
     }
-     public int DeleteSlider(Slider slider) {
+
+    public int DeleteSlider(Slider slider) {
         int n = 0;
         String query = "DELETE FROM [dbo].[Slider] WHERE [SliderId] = ?";
         try {
@@ -230,11 +231,12 @@ public class SliderDAO extends DBContext {
         }
         return n;
     }
-     public boolean updateSliderStatus(int sliderId, boolean sliderStatus) {
+
+    public boolean updateSliderStatus(int sliderId, boolean sliderStatus) {
         String sql = "UPDATE Slider SET SliderStatus = ? WHERE SliderId = ?";
-        try  {
-             java.sql.Connection conn = connection;
-             PreparedStatement ps = conn.prepareStatement(sql);
+        try {
+            java.sql.Connection conn = connection;
+            PreparedStatement ps = conn.prepareStatement(sql);
             ps.setBoolean(1, sliderStatus);
             ps.setInt(2, sliderId);
             int rowsUpdated = ps.executeUpdate();
@@ -244,7 +246,6 @@ public class SliderDAO extends DBContext {
         }
         return false;
     }
-     
 
 //    public static void main(String[] args) {
 //        SliderDAO d = new SliderDAO();
@@ -257,25 +258,23 @@ public class SliderDAO extends DBContext {
 //            System.out.println("Status: " + slider.isSliderStatus());
 //            System.out.println("---------------------------");
 //        }
-     
-     public static void main(String[] args) {
-    // Giả sử bạn đã tạo một instance của DAO chứa hàm searchByText
-    SliderDAO sliderDAO = new SliderDAO();
-
-    // Gọi hàm searchByText để kiểm tra
-    List<Slider> sliders = sliderDAO.searchByText(1, 2, "n");
-
-    // In ra kết quả
-    for (Slider slider : sliders) {
-        System.out.println("ID: " + slider.getSliderId());
-        System.out.println("Name: " + slider.getSliderName());
-        System.out.println("Image: " + slider.getSliderImg());
-        System.out.println("Date: " + slider.getSliderDate());
-        System.out.println("Status: " + slider.isSliderStatus());
-        System.out.println("-----------------------------");
-    }
-     }  
-     
+//     public static void main(String[] args) {
+//    // Giả sử bạn đã tạo một instance của DAO chứa hàm searchByText
+//    SliderDAO sliderDAO = new SliderDAO();
+//
+//    // Gọi hàm searchByText để kiểm tra
+//    List<Slider> sliders = sliderDAO.searchByText(1, 2, "n");
+//
+//    // In ra kết quả
+//    for (Slider slider : sliders) {
+//        System.out.println("ID: " + slider.getSliderId());
+//        System.out.println("Name: " + slider.getSliderName());
+//        System.out.println("Image: " + slider.getSliderImg());
+//        System.out.println("Date: " + slider.getSliderDate());
+//        System.out.println("Status: " + slider.isSliderStatus());
+//        System.out.println("-----------------------------");
+//    }
+//     }  
 //     public static void main(String[] args) {
 //        // Tạo một đối tượng Slider với các thuộc tính cần thiết
 //        Slider slider = new Slider();
@@ -297,6 +296,25 @@ public class SliderDAO extends DBContext {
 //            System.out.println("Failed to insert slider.");
 //        }
 //    }
-     
-     
+    public static void main(String[] args) {
+        // Khởi tạo đối tượng SliderDAO
+        SliderDAO sliderDAO = new SliderDAO();
+
+        // Tạo một đối tượng Slider mới để cập nhật
+        Slider slider = new Slider();
+        slider.setSliderId(1009);  // ID của slider muốn cập nhật
+        slider.setSliderName("Updated Slider Name");
+        slider.setSliderImg("newBase64EncodedImage");  // Chuỗi hình ảnh đã mã hóa Base64
+        slider.setSliderDate("2024-08-22");  // Ngày tạo slider mới
+
+        // Gọi phương thức updateSlider
+        int result = sliderDAO.updateSlider(slider);
+
+        // Kiểm tra kết quả
+        if (result > 0) {
+            System.out.println("Slider updated successfully.");
+        } else {
+            System.out.println("Failed to update slider.");
+        }
+    }
 }

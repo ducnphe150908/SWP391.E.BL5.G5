@@ -32,6 +32,12 @@ public class Slider {
         this.sliderDate = sliderDate;
         this.sliderStatus = sliderStatus;
     }
+
+    public Slider(String sliderName, String sliderImg, String sliderDate) {
+        this.sliderName = sliderName;
+        this.sliderImg = sliderImg;
+        this.sliderDate = sliderDate;
+    }
     
 
     public boolean isSliderStatus() {
