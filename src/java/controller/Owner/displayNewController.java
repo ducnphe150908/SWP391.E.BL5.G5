@@ -35,11 +35,32 @@ public class displayNewController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        
         NewDAO newsDAO = new NewDAO(); // Assuming NewsDAO handles database operations
-        List<News> newsList = newsDAO.getNewsList(); // Fetch news list from DAO
+       String indexParam = request.getParameter("index");
+        int index = 1;
+        try {
+            if (indexParam != null && !indexParam.isEmpty()) {
+                index = Integer.parseInt(indexParam);
+            }
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+
+        // Get the page size from the request, defaulting to 5 if not provided or invalid
+        String pageSizeParam = request.getParameter("pageSize");
+        int pageSize = 5;
+        try {
+            if (pageSizeParam != null && !pageSizeParam.isEmpty()) {
+                pageSize = Integer.parseInt(pageSizeParam);
+            }
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+        List<News> ListN = newsDAO.getNewsList(index, pageSize);
        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
        SimpleDateFormat sds = new SimpleDateFormat("dd-MM-yyyy ");
-        for (News news : newsList) {
+        for (News news : ListN) {
             Date date = null;
             String formattedDate = news.getCreateAt();
         
@@ -54,7 +75,7 @@ public class displayNewController extends HttpServlet {
         }
         }
        
-        request.setAttribute("newsList", newsList); // Set newsList attribute for JSP
+        request.setAttribute("newsList", ListN); // Set newsList attribute for JSP
 
         request.getRequestDispatcher("Owner/DisplayNews.jsp").forward(request, response); // Forward to JSP for display
     } 
@@ -83,7 +104,37 @@ public class displayNewController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        String raw_search = request.getParameter("search");
+        String indexParam = request.getParameter("index");
+        int index = 1;
+        try {
+            if (indexParam != null && !indexParam.isEmpty()) {
+                index = Integer.parseInt(indexParam);
+            }
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+
+        // Get the page size from the request, defaulting to 5 if not provided or invalid
+        String pageSizeParam = request.getParameter("pageSize");
+        int pageSize = 5;
+        try {
+            if (pageSizeParam != null && !pageSizeParam.isEmpty()) {
+                pageSize = Integer.parseInt(pageSizeParam);
+            }
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+        NewDAO newsDAO = new NewDAO();
+        List<News> ListN = newsDAO.searchByText(index, pageSize, raw_search);
+        System.out.println(ListN.size());
+        request.setAttribute("newsList", ListN); // Set newsList attribute for JSP
+
+        request.setAttribute("pageSize", pageSize);
+        request.setAttribute("currentPage", index);
+        request.setAttribute("search", raw_search);
+        request.getRequestDispatcher("Owner/DisplayNews.jsp").forward(request, response);
+    
     }
 
     /** 
