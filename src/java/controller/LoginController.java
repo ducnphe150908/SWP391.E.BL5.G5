@@ -17,10 +17,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Account;
 
-/**
- *
- * @author yetvv.piacom
- */
 @WebServlet(name = "LoginController", urlPatterns = {"/login"})
 public class LoginController extends HttpServlet {
 
@@ -49,8 +45,6 @@ public class LoginController extends HttpServlet {
                 session.setAttribute("email", email);
                 session.setAttribute("password", password);
                 request.setAttribute("message", "Login successfully");
-
-                
 
                 int role = a.getUserRole(email, password);
 

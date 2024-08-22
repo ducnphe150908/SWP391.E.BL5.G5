@@ -22,7 +22,7 @@ import model.User;
 
 /**
  *
- * @author quocp
+ * @author quan
  */
 @WebServlet(name="AddRenterController", urlPatterns={"/AddRenterController"})
 public class AddRenterController extends HttpServlet {
