@@ -1,3 +1,9 @@
+<%-- 
+    Document   : list
+    Created on : Jun 10, 2024, 9:56:50 PM
+    Author     : DAT
+--%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.List" %>
@@ -136,4 +142,26 @@
             });
             
     </script>
+    
+
+    <!--    <script src="js/bootstrap.bundle.min.js"></script>
+        <script src="js/tiny-slider.js"></script>
+        <script src="js/aos.js"></script>
+        <script src="js/navbar.js"></script>
+        <script src="js/counter.js"></script>
+        <script src="js/custom.js"></script>
+    
+    
+         JavaScript Libraries 
+        <script src="lib/jquery/jquery.min.js"></script>
+        <script src="lib/jquery/jquery-migrate.min.js"></script>
+        <script src="lib/popper/popper.min.js"></script>
+        <script src="lib/bootstrap/js/bootstrap.min.js"></script>
+        <script src="lib/easing/easing.min.js"></script>
+        <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+        <script src="lib/scrollreveal/scrollreveal.min.js"></script>
+    
+    
+         Template Main Javascript File 
+        <script src="js/main_owner.js"></script>-->
 </html>

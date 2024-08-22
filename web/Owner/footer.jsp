@@ -1,4 +1,7 @@
-
+<%-- 
+    Document   : footer
+    Created on : Jun 10, 2024, 10:12:22 PM
+    Author     : DAT
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

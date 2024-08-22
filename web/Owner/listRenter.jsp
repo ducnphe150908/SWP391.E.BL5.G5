@@ -1,4 +1,8 @@
-
+<%-- 
+    Document   : listRenter
+    Created on : 4 thg 7, 2024, 23:21:05
+    Author     : quocp
+--%>
 
 <%@page import="dao.RoomDAO,java.util.List"%>
 <%@page import="model.Rooms, model.RenterList" %>

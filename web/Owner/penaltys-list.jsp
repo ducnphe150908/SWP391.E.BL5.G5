@@ -1,4 +1,8 @@
-
+<%-- 
+    Document   : list
+    Created on : Jun 10, 2024, 9:56:50 PM
+    Author     : DAT
+--%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -33,7 +37,7 @@
 
             <div class="main">
                 <div class="container" style="margin-top: 2em">
-                  <div class="col-3"><a href="insertPenalty"> <button type="button" class="btn btn-primary">Add Penalty</button></div></a>
+<!--                    <div class="col-3"><a href="insertPenalty"> <button type="button" class="btn btn-primary">Add Penalty</button></div></a>-->
                     <table id="guildLineTable" class="display">
                         <thead>
                             <tr>

@@ -336,12 +336,22 @@
 
                                 <div class="price-range">
                                     <label style="color: orange; font-size: 17px" class="price-label">Price Levels</label><br>
+                                    <input type="checkbox" id="priceAll" name="priceRange" value="all" class="price-input" onclick="filterRooms(this)">
+                                    <label for="priceAll" class="price-label">All</label><br>
                                     <input type="checkbox" id="priceBelow1M" name="priceRange" value="below1M" class="price-input" onclick="filterRooms(this)">
                                     <label for="priceBelow1M" class="price-label">Under 1 million</label><br>
                                     <input type="checkbox" id="price1To2M" name="priceRange" value="1To2M" class="price-input" onclick="filterRooms(this)">
                                     <label for="price1To2M" class="price-label">1-2 million</label><br>
                                     <input type="checkbox" id="price2To3M" name="priceRange" value="2To3M" class="price-input" onclick="filterRooms(this)">
                                     <label for="price2To3M" class="price-label">2-3 million</label>
+                                </div>
+
+                                <div class="price-range">
+                                    <label style="color: orange; font-size: 17px" class="price-label">Department</label><br>
+                                    <input type="checkbox" id="departmentA" name="priceRange" value="A" class="price-input" onclick="filterRoomsByDepartment(this)">
+                                    <label for="departmentA" class="price-label">Department A</label>
+                                    <input type="checkbox" id="departmentB" name="priceRange" value="B" class="price-input" onclick="filterRoomsByDepartment(this)">
+                                    <label for="departmentB" class="price-label">Department B</label>
                                 </div>
                             </div>
                         </div>
@@ -719,4 +729,3 @@
 
     </body>
 </html>
-// list room renter c??ng

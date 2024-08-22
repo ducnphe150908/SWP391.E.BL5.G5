@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="6.0" xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee                               http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+    <servlet>
+        <servlet-name>RenterHomeController</servlet-name>
+        <servlet-class>controller.Renter.RenterHomeController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RenterHomeController</servlet-name>
+        <url-pattern>/renterhome</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>RenterProfileController</servlet-name>
+        <servlet-class>controller.Renter.RenterProfileController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RenterProfileController</servlet-name>
+        <url-pattern>/renterprofile</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>RenterUpdateProfileController</servlet-name>
+        <servlet-class>controller.Renter.RenterUpdateProfileController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RenterUpdateProfileController</servlet-name>
+        <url-pattern>/renterupdate</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>LoginController</servlet-name>
+        <servlet-class>controller.LoginController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LoginController</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+</web-app>
