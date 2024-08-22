@@ -19,6 +19,19 @@ import model.Payment;
 
 public class PaymentDAO extends DBContext {
 
+    public void deleteMoney(int renterID) {
+        int n = 0;
+        String sql = "DELETE FROM payments\n"
+                + " WHERE userid = ?;";
+        try {
+            PreparedStatement pre = connection.prepareStatement(sql);
+            pre.setInt(1, renterID);
+            n = pre.executeUpdate();
+        } catch (SQLException ex) {
+
+        }
+    }
+
     public ArrayList<Payment> findAll() {
         ArrayList<Payment> payments = new ArrayList<>();
         try {
@@ -104,8 +117,8 @@ public class PaymentDAO extends DBContext {
         }
         return n;
     }
-    
-    public int updatePaymentStatus(int id) {        
+
+    public int updatePaymentStatus(int id) {
         int n = 0;
         String sql = "UPDATE [dbo].[payments] set [status] = 1 where id = ?";
         try {
@@ -113,11 +126,11 @@ public class PaymentDAO extends DBContext {
             pre.setInt(1, id);
             n = pre.executeUpdate();
         } catch (SQLException ex) {
-            
+
         }
         return n;
     }
-    
+
     public int displayMoney(int renterID) {
         int balance = 0;
         String sql = "  select balance from renter where renterID = ?";
@@ -128,7 +141,7 @@ public class PaymentDAO extends DBContext {
             if (rs.next()) {
                 balance = rs.getInt("balance");
             }
-           
+
         } catch (SQLException ex) {
 
         }
@@ -139,11 +152,10 @@ public class PaymentDAO extends DBContext {
         PaymentDAO dao = new PaymentDAO();
         int displayMoney = dao.displayMoney(602);
         System.out.println(displayMoney);
-        
-        
+
     }
 
-    public int updateRenterMoney(int renterID, double balance) {        
+    public int updateRenterMoney(int renterID, double balance) {
         int n = 0;
         String sql = "UPDATE [dbo].[renter] set [balance] = ? where renterID = ?";
         try {
@@ -152,7 +164,7 @@ public class PaymentDAO extends DBContext {
             pre.setInt(2, renterID);
             n = pre.executeUpdate();
         } catch (SQLException ex) {
-            
+
         }
         return n;
     }

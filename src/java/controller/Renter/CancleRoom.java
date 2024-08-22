@@ -1,6 +1,6 @@
-
 package controller.Renter;
 
+import dao.PaymentDAO;
 import dao.RenterDAO;
 import dao.RoomDAO;
 import java.io.IOException;
@@ -23,14 +23,17 @@ public class CancleRoom extends HttpServlet {
         HttpSession session = request.getSession();
         RoomDAO dao = new RoomDAO();
         RenterDAO renterDAO = new RenterDAO();
+        PaymentDAO pdao = new PaymentDAO();
         //get email and password 
         String email = (String) session.getAttribute("email");
         String password = (String) session.getAttribute("password");
 
+        int userID = 0;
         int renterID = 0;
         List<Renter> getBasicRenter = (List<Renter>) renterDAO.getRenterDetail(email, password);
         for (Renter renter : getBasicRenter) {
             renterID = renter.getRenterID();
+            userID = renter.getUserID();
         }
 
         int roomID = Integer.parseInt(request.getParameter("roomId"));
@@ -39,6 +42,7 @@ public class CancleRoom extends HttpServlet {
 
         if (cancleRoom > 0) {
             request.setAttribute("Successfully canceled the room", "message");
+            pdao.deleteMoney(userID);
             request.getRequestDispatcher("Renter/RenterRoomDetail.jsp").forward(request, response);
         }
     }
