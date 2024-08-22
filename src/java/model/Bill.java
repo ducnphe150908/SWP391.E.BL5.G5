@@ -4,6 +4,10 @@
  */
 package model;
 
+/**
+ *
+ * @author ASUS
+ */
 public class Bill {
     private int billID, roomID;
     private double service, electric, water, roomFee, other, penMoney, total;

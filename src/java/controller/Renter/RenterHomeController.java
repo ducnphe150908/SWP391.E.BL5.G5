@@ -8,13 +8,11 @@ import dao.RenterDAO;
 import java.io.IOException;
 import java.util.List;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebServlet(name = "RenterHomeController", urlPatterns = {"/renterhome"})
 public class RenterHomeController extends HttpServlet {
 
     @Override
@@ -23,17 +21,20 @@ public class RenterHomeController extends HttpServlet {
         HttpSession session = request.getSession();
         String email = (String) session.getAttribute("email");
         String password = (String) session.getAttribute("password");
-        
         // Retrieve the account object from the session
         Account account = (Account) session.getAttribute("user");
         request.setAttribute("email", email);
         request.setAttribute("password", password);
 
+        // Check if the account object exists in the session
         if (account != null) {
+            RenterDAO dao1 = new RenterDAO();
+            List<News> listN = dao1.getAllNews();
+            request.setAttribute("ListN", listN);
+
             RenterDAO dao = new RenterDAO();
-            User user = dao.getUserByID(account.getUserID());
-            String imgAvata = user.getUserAvatar();
-            session.setAttribute("imgAvata", imgAvata);
+            List<User> list = dao.getRenterDetailByAccountAndPassword(email, password);
+            request.setAttribute("ListRP", list);
             request.getRequestDispatcher("Renter/RenterHome.jsp").forward(request, response);
         } else {
             response.sendRedirect("login.jsp");

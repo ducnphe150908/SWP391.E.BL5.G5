@@ -45,6 +45,9 @@ public class RenterController extends HttpServlet {
             service = RENTER_HOME;
         }
 
+        LOGGER.info("Service requested: " + service);
+        request.setAttribute("service", service);
+
         try {
             switch (service) {
                 case RENTER_HOME:

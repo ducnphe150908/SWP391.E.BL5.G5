@@ -99,6 +99,7 @@
                             <div class="img-property-slide-wrap">
                                 <div class="img-property-slide">
                                 <% String base64Image = roomDetail.getRoomImg(); %>
+
                                 <img style="margin-top: 50px;" src="data:image/jpg;base64, <%= base64Image %>" alt="Image" class="img-fluid">
 
                             </div>
@@ -133,7 +134,7 @@
                                 }
                             %>
                             <p class="textDetail">Address: Thon 3, Tan Xa, Thach That, Ha Noi</p>
-                            <p class="textDetail">Contact Info: 0395866168</p>
+                            <p class="textDetail">Contact Info: 0123456789</p>
                             <div class="row">
                                 <div class="col-sm-12">
                                     <a class="btn btn-info " href="RenterRoomController?service=rentRoom&roomID=<%= roomDetail.getRoomID()%>">Rent</a>

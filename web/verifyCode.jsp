@@ -1,5 +1,4 @@
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <% String message = (String) request.getParameter("message"); %>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,7 +19,7 @@
             }
 
             .enter-otp {
-
+                
                 background-color: white;
                 width: fit-content;
                 text-align: center;
@@ -72,18 +71,12 @@
             <div class="text-notice">Enter OTP</div>
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWxaKG6HL-_z88M5D0-zeXZjQHqN33XNtYmA&usqp=CAU" alt="Response Image">
             <div class="text-notice">Check your email for the OTP</div>
-
-
-            <!-- <% if(message != null) { %>
-            <h3 id="message" style="color: #FF0E0E; margin-top: 20px;"><%= message %></h3> 
-            <% } %>-->
-
-
+            <div class="otp-text">
+                <% if(message != null) { %>
+                <h3 id="message" style="color: #FF0E0E; margin-top: 20px;"><%= message %></h3> 
+                <% } %>
+            </div>
             <form id="register-form" action="verifyCode" class="form" method="post">
-                <c:if test="${checkfailed==1}" >
-                    <p style="color: red">${message}</p>
-                </c:if>
-               
                 <div class="otp-value">
                     <input id="opt" name="code" placeholder="Enter OTP" type="text" required>
                 </div>

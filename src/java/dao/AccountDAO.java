@@ -13,6 +13,10 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ *
+ * @author ASUS
+ */
 public class AccountDAO extends MyDAO {
 
     //Table - Account

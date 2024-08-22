@@ -7,6 +7,10 @@ package model;
 import model.*;
 import java.sql.Date;
 
+/**
+ *
+ * @author Admin
+ */
 public class Penalty {
 
     private int penID;

@@ -11,10 +11,10 @@ import javax.crypto.spec.SecretKeySpec;
 
 public class VNPayConfig {
 
-    public static final String vnp_TmnCode = "LSN8XAGM";
-    public static final String vnp_HashSecret = "DLLU32CIEXBO4WVSIK1TGHML2EPXRP0H";
+    public static final String vnp_TmnCode = "N4C21R7Q";
+    public static final String vnp_HashSecret = "F9NCJPJWHVXUHVRC69WV72HKLXCCQJ42";
     public static final String vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-    public static final String vnp_ReturnUrl = "http://localhost:9999/SWP391.E.BL5.G5/VNPay_ReturnController";
+    public static final String vnp_ReturnUrl = "http://localhost:8080/HL_Motel/VNPay_ReturnController";
 
     public static String getIpAddress(HttpServletRequest request) {
         String ipAddress = request.getHeader("X-Forwarded-For");

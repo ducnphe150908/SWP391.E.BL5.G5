@@ -20,6 +20,10 @@ import model.RoomDetailSe;
 import model.Rooms;
 import model.UserDetail;
 
+/**
+ *
+ * @author quocp
+ */
 @WebServlet(name = "RenterListRoom", urlPatterns = {"/RenterRoomController"})
 public class RenterRoomController extends HttpServlet {
 

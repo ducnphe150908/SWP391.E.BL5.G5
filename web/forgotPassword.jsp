@@ -14,35 +14,12 @@
             }
             .container {
                 max-width: 700px;
-                max-height: 300px;
                 margin: 10% auto 0;
                 padding: 20px;
                 background-color: white;
                 border-radius: 5px;
                 border-color: white;
                 box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
-            }
-
-            .get-password {
-                background-color: #5A84E6;
-                color: white;
-                padding: 10px 20px;
-                border: none;
-                border-radius: 5px;
-                text-align: center;
-                text-decoration: none; /* Remove underline for anchor tag */
-                display: inline-block; /* To make anchor tag behave like a button */
-                font-size: 16px; /* Adjust font size as needed */
-                cursor: pointer;
-                margin: 5px;
-            }
-
-            .get-password:hover {
-                background-color: #4a6bbf; /* Darker shade for hover effect */
-            }
-
-            .back-login {
-                display: inline-block; /* Ensure the link behaves like a button */
             }
         </style>
     </head>
@@ -71,12 +48,14 @@
                 <br>
                 <hr>
                 <div class="submit-password">
-                    <button class="get-password" type="submit">
+                    <button class="get-password" type="submit" style="background-color: #30BD36">
                         Get New Password
                     </button>
-                    <a class="get-password back-login" href="login.jsp">
-                        Back to Login
-                    </a>
+                    <button class="get-password" style="background-color: #5A84E6">
+                        <a class="back-login" href="login.jsp" style="background-color: #5A84E6">
+                            Back to Login
+                        </a>
+                    </button>
                     <h2 class="notice-message">${message}</h2>
                 </div>
             </form>

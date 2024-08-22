@@ -4,6 +4,10 @@
  */
 package model;
 
+/**
+ *
+ * @author Creep
+ */
 public class Guideline {
     private int guideID;
     private String guideName;

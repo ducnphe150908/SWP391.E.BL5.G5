@@ -1,3 +1,9 @@
+<%-- 
+    Document   : change-password
+    Created on : May 29, 2024, 12:57:26 AM
+    Author     : DAT
+--%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">

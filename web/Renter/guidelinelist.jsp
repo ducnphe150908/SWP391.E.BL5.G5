@@ -1,3 +1,9 @@
+<%-- 
+    Document   : list
+    Created on : Jun 10, 2024, 9:56:50 PM
+    Author     : DAT
+--%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.List" %>
@@ -27,6 +33,10 @@
         <link rel="stylesheet" href="css/tiny-slider.css">
         <link rel="stylesheet" href="css/aos.css">
         <link rel="stylesheet" href="css/style.css">
+
+
+
+
 
         <!-- Favicons -->
         <link rel="shortcut icon" href="images/favicon.png">
@@ -170,7 +180,7 @@
             <div class="container">
                 <div class="menu-bg-wrap">
                     <div class="site-navigation">
-                        <a href="renterguideline" class="logo m-0 float-start">GuideLine</a>
+                        <a href="OwnerHome.jsp" class="logo m-0 float-start">Room</a>
                         <jsp:include page = "navbar.jsp"></jsp:include>
 
                             <a href="#" class="burger light me-auto float-end mt-1 site-menu-toggle js-menu-toggle d-inline-block d-lg-none" data-toggle="collapse" data-target="#main-navbar">
@@ -183,7 +193,7 @@
             </nav>
 
 
-            <div  class="container light-style flex-grow-1 container-p-y">
+                        <div  class="container light-style flex-grow-1 container-p-y">
                 <h4 class="font-weight-bold py-3 mb-4">
 
                 </h4>

@@ -6,6 +6,10 @@ package model;
 
 import model.*;
 
+/**
+ *
+ * @author Admin
+ */
 public class RenterPenChart {
     private int roomID;
     private float penMoney;
