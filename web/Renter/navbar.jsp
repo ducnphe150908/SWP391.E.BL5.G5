@@ -1,9 +1,3 @@
-<%-- 
-    Document   : navbar
-    Created on : 25 thg 5, 2024, 15:32:37
-    Author     : phuc
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
@@ -54,15 +48,8 @@
             <li class="${param.service == "paymentList" ? "active" : ''}"><a href="WalletController">Wallet</a></li>
             <li><a href="rentercontroller?service=request">Contact Us</a></li>
             <li><a href="logout">Logout</a></li>
-            <!--            <li>
-                            <a href="rentercontroller?service=renterprofile">
-                                <img src="images/firefly.jpg" alt="Profile Image" width="30px" height="30px" style="border-radius: 10px;">
-                            </a>
-                        </li>-->
             <li>
                 <a href="rentercontroller?service=renterprofile">
-
-                    <!-- data: image/jsp;base64  nó là mã hóa chuỗi imgAvata xong rr nhé   -->
                     <img src="data:image/jpg;base64,${imgAvata}" alt="Profile Image" width="30px" height="30px" style="border-radius: 10px;">
                 </a>
             </li>

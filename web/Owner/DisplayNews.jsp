@@ -66,7 +66,7 @@
             <div class="container">
                 <div class="menu-bg-wrap">
                     <div class="site-navigation">
-                        <a href="addnews" class="logo m-0 float-start">Owner</a>
+                        <a href="displaynews" class="logo m-0 float-start">Owner</a>
 
                         <jsp:include page = "navbar.jsp"></jsp:include>
 
@@ -125,7 +125,9 @@
                                 </div>   
             <ul class="list-group">
                 <c:forEach var="news" items="${newsList}">
-                    <li class="list-group-item"><span style="margin-right: 10px;">${news.createAt}</span><a href="newsDetail?id=${news.newId}" style="color: blue">${news.newTitle}</a> 
+                    <li class="list-group-item">
+                        <span style="margin-right: 10px;">${news.createAt}</span>
+                        <a href="newsDetail?id=${news.newId}" style="color: blue">${news.newTitle}</a> 
                         <form action="deleteNews" method="post" style="float: right; margin: 0;">
                             <input type="hidden" name="newsId" value="${news.newId}" />
                             <input type="submit" class="btn btn-primary" value="Delete" onclick="confirmDelete(event)" />
