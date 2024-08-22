@@ -1,10 +1,11 @@
 <%-- 
-     Document   : EditNews
-    Created on : August 9, 2024, 9:31:14 PM
-    Author     : quan
+    Document   : EditNews
+    Created on : Aug 22, 2024, 2:25:25 PM
+    Author     : quanb
 --%>
-<%@page import="model.News"%>
 
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="model.News"%>
 <!doctype html>
 <html lang="en">
     <head>
@@ -70,13 +71,13 @@
         <%
         String error = (String) request.getAttribute("error");
         if (error != null && !error.isEmpty()) {
-    %>
+        %>
         <div style="color: red; font-weight: bold;">
             <%= error %>
         </div>
-    <%
-        }
-    %>
+        <%
+            }
+        %>
         <div class="site-mobile-menu site-navbar-target">
             <div class="site-mobile-menu-header">
                 <div class="site-mobile-menu-close">
@@ -90,7 +91,7 @@
             <div class="container">
                 <div class="menu-bg-wrap">
                     <div class="site-navigation">
-                        <a href="" class="logo m-0 float-start">Owner</a>
+                        <a href="displayNews" class="logo m-0 float-start">Owner</a>
 
                         <jsp:include page = "navbar.jsp"></jsp:include>
 
@@ -113,30 +114,33 @@
                     </div>
                 </div>
             </div>
-       
-        <div class="container my-5">
-            <h2>Edit News</h2>
-            <form action="UpdateNewsController" method="post" enctype="multipart/form-data">
-                <input type="hidden" name="id" value="${news.newId}"/>
-                <div class="form-group mb-3">
-                    <label for="title">Title</label>
-                    <input type="text" class="form-control" name="title" value="${news.newTitle}" required>
+
+            <div class="container my-5">
+                <h2>Edit Slider</h2>
+                <form action="updatenews" method="post" enctype="multipart/form-data">
+                    <div class="form-group mb-3">
+                        <label for="id">News ID</label>
+                        <input type="text" name="id" value="${news.newId}" readonly/>
                 </div>
                 <div class="form-group mb-3">
-                    <label for="description">Description</label>
-                    <textarea class="form-control" id="description" name="description" required>${news.description} </textarea>
-                </div>
+                    <label for="title">News Name</label>
+                    <input type="text" class="form-control" name="name" value="${news.newTitle}" required>
+                </div>      
                 <div class="form-group mb-3">
-                    <label for="img">Image URL</label>
+                    <label for="description">News Description</label>
+                    <input type="text" class="form-control" name="description" value="${news.description}" required>
+                </div> 
+                <div class="form-group mb-3">
+                    <label for="img">Slider Image</label>
                     <input type="file" class="form-control" id="img" name="img" accept="image/jpeg, image/png" required>
                     <c:if test="${not empty error}">
-                                    <span style="color: red;">${error}</span>
-                                </c:if>
-                                <span id="fileError" style="color: red;"></span>
+                        <span style="color: red;">${error}</span>
+                    </c:if>
+                    <span id="fileError" style="color: red;"></span>
                 </div>
                 <div class="form-group mb-3">
-                    <label for="createAt">Create At</label>
-                    <input type="text" class="form-control" id="createAt" name="createAt" value="${news.createAt}" readonly="">
+                    <label for="date">Create At</label>
+                    <input type="text" class="form-control" id="date" name="date" value="${sliders.sliderDate}" readonly="">
                 </div>
                 <button type="submit" class="btn btn-primary" onclick="return validateFile()">Submit</button>
             </form>
@@ -144,48 +148,48 @@
 
                 const today = new Date().toISOString().split('T')[0];
 
-                document.getElementById('createAt').value = today;
+                document.getElementById('date').value = today;
             </script>
-                <script>
-                    function validateFile() {
-                        const fileInput = document.getElementById('img');
-                        const fileError = document.getElementById('fileError');
-                        fileError.textContent = ''; // Clear previous errors
+            <script>
+                function validateFile() {
+                    const fileInput = document.getElementById('img');
+                    const fileError = document.getElementById('fileError');
+                    fileError.textContent = ''; // Clear previous errors
 
-                        if (!fileInput.files || fileInput.files.length === 0) {
-                            fileError.textContent = 'Please select a file.';
-                            return false;
-                        }
-
-                        const file = fileInput.files[0];
-                        const allowedTypes = ['image/jpeg', 'image/png'];
-                        const maxSize = 1 * 1024 * 1024; // 5 MB
-
-                        if (!allowedTypes.includes(file.type)) {
-                            fileError.textContent = 'Only JPEG and PNG files are allowed.';
-                            return false;
-                        }
-
-                        if (file.size > maxSize) {
-                            fileError.textContent = 'File size must be less than 1 MB.';
-                            return false;
-                        }
-
-                        return true;
+                    if (!fileInput.files || fileInput.files.length === 0) {
+                        fileError.textContent = 'Please select a file.';
+                        return false;
                     }
-                </script>
-                <script>
-                    function checkImageFile() {
-                        var fileInput = document.getElementById('files');
-                        var filePath = fileInput.value;
-                        var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
-                        if (!allowedExtensions.exec(filePath)) {
-                            alert('Ch? cho phép tai lên các file có dinh dang: .jpeg/.jpg/.png/.gif');
-                            fileInput.value = '';
-                            return false;
-                        }
+
+                    const file = fileInput.files[0];
+                    const allowedTypes = ['image/jpeg', 'image/png'];
+                    const maxSize = 1 * 1024 * 1024; // 5 MB
+
+                    if (!allowedTypes.includes(file.type)) {
+                        fileError.textContent = 'Only JPEG and PNG files are allowed.';
+                        return false;
                     }
-                </script>
+
+                    if (file.size > maxSize) {
+                        fileError.textContent = 'File size must be less than 1 MB.';
+                        return false;
+                    }
+
+                    return true;
+                }
+            </script>
+            <script>
+                function checkImageFile() {
+                    var fileInput = document.getElementById('files');
+                    var filePath = fileInput.value;
+                    var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+                    if (!allowedExtensions.exec(filePath)) {
+                        alert('Ch? cho phÃ©p tai lÃªn cÃ¡c file cÃ³ dinh dang: .jpeg/.jpg/.png/.gif');
+                        fileInput.value = '';
+                        return false;
+                    }
+                }
+            </script>
         </div>
         <div class="site-footer">
             <div class="container">
@@ -287,4 +291,3 @@ Please don't remove this copyright link unless you buy the license here https://
         <script src="js/main_owner.js"></script>
     </body>
 </html>
-
