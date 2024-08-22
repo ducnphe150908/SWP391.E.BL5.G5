@@ -1,24 +1,36 @@
 <%-- 
-    Document   : DisplaySlider
-    Created on : Jul 4, 2024, 3:32:14 PM
-    Author     : quan
+    Document   : DetailsNews
+    Created on : Aug 22, 2024, 2:26:01 AM
+    Author     : quanb
 --%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="author" content="Untree.co">
-        <link rel="shortcut icon" href="favicon.png">
 
-        <meta name="description" content="" />
-        <meta name="keywords" content="bootstrap, bootstrap5" />
+        <meta name="description" content="">
+        <meta name="author" content="">
 
+        <title>Tooplate's Little Fashion</title>
+
+        <!-- CSS FILES -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;700;900&display=swap" rel="stylesheet">
+
+        <link href="RenterCSS/css/bootstrap.min.css" rel="stylesheet">
+        <link href="RenterCSS/css/bootstrap-icons.css" rel="stylesheet">
+
+        <link rel="stylesheet" href="css/slick.css"/>
+
+        <link href="RenterCSS/css/tooplate-little-fashion.css" rel="stylesheet">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -30,31 +42,12 @@
         <link rel="stylesheet" href="css/tiny-slider.css">
         <link rel="stylesheet" href="css/aos.css">
         <link rel="stylesheet" href="css/style.css">
-
-
-
-
-
-        <!-- Favicons -->
-        <link rel="shortcut icon" href="images/favicon.png">
-        <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
-
-        <!-- Google Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
-
-        <!-- Bootstrap CSS File -->
-        <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-        <!-- Libraries CSS Files -->
-        <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-        <link href="lib/animate/animate.min.css" rel="stylesheet">
-        <link href="lib/ionicons/css/ionicons.min.css" rel="stylesheet">
-        <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-
-        <!-- Main Stylesheet File -->
-        <link href="css/style_owner.css" rel="stylesheet">
-
-        <title>HoLa Motel</title>
+        <title>JSP Page</title>
+        <script>
+            .card {
+            margin - top: 20px;
+            }
+        </script>
     </head>
     <body>
         <div class="site-mobile-menu site-navbar-target">
@@ -70,7 +63,7 @@
             <div class="container">
                 <div class="menu-bg-wrap">
                     <div class="site-navigation">
-                        <a href="addnews" class="logo m-0 float-start">Owner</a>
+                        <a href="displayslider" class="logo m-0 float-start">Owner</a>
 
                         <jsp:include page = "navbar.jsp"></jsp:include>
 
@@ -83,77 +76,56 @@
                 </div>
             </nav>
 
-            <div class="hero page-inner overlay" style="background-image: url('images/hero_bg_3.jpg');">
+            <div class="hero page-inner overlay" style="background-image: url('images/hero_bg_1.jpg');">
                 <div class="container">
                     <div class="row justify-content-center align-items-center">
                         <div class="col-lg-9 text-center mt-5">
-                            <h1 class="heading" data-aos="fade-up">List Slider</h1>
+                            <h1 class="heading" data-aos="fade-up">News Detail</h1>
 
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Main Content -->
-            <div class="container my-5">
-                <div class="d-flex justify-content-between align-items-center mb-4">
-                <c:if test="${not empty message}">
-                    <div class="alert alert-success">
-                        <c:out value="${message}" />
-                    </div>
-                </c:if>
-                <h2 class="mb-0">Slider List</h2>
-                <a href="addslider" class="btn btn-primary">ADD SLIDER</a>
-            </div>
-            
-            <div class="text-black row mb-3">
-                <form id="myform" action="displayslider" class="form-inline">
-                    <label for="page-size-select" class="ps-3">Products per page:</label>
-                    <select name="pageSize" id="page-size-select" class="form-control" onchange="document.getElementById('myform').submit()">
-                        <option value="5" <c:if test="${pageSize == 5}">selected</c:if>>5</option>
-                        <option value="10" <c:if test="${pageSize == 10}">selected</c:if>>10</option>
-                        <option value="15" <c:if test="${pageSize == 15}">selected</c:if>>15</option>
-                        <option value="20" <c:if test="${pageSize == 20}">selected</c:if>>20</option>
-                        </select>
-                        <input type="hidden" name="index" value="1" />
-                        <input type="hidden" name="blogName" value="${pi}" />
-                    <noscript>
-                    <button type="submit" class="btn btn-primary">Go</button>
-                    </noscript>
-                </form>
+        
+       
+        <c:forEach var="n" items="${n}">
+            <section class="product-detail section-padding">
+                <div class="container">
+                    <div class="row">
 
-            </div> 
-            <ul class="list-group">
-                <c:forEach var="slider" items="${sliderList}">
-                    <li class="list-group-item">
-                        <span style="margin-right: 10px;">${slider.sliderDate}</span>
-                        <a href="sliderDetail?id=${slider.sliderId}" style="color: blue">
-                            <img class="img-fluid product-image" src="data:image/jpg;base64,${slider.sliderImg}" style="width: 500px; height: auto;"/>
-                        </a>
-                        <div style="float: right;">
-                            <!-- Nút trạng thái -->
-                            <a href="toggleSliderStatus?pid=${slider.sliderId}&status=${slider.sliderStatus}" class="edit">
-                                <button class="btn ${slider.sliderStatus ? 'btn-success' : 'btn-danger'}">
-                                    ${slider.sliderStatus ? 'Show' : 'Hide'}
-                                </button>
-                            </a>
-
-                            <!-- Nút delete -->
-                            <form action="deleteslider" method="post" style="display: inline; margin-left: 5px;">
-                                <input type="hidden" name="sliderId" value="${slider.sliderId}" />
-                                <input type="submit" class="btn btn-primary" value="Delete" onclick="confirmDelete(event)" />
-                            </form>
+                        <div class="col-lg-6 col-12">
+                            <div class="product-thumb">
+                                <img class="img-fluid product-image" src="data:image/jpg;base64,${n.img}" >
+                            </div>
                         </div>
-                    </li>
-                </c:forEach>
-            </ul>
-        </div>
-        <script>
-            function confirmDelete(event) {
-                if (!confirm("Are you sure you want to delete this post?")) {
-                    event.preventDefault();
-                }
-            }
-        </script>
+
+                        <div class="col-lg-6 col-12">
+                            <div class="product-info d-flex">
+                                <div>
+                                    <h2 class="product-title mb-0">${n.newTitle}</h2>
+                                    <p class="product-p">${n.createAt}</p>
+                                </div>
+                            </div>
+                                <div class="product-description">
+
+                                <strong class="d-block mt-4 mb-2">Description</strong>
+
+                                <p class="lead mb-5">${n.description}</p>
+                            </div>
+                            <div class="product-cart-thumb row">
+                                <div class="col-lg-6 col-12 mt-4 mt-lg-0">
+                                    <button type="button" class="btn custom-btn cart-btn" onclick="location.href = 'news'">Back To List</button>
+                                    
+                                </div>
+                                <p></br></p>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+        </c:forEach>
 
         <div class="site-footer">
             <div class="container">
@@ -226,11 +198,16 @@ Please don't remove this copyright link unless you buy the license here https://
 
                     </div>
                 </div>
-            </div> <!-- /.container -->
-        </div> <!-- /.site-footer -->
-
+            </div> 
+        </div> 
         <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
         <div id="preloader"></div>
+        <script src="RenterCSS/js/jquery.min.js"></script>
+        <script src="RenterCSS/js/bootstrap.bundle.min.js"></script>
+        <script src="RenterCSS/js/Headroom.js"></script>
+        <script src="RenterCSS/js/jQuery.headroom.js"></script>
+        <script src="RenterCSS/js/slick.min.js"></script>
+        <script src="RenterCSS/js/custom.js"></script>
         <script src="js/bootstrap.bundle.min.js"></script>
         <script src="js/tiny-slider.js"></script>
         <script src="js/aos.js"></script>
@@ -238,18 +215,5 @@ Please don't remove this copyright link unless you buy the license here https://
         <script src="js/counter.js"></script>
         <script src="js/custom.js"></script>
 
-
-        <!-- JavaScript Libraries -->
-        <script src="lib/jquery/jquery.min.js"></script>
-        <script src="lib/jquery/jquery-migrate.min.js"></script>
-        <script src="lib/popper/popper.min.js"></script>
-        <script src="lib/bootstrap/js/bootstrap.min.js"></script>
-        <script src="lib/easing/easing.min.js"></script>
-        <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-        <script src="lib/scrollreveal/scrollreveal.min.js"></script>
-
-
-        <!-- Template Main Javascript File -->
-        <script src="js/main_owner.js"></script>
     </body>
 </html>
