@@ -4,12 +4,6 @@
  */
 package model;
 
-
-
-/**
- *
- * @author ASUS
- */
 public class News {
 
     private int newId;

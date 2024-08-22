@@ -9,10 +9,6 @@ import java.sql.DriverManager;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author kienb
- */
 public class DBContext {
     protected Connection connection;
     public DBContext()

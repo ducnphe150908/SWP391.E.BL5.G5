@@ -4,12 +4,6 @@
  */
 package model;
 
-
-
-/**
- *
- * @author ASUS
- */
 public class SeSercurity {
     private int sID;
     private int userID;

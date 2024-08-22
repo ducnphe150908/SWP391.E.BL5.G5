@@ -4,12 +4,6 @@
  */
 package model;
 
-
-
-/**
- *
- * @author ASUS
- */
 public class Request {
     private int requestID;
     private int renterID;

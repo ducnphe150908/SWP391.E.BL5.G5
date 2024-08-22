@@ -4,10 +4,6 @@
  */
 package model;
 
-/**
- *
- * @author Admin
- */
 public class SecurityList {
     
     private int seID;

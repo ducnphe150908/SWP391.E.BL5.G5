@@ -12,10 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 import model.Account;
 
-/**
- *
- * @author pc
- */
 public class DAO extends DBContext {
 
     Connection conn = null;

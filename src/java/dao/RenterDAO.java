@@ -20,11 +20,6 @@ import model.RenterList;
 import java.sql.CallableStatement;
 import model.RentDetail;
 
-/**
- * Data Access Object for Renter-related operations.
- *
- * Author: creep
- */
 public class RenterDAO extends MyDAO {
 
     Connection conn = null;

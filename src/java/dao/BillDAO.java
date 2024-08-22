@@ -17,10 +17,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-/**
- *
- * @author ASUS
- */
 public class BillDAO extends MyDAO {
 
     public List<Bill> getBillByRoomID(int id) {

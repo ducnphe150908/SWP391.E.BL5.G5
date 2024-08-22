@@ -9,10 +9,6 @@ import java.sql.PreparedStatement;
 import model.News;
 import java.sql.ResultSet;
 
-/**
- *
- * @author pc
- */
 public class EditNewsDAO extends DBContext {
 
     public int updateNews(News news) {

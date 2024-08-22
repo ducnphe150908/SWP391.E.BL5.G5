@@ -4,11 +4,6 @@
  */
 package model;
 
-
-/**
- *
- * @author ASUS
- */
 public class Account {
 
     private int userID;
