@@ -105,7 +105,7 @@ public class NewListServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         String raw_search = request.getParameter("search");
+        String raw_search = request.getParameter("search");
         String indexParam = request.getParameter("index");
         int index = 1;
         try {

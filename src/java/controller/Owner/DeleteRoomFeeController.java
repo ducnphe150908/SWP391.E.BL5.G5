@@ -1,13 +1,11 @@
-
-package controller.Owner;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
+package controller.Owner;
 
-
-import dao.*;
-import model.*;
+import dao.BillDAO;
+import dao.EditNewsDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -15,16 +13,15 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.util.List;
-import javax.mail.Session;
+import model.Bill;
+import model.News;
 
 /**
  *
- * @author ASUS
+ * @author admin
  */
-@WebServlet(name = "RoomFeeController", urlPatterns = {"/roomfee"})
-public class RoomFeeController extends HttpServlet {
+@WebServlet(name = "DeleteRoomFeeController", urlPatterns = {"/DeleteRoomFeeController"})
+public class DeleteRoomFeeController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,15 +35,15 @@ public class RoomFeeController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
+        try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet RoomFeeController</title>");
+            out.println("<title>Servlet DeleteRoomFeeController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet RoomFeeController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet DeleteRoomFeeController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -64,21 +61,20 @@ public class RoomFeeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        HttpSession session = request.getSession();
-//        int billID = Integer.parseInt(request.getParameter("id"));
-//        session.setAttribute("billID", billID);
-         String id_raw = request.getParameter("roomID");
-         
-        int id = Integer.parseInt(id_raw);
-        request.setAttribute("roomID", id);
-        HttpSession session = request.getSession();
-        session.setAttribute("roomID", id);
+        String id_raw = request.getParameter("id");
 
-        BillDAO dao = new BillDAO();
-        List<Bill> list = dao.getBillByRoomID(id);
-        request.setAttribute("billList", list);
-        request.getRequestDispatcher("/Owner/roomfee.jsp").forward(request, response);
-        
+        try {
+            int billID = Integer.parseInt(id_raw);
+            Bill bill = new Bill();
+            bill.setBillID(billID);
+            BillDAO  dao = new BillDAO ();
+            Bill billByID = dao.getBillBybillID(billID);
+            int result = dao.deleteBill(billID);
+            
+            response.sendRedirect("roomfee?roomID=" + billByID.getRoomID());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -92,7 +88,6 @@ public class RoomFeeController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
     }
 
     /**
