@@ -4,10 +4,6 @@
  */
 package model;
 
-/**
- *
- * @author Creep
- */
 public class UserDetail{
      private int userID;
     private String userMail;

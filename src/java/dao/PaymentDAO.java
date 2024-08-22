@@ -17,10 +17,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Payment;
 
-/**
- *
- * @author DAT
- */
 public class PaymentDAO extends DBContext {
 
     public ArrayList<Payment> findAll() {

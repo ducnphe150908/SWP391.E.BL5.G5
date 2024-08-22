@@ -11,10 +11,6 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author Admin
- */
 public class NewDAO extends DBContext {
 
     public List<News> getNewsList() {

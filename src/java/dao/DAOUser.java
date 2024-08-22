@@ -14,10 +14,6 @@ import java.util.List;
 import model.User;
 import model.UserDetail;
 
-/**
- *
- * @author pc
- */
 public class DAOUser extends DBContext {
 
     Connection conn = null;

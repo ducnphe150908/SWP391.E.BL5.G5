@@ -6,10 +6,6 @@ package model;
 
 import model.*;
 
-/**
- *
- * @author ASUS
- */
 public class Item {
     private int itemID;
     private String itemName;

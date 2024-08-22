@@ -12,10 +12,6 @@ import java.sql.PreparedStatement;
 import java.util.Date;
 import model.News;
 
-/**
- *
- * @author pc
- */
 public class AddnewsDAO extends DBContext{
 
     public int insertNews(News news) {

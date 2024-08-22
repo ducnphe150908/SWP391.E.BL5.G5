@@ -10,10 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 import model.Slider;
 
-/**
- *
- * @author quanb
- */
 public class SliderDAO extends DBContext {
 
     public List<Slider> getAllSliders() {

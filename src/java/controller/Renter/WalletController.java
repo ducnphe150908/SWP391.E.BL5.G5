@@ -17,10 +17,6 @@ import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import model.Renter;
 
-/**
- *
- * @author nguye
- */
 @WebServlet(name = "WalletController", urlPatterns = {"/WalletController"})
 public class WalletController extends HttpServlet {
 

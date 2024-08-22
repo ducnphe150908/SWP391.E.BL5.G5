@@ -18,10 +18,6 @@ import java.util.ArrayList;
 import model.Account;
 import model.Payment;
 
-/**
- *
- * @author nguye
- */
 @WebServlet(name="ListPaymentController", urlPatterns={"/paymentList"})
 public class ListPaymentController extends HttpServlet {
    

@@ -4,12 +4,6 @@
  */
 package model;
 
-
-
-/**
- *
- * @author ASUS
- */
 public class RoomItem {
     private int roomItemID;
     private int roomID;

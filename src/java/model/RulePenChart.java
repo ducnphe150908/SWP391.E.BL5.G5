@@ -4,12 +4,6 @@
  */
 package model;
 
-
-
-/**
- *
- * @author Admin
- */
 public class RulePenChart {
     private String ruleName;
     private int number;

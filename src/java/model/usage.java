@@ -7,10 +7,6 @@ package model;
 
 import java.util.Date;
 
-/**
- *
- * @author Admin
- */
 public class usage {
     private int usageID;
     private int roomID;

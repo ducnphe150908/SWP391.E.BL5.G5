@@ -6,9 +6,6 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>HL_Motel</title>
-
-
-
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="Free HTML5 Template by FREEHTML5.CO" />
         <meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive" />
@@ -190,7 +187,6 @@
             </div> <!-- /.container -->
         </div> <!-- /.site-footer -->
 
-
         <!-- jQuery -->
         <script src="RenterCSS/js/jquery.min.js"></script>
         <!-- jQuery Easing -->
@@ -205,9 +201,5 @@
         <script src="RenterCSS/js/salvattore.min.js"></script>
         <!-- Main JS -->
         <script src="RenterCSS/js/main.js"></script>
-
-
-
-
     </body>
 </html>

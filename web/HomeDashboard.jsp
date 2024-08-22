@@ -1,9 +1,3 @@
-<%-- 
-    Document   : HomeDashboard
-    Created on : Aug 7, 2024, 11:19:45 PM
-    Author     : admin
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
