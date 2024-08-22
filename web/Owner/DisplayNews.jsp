@@ -1,7 +1,7 @@
 <%-- 
     Document   : DisplayNews
-    Created on : Jul 4, 2024, 3:32:14 PM
-    Author     : pc
+    Created on : August 9, 2024, 3:32:14 PM
+    Author     : quan
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
@@ -70,7 +70,7 @@
             <div class="container">
                 <div class="menu-bg-wrap">
                     <div class="site-navigation">
-                        <a href="addnews" class="logo m-0 float-start">Owner</a>
+                        <a href="displaynews" class="logo m-0 float-start">Owner</a>
 
                         <jsp:include page = "navbar.jsp"></jsp:include>
 
@@ -110,9 +110,28 @@
                     <button class="btn-primary">Search</button>
                 </form>
             </div>
+                     <div class="text-black row mb-3">
+                                    <form id="myform" action="displayNews" class="form-inline">
+                                        <label for="page-size-select" class="ps-3">Products per page:</label>
+                                        <select name="pageSize" id="page-size-select" class="form-control" onchange="document.getElementById('myform').submit()">
+                                            <option value="5" <c:if test="${pageSize == 5}">selected</c:if>>5</option>
+                                            <option value="10" <c:if test="${pageSize == 10}">selected</c:if>>10</option>
+                                            <option value="15" <c:if test="${pageSize == 15}">selected</c:if>>15</option>
+                                            <option value="20" <c:if test="${pageSize == 20}">selected</c:if>>20</option>
+                                            </select>
+                                            <input type="hidden" name="index" value="1" />
+                                            <input type="hidden" name="blogName" value="${pi}" />
+                                        <noscript>
+                                        <button type="submit" class="btn btn-primary">Go</button>
+                                        </noscript>
+                                    </form>
+
+                                </div>   
             <ul class="list-group">
                 <c:forEach var="news" items="${newsList}">
-                    <li class="list-group-item"><span style="margin-right: 10px;">${news.createAt}</span><a href="newsDetail?id=${news.newId}" style="color: blue">${news.newTitle}</a> 
+                    <li class="list-group-item">
+                        <span style="margin-right: 10px;">${news.createAt}</span>
+                        <a href="newsDetail?id=${news.newId}" style="color: blue">${news.newTitle}</a> 
                         <form action="deleteNews" method="post" style="float: right; margin: 0;">
                             <input type="hidden" name="newsId" value="${news.newId}" />
                             <input type="submit" class="btn btn-primary" value="Delete" onclick="confirmDelete(event)" />

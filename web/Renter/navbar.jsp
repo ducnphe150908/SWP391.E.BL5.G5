@@ -1,9 +1,3 @@
-<%-- 
-    Document   : navbar
-    Created on : 25 thg 5, 2024, 15:32:37
-    Author     : phuc
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
@@ -28,7 +22,7 @@
         <link rel="stylesheet" href="../css/tiny-slider.css">
         <link rel="stylesheet" href="../css/aos.css">
         <link rel="stylesheet" href="../css/style.css">
-        
+
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.css" />
 
@@ -45,10 +39,10 @@
                 <a href="#">View</a>
                 <ul class="dropdown">
                     <li><a href="RenterRoomController?service=listRoom&index=1">List Of Rooms</a></li>
-                    <li><a href="guidelines">Guide and Rule</a></li>
+                    <li><a href="renterguideline?service=guideandrule">Guide and Rule</a></li>
                     <li><a href="RenterRoomDetail?service=RenterRoomDetail">My Room</a></li>
                     <li><a href="rentercontroller?service=news">News</a></li>
-                    <li><a href="penaltys">Penalty</a></li>
+                    <li><a href="renpen">Penalty</a></li>
                 </ul>
             </li>               
             <li class="${param.service == "paymentList" ? "active" : ''}"><a href="WalletController">Wallet</a></li>
@@ -56,7 +50,7 @@
             <li><a href="logout">Logout</a></li>
             <li>
                 <a href="rentercontroller?service=renterprofile">
-                    <img src="images/firefly.jpg" alt="Profile Image" width="30px" height="30px" style="border-radius: 10px;">
+                    <img src="data:image/jpg;base64,${imgAvata}" alt="Profile Image" width="30px" height="30px" style="border-radius: 10px;">
                 </a>
             </li>
         </ul>

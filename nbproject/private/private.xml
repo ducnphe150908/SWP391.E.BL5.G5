@@ -10,5 +10,14 @@
             <file>file:/C:/Users/admin/Documents/GitHub/SWP391.E.BL5.G55/src/java/model/Guideline.java</file>
             <file>file:/C:/Users/admin/Documents/GitHub/SWP391.E.BL5.G55/src/java/model/Account.java</file>
         </group>
+        <group name="SWP391">
+            <file>file:/D:/SWP391/New%20folder/SWP391.E.BL5.G5/src/java/model/Room.java</file>
+            <file>file:/D:/SWP391/New%20folder/SWP391.E.BL5.G5/src/java/controller/Owner/DeleteRuleController.java</file>
+            <file>file:/D:/SWP391/New%20folder/SWP391.E.BL5.G5/src/java/dao/DBContext.java</file>
+            <file>file:/D:/SWP391/New%20folder/SWP391.E.BL5.G5/src/java/controller/LoginController.java</file>
+            <file>file:/D:/SWP391/New%20folder/SWP391.E.BL5.G5/src/java/util/Sendmail.java</file>
+            <file>file:/D:/SWP391/New%20folder/SWP391.E.BL5.G5/src/java/model/User.java</file>
+            <file>file:/D:/SWP391/New%20folder/SWP391.E.BL5.G5/src/java/dao/RoomDAO.java</file>
+        </group>
     </open-files>
 </project-private>

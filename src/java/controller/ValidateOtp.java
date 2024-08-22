@@ -14,19 +14,19 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebServlet(name = "ValidateOtp", urlPatterns = {"/ValidateOtp"})
+@WebServlet("/ValidateOtp")
 public class ValidateOtp extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession mySession = request.getSession();
         String value = request.getParameter("otp");
+        HttpSession mySession = request.getSession();
         String otp = (String) mySession.getAttribute("otp");
         Cookie[] cookies = request.getCookies();
         String otpR = "";
         for (Cookie cooky : cookies) {
-            if (cooky.getName().equals("otpR")) {
+            if(cooky.getName().equals("otpR")){
                 otpR = cooky.getValue();
                 break;
             }
@@ -35,11 +35,14 @@ public class ValidateOtp extends HttpServlet {
 
         if (value.equals(otpR)) {
             request.setAttribute("email", request.getParameter("email"));
-            request.getRequestDispatcher("newPassword.jsp").forward(request, response);
+            dispatcher = request.getRequestDispatcher("newPassword.jsp");
+            dispatcher.forward(request, response);
 
         } else {
             request.setAttribute("message", "wrong otp");
-            request.getRequestDispatcher("enterotp.jsp").forward(request, response);
+
+            dispatcher = request.getRequestDispatcher("EnterOtp.jsp");
+            dispatcher.forward(request, response);
         }
     }
 }

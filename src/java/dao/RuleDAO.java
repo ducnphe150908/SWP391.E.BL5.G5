@@ -17,10 +17,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Penalty;
 
-/**
- *
- * @author Admin
- */
 public class RuleDAO extends DBContext {
     public List<Rule> getRule() {
         List<Rule> rule = new ArrayList<>();

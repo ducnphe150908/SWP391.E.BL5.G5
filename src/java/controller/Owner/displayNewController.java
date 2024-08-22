@@ -2,6 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
+
 package controller.Owner;
 
 import dao.NewDAO;
@@ -21,25 +22,22 @@ import model.News;
  *
  * @author pc
  */
-@WebServlet(name = "displayNewController", urlPatterns = {"/displayNews"})
+@WebServlet(name="displayNewController", urlPatterns={"/displayNews"})
 public class displayNewController extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
+   
+    /** 
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        
         NewDAO newsDAO = new NewDAO(); // Assuming NewsDAO handles database operations
-        List<News> newsList = newsDAO.getNewsList(0, 100);// Fetch news list from DAO
-
-        String indexParam = request.getParameter("index");
+       String indexParam = request.getParameter("index");
         int index = 1;
         try {
             if (indexParam != null && !indexParam.isEmpty()) {
@@ -59,35 +57,32 @@ public class displayNewController extends HttpServlet {
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
-        // Get paginated products
         List<News> ListN = newsDAO.getNewsList(index, pageSize);
-
-        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
-        SimpleDateFormat sds = new SimpleDateFormat("dd-MM-yyyy ");
-        for (News news : newsList) {
+       SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
+       SimpleDateFormat sds = new SimpleDateFormat("dd-MM-yyyy ");
+        for (News news : ListN) {
             Date date = null;
             String formattedDate = news.getCreateAt();
-
-            try {
-                // Chuyển chuỗi gốc thành đối tượng Date
-                date = inputFormat.parse(formattedDate);
-                // Chuyển đối tượng Date thành chuỗi theo định dạng mong muốn
-                formattedDate = sds.format(date);
-                news.setCreateAt(formattedDate);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        
+        try {
+            // Chuyển chuỗi gốc thành đối tượng Date
+         date = inputFormat.parse(formattedDate);
+            // Chuyển đối tượng Date thành chuỗi theo định dạng mong muốn
+            formattedDate = sds.format(date);
+            news.setCreateAt(formattedDate);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        request.setAttribute("newsList", newsList); // Set newsList attribute for JSP
+        }
+       
+        request.setAttribute("newsList", ListN); // Set newsList attribute for JSP
 
         request.getRequestDispatcher("Owner/DisplayNews.jsp").forward(request, response); // Forward to JSP for display
-    }
+    } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
+    /** 
      * Handles the HTTP <code>GET</code> method.
-     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -96,12 +91,11 @@ public class displayNewController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        processRequest(request, response);                                                                  
     }
 
-    /**
+    /** 
      * Handles the HTTP <code>POST</code> method.
-     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -109,7 +103,7 @@ public class displayNewController extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    throws ServletException, IOException {
         String raw_search = request.getParameter("search");
         String indexParam = request.getParameter("index");
         int index = 1;
@@ -131,7 +125,7 @@ public class displayNewController extends HttpServlet {
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
-        NewDAO newsDAO = new NewDAO(); // Assuming NewsDAO handles database operations
+        NewDAO newsDAO = new NewDAO();
         List<News> ListN = newsDAO.searchByText(index, pageSize, raw_search);
         System.out.println(ListN.size());
         request.setAttribute("newsList", ListN); // Set newsList attribute for JSP
@@ -140,12 +134,11 @@ public class displayNewController extends HttpServlet {
         request.setAttribute("currentPage", index);
         request.setAttribute("search", raw_search);
         request.getRequestDispatcher("Owner/DisplayNews.jsp").forward(request, response);
-
+    
     }
 
-    /**
+    /** 
      * Returns a short description of the servlet.
-     *
      * @return a String containing servlet description
      */
     @Override

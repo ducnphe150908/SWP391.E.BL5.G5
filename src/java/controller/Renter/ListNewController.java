@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package controller.Renter;
 
 import dao.NewDAO;
@@ -17,27 +13,13 @@ import java.util.Date;
 import java.util.List;
 import model.News;
 
-/**
- *
- * @author quan
- */
 @WebServlet(name = "ListNewController", urlPatterns = {"/news"})
 public class ListNewController extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         NewDAO newsDAO = new NewDAO(); // Assuming NewsDAO handles database operations
-//        List<News> ListN = newsDAO.getNewsList(); // Fetch news list from DAO
         String indexParam = request.getParameter("index");
         int index = 1;
         try {
@@ -58,9 +40,8 @@ public class ListNewController extends HttpServlet {
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
-        // Get paginated products
         List<News> ListN = newsDAO.getNewsList(index, pageSize);
-        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-dd-MM HH:mm:ss.S");
+        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
         SimpleDateFormat sds = new SimpleDateFormat("dd-MM-yyyy ");
         for (News news : ListN) {
             Date date = null;
@@ -77,10 +58,8 @@ public class ListNewController extends HttpServlet {
             }
         }
 
-        request.setAttribute("ListN", ListN); // Set newsList attribute for JSP
+        request.setAttribute("newsList", ListN); // Set newsList attribute for JSP
 
-        request.setAttribute("pageSize", pageSize);
-        request.setAttribute("currentPage", index);
         request.getRequestDispatcher("Renter/NewsPRO.jsp").forward(request, response); // Forward to JSP for display
     }
 
@@ -110,7 +89,7 @@ public class ListNewController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String raw_search = request.getParameter("search");
+          String raw_search = request.getParameter("search");
         String indexParam = request.getParameter("index");
         int index = 1;
         try {
@@ -131,14 +110,27 @@ public class ListNewController extends HttpServlet {
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
-        NewDAO newsDAO = new NewDAO(); // Assuming NewsDAO handles database operations
+        NewDAO newsDAO = new NewDAO();
         List<News> ListN = newsDAO.searchByText(index, pageSize, raw_search);
-        request.setAttribute("ListN", ListN); // Set newsList attribute for JSP
+        System.out.println(ListN.size());
+        request.setAttribute("newsList", ListN); // Set newsList attribute for JSP
 
         request.setAttribute("pageSize", pageSize);
         request.setAttribute("currentPage", index);
         request.setAttribute("search", raw_search);
-        request.getRequestDispatcher("Renter/NewsPRO.jsp").forward(request, response); // Forward to JSP for display
+        request.getRequestDispatcher("Renter/NewsPRO.jsp").forward(request, response);
+    
+    
     }
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }// </editor-fold>
 
 }

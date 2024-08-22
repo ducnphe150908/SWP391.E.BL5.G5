@@ -15,10 +15,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author ASUS
- */
 public class UserDAO extends MyDAO {
 
     //Table - User
@@ -158,7 +154,6 @@ public class UserDAO extends MyDAO {
                 + "     FROM [User]\n"
                 + "     INNER JOIN Account ON [User].userID = Account.userID\n"
                 + "     WHERE Account.userRole = 3";
-
         try {
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();

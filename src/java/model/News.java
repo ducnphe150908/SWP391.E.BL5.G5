@@ -4,12 +4,6 @@
  */
 package model;
 
-
-
-/**
- *
- * @author quan
- */
 public class News {
 
     private int newId;

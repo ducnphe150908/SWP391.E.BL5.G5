@@ -6,10 +6,6 @@ package model;
 
 import java.util.Date;
 
-/**
- *
- * @author Admin
- */
 public class PenaltyList {
 
     private int penId;

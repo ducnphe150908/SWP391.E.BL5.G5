@@ -24,7 +24,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.crypto.SecretKey;
 
-@WebServlet(name = "verifyCode", urlPatterns = {"/verifyCode"})
+
+/**
+ *
+ * @author quocp
+ */
+@WebServlet(urlPatterns = {"/verifyCode"})
 public class verifyCode extends HttpServlet {
 
     /**
@@ -36,8 +41,6 @@ public class verifyCode extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
-    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -58,16 +61,12 @@ public class verifyCode extends HttpServlet {
 
         String authCode = (String) session.getAttribute("authCode");
         Long codeGeneratedTime = (Long) session.getAttribute("codeGeneratedTime");
-        
-        int checkfailed = 0; 
-        
+
         if (authCode != null && codeGeneratedTime != null) {
             long currentTime = System.currentTimeMillis();
             long timeElapsed = (currentTime - codeGeneratedTime) / 1000;
 
             if (timeElapsed > 120) {
-                checkfailed = 1;
-                request.setAttribute("checkfailed", checkfailed);
                 request.setAttribute("message","Verification code expired");
                 request.getRequestDispatcher("verifyCode.jsp").forward(request, response);
             } else if (authCode.equals(code)) {
@@ -78,8 +77,6 @@ public class verifyCode extends HttpServlet {
                 request.setAttribute("error", "Successful account registration");
                 request.getRequestDispatcher("login.jsp").forward(request, response);
             } else {
-                checkfailed = 1;
-                request.setAttribute("checkfailed", checkfailed);
                 request.setAttribute("message", "Confirmation code is incorrect");
                 request.getRequestDispatcher("verifyCode.jsp").forward(request, response);
             }

@@ -9,10 +9,6 @@ import java.sql.PreparedStatement;
 import model.News;
 import java.sql.ResultSet;
 
-/**
- *
- * @author pc
- */
 public class EditNewsDAO extends DBContext {
 
     public int updateNews(News news) {
@@ -35,6 +31,8 @@ public class EditNewsDAO extends DBContext {
 
             n = ps.executeUpdate();
         } catch (Exception e) {
+            e.printStackTrace();  // In thông báo lỗi ra console để dễ dàng gỡ lỗi
+            System.out.println(e.getMessage());
         }
         return n;
     }
