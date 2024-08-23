@@ -4,6 +4,10 @@
  */
 package model;
 
+/**
+ *
+ * @author ASUS
+ */
 public class UsagePrice {
 
     private double eprice, wprice;

@@ -98,7 +98,7 @@
                         </a>
                     </div>
                     <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
-                        <a href="#" class="feature-link">
+                        <a href="RenterRoomDetail?service=RenterRoomDetail" class="feature-link">
                             <div class="box-feature">
                                 <span class="flaticon-building"></span>
                                 <h3 class="mb-3">My Room</h3>
@@ -117,15 +117,15 @@
                         </a>
                     </div>
                     <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
-                        <a href="#" class="feature-link">
+                        <a href="renterguideline?service=guideandrule" class="feature-link">
                             <div class="box-feature">
                                 <span class="flaticon-house-1"></span>
-                                <h3 class="mb-3">Guide</h3>
+                                <h3 class="mb-3">GuideLine</h3>
                                 <p>Guide for new visitor</p>
                             </div>
                         </a>
                     </div>
-                    <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
+<!--                    <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
                         <a href="#" class="feature-link">
                             <div class="box-feature">
                                 <span class="flaticon-house-1"></span>
@@ -133,9 +133,9 @@
                                 <p>Rule for new visitor</p>
                             </div>
                         </a>
-                    </div>
+                    </div>-->
                     <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="600">
-                        <a href="#" class="feature-link">
+                        <a href="RenterRoomController?service=listRoom&index=1" class="feature-link">
                             <div class="box-feature">
                                 <span class="flaticon-house-1"></span>
                                 <h3 class="mb-3">List Room</h3>

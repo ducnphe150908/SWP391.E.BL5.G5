@@ -4,10 +4,14 @@
  */
 package dao;
 import dao.DBContext;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+
+/**
+ *
+ * @author ASUS
+ */
 
 public class MyDAO extends DBContext{
     public Connection con = null;
@@ -19,4 +23,13 @@ public class MyDAO extends DBContext{
         con = connection;
     }
 
+    public void finalize() {
+        try {
+            if (con != null) {
+                con.close();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

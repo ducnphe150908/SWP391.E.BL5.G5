@@ -6,6 +6,10 @@ package model;
 
 import java.sql.Date;
 
+/**
+ *
+ * @author ASUS
+ */
 public class SeUser {
     private int userID;
     private String userName;

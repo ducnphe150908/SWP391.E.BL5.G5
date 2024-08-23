@@ -1,3 +1,9 @@
+<%-- 
+    Document   : test
+    Created on : 27 thg 5, 2024, 20:04:34
+    Author     : quocp
+--%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="dao.RoomDAO,java.util.List,java.util.Vector"%>
 <%@page import="model.Rooms, model.User" %>
@@ -135,7 +141,7 @@
                                     </div>
                                 </div>
                             </div>
-<!--                            <div class="card mt-3">
+                            <div class="card mt-3">
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                         <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe mr-2 icon-inline"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>Website</h6>
@@ -158,7 +164,7 @@
                                         <span class="text-secondary"><a href="https://www.facebook.com/elfadkeachother">FaceBook</a></span>
                                     </li>
                                 </ul>
-                            </div>-->
+                            </div>
                         </div>
                         <div class="col-md-8">
                             <div class="card mb-3">

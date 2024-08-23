@@ -1,3 +1,9 @@
+<%-- 
+    Document   : dashboard
+    Created on : 27 thg 5, 2024, 09:10:20
+    Author     : Admin
+--%>
+
 <!DOCTYPE html>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -70,6 +76,10 @@
                             <a class="nav-link" href="pen">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 Penalty List
+                            </a>
+                            <a class="nav-link" href="newlist">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                News
                             </a>
                             <a class="nav-link" href="rule">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
@@ -243,4 +253,3 @@
         </script>
     </body>
 </html>
-

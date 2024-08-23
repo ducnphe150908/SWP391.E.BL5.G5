@@ -1,3 +1,4 @@
+
 package controller.Renter;
 
 import dao.PaymentDAO;
@@ -28,8 +29,8 @@ public class CancleRoom extends HttpServlet {
         String email = (String) session.getAttribute("email");
         String password = (String) session.getAttribute("password");
 
-        int userID = 0;
         int renterID = 0;
+        int userID = 0;
         List<Renter> getBasicRenter = (List<Renter>) renterDAO.getRenterDetail(email, password);
         for (Renter renter : getBasicRenter) {
             renterID = renter.getRenterID();

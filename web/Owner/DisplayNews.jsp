@@ -1,7 +1,7 @@
 <%-- 
     Document   : DisplayNews
-    Created on : August 9, 2024, 3:32:14 PM
-    Author     : quan
+    Created on : Jul 4, 2024, 3:32:14 PM
+    Author     : pc
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
@@ -70,29 +70,29 @@
             <div class="container">
                 <div class="menu-bg-wrap">
                     <div class="site-navigation">
-                        <a href="displaynews" class="logo m-0 float-start">Owner</a>
+                        <a href="addnews" class="logo m-0 float-start">Owner</a>
 
                         <jsp:include page = "navbar.jsp"></jsp:include>
 
-                            <a href="#" class="burger light me-auto float-end mt-1 site-menu-toggle js-menu-toggle d-inline-block d-lg-none" data-toggle="collapse" data-target="#main-navbar">
-                                <span></span>
-                            </a>
+                        <a href="#" class="burger light me-auto float-end mt-1 site-menu-toggle js-menu-toggle d-inline-block d-lg-none" data-toggle="collapse" data-target="#main-navbar">
+                            <span></span>
+                        </a>
 
-                        </div>
-                    </div>
-                </div>
-            </nav>
-
-            <div class="hero page-inner overlay" style="background-image: url('images/hero_bg_3.jpg');">
-                <div class="container">
-                    <div class="row justify-content-center align-items-center">
-                        <div class="col-lg-9 text-center mt-5">
-                            <h1 class="heading" data-aos="fade-up">List News</h1>
-
-                        </div>
                     </div>
                 </div>
             </div>
+        </nav>
+
+                        <div class="hero page-inner overlay" style="background-image: url('images/hero_bg_3.jpg');">
+                            <div class="container">
+                                <div class="row justify-content-center align-items-center">
+                                    <div class="col-lg-9 text-center mt-5">
+                                        <h1 class="heading" data-aos="fade-up">List News</h1>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
             <!-- Main Content -->
             <div class="container my-5">
                 <div class="d-flex justify-content-between align-items-center mb-4">
@@ -104,34 +104,9 @@
                 <h2 class="mb-0">News List</h2>
                 <a href="addnews" class="btn btn-primary">ADD NEWS</a>
             </div>
-            <div class="row">
-                <form class="form-control" method="post" action="displayNews">
-                    <input class="input-box" type="text" name="search" placeholder="Enter data for search" value="${search}"/>
-                    <button class="btn-primary">Search</button>
-                </form>
-            </div>
-                     <div class="text-black row mb-3">
-                                    <form id="myform" action="displayNews" class="form-inline">
-                                        <label for="page-size-select" class="ps-3">Products per page:</label>
-                                        <select name="pageSize" id="page-size-select" class="form-control" onchange="document.getElementById('myform').submit()">
-                                            <option value="5" <c:if test="${pageSize == 5}">selected</c:if>>5</option>
-                                            <option value="10" <c:if test="${pageSize == 10}">selected</c:if>>10</option>
-                                            <option value="15" <c:if test="${pageSize == 15}">selected</c:if>>15</option>
-                                            <option value="20" <c:if test="${pageSize == 20}">selected</c:if>>20</option>
-                                            </select>
-                                            <input type="hidden" name="index" value="1" />
-                                            <input type="hidden" name="blogName" value="${pi}" />
-                                        <noscript>
-                                        <button type="submit" class="btn btn-primary">Go</button>
-                                        </noscript>
-                                    </form>
-
-                                </div>   
             <ul class="list-group">
                 <c:forEach var="news" items="${newsList}">
-                    <li class="list-group-item">
-                        <span style="margin-right: 10px;">${news.createAt}</span>
-                        <a href="newsDetail?id=${news.newId}" style="color: blue">${news.newTitle}</a> 
+                    <li class="list-group-item"><span style="margin-right: 10px;">${news.createAt}</span><a href="newsDetail?id=${news.newId}" style="color: blue">${news.newTitle}</a> 
                         <form action="deleteNews" method="post" style="float: right; margin: 0;">
                             <input type="hidden" name="newsId" value="${news.newId}" />
                             <input type="submit" class="btn btn-primary" value="Delete" onclick="confirmDelete(event)" />
@@ -143,11 +118,11 @@
         <script>
             function confirmDelete(event) {
                 if (!confirm("Are you sure you want to delete this post?")) {
-                    event.preventDefault();
+                    event.preventDefault(); 
                 }
             }
         </script>
-
+        
         <div class="site-footer">
             <div class="container">
 

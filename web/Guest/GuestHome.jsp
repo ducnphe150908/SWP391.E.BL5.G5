@@ -1,6 +1,6 @@
 <%@page import="dao.RoomDAO,java.util.List"%>
 <%@page import="model.Rooms" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <% List<Rooms> listRoom = (List<Rooms>) request.getAttribute("listRoom"); %>
 <!doctype html>
 <html lang="en">
@@ -16,7 +16,7 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-        <link href='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css' rel='stylesheet' />
+  <link href='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css' rel='stylesheet' />
 
         <link rel="stylesheet" href="fonts/icomoon/style.css">
         <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
@@ -55,36 +55,35 @@
                 </div>
             </nav>
 
-            <div class="hero">              
+            <div class="hero">
                 <div class="hero-slide">
-                    <c:forEach var="slider" items="${s}">                 
-                    <img src="data:image/jpeg;base64,${slider.sliderImg}" class="img overlay" alt="Image not found" />
-                </c:forEach>
-            </div>
-                
-            <div class="container">
-                <div class="row justify-content-center align-items-center">
-                    <div class="col-lg-9 text-center">
-                        <h1 class="heading" data-aos="fade-up">Hoa Lac Apartment - The Apartment For college student</h1>
+                    <div class="img overlay" style="background-image: url('images/hero_bg_3.jpg')"></div>
+                    <div class="img overlay" style="background-image: url('images/hero_bg_2.jpg')"></div>
+                    <div class="img overlay" style="background-image: url('images/hero_bg_1.jpg')"></div>
+                </div>
+                <div class="container">
+                    <div class="row justify-content-center align-items-center">
+                        <div class="col-lg-9 text-center">
+                            <h1 class="heading" data-aos="fade-up">Hoa Lac Apartment - The Apartment For college student</h1>
 
-                        </form>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
 
-        <div class="section">
-            <div class="container">
-                <div class="row mb-5 align-items-center">
-                    <div class="col-lg-12 text-lg-end">
-                        <p><a href="GuestController?service=ListRoom&index=1" class="btn btn-primary text-white py-3 px-4">View list rooms</a></p>
+            <div class="section">
+                <div class="container">
+                    <div class="row mb-5 align-items-center">
+                        <div class="col-lg-12 text-lg-end">
+                            <p><a href="GuestController?service=ListRoom&index=1" class="btn btn-primary text-white py-3 px-4">View list rooms</a></p>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <div class="property-slider-wrap">
-                            <div class="property-slider">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="property-slider-wrap">
+                                <div class="property-slider">
                                 <% for (int i = 0; i <= 4; i++) { %>
                                 <div class="property-item">
                                     <a href="OwnerController?service=roomDetail&roomID=<%= listRoom.get(i).getRoomID()%>" class="img">
@@ -267,7 +266,7 @@
                         <div class="widget">
                             <h3>Sources</h3>
                             <ul class="list-unstyled float-start links">
-                                <li><a href="#">contactUs</a></li>
+                                <li><a href="#">About us</a></li>
                                 <li><a href="#">Services</a></li>
                                 <li><a href="#">Vision</a></li>
                                 <li><a href="#">Mission</a></li>

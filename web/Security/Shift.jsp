@@ -1,3 +1,8 @@
+<%-- 
+    Document   : roomTable
+    Created on : 27 thg 5, 2024, 11:02:30
+    Author     : Admin
+--%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -212,4 +217,3 @@
 <script src="SecurityCSS/js/datatables-simple-demo.js"></script>
 </body>
 </html>
-
