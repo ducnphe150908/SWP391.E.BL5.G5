@@ -18,10 +18,6 @@ import java.util.Date;
 import java.util.List;
 import model.News;
 
-/**
- *
- * @author pc
- */
 @WebServlet(name="ListNewController", urlPatterns={"/news"})
 public class ListNewController extends HttpServlet {
    
