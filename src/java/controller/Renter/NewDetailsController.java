@@ -28,7 +28,7 @@ public class NewDetailsController extends HttpServlet {
         News news = newsDAO.getNewsById(id);
         
         request.setAttribute("n", news);
-        request.getRequestDispatcher("Renter/new-details.jsp").forward(request, response); // Forward to JSP for display
+        request.getRequestDispatcher("Renter/DetailsNews.jsp").forward(request, response); // Forward to JSP for display
         
     } 
 

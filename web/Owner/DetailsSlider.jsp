@@ -108,7 +108,7 @@
                             <div class="product-cart-thumb row">
                                 <div class="col-lg-6 col-12 mt-4 mt-lg-0">
                                     <button type="button" class="btn custom-btn cart-btn" onclick="location.href = 'displayslider'">Back To List</button>
-                                    <button type="button" class="btn custom-btn cart-btn" onclick="location.href = 'formeditslider?id=${s.sliderId}'" style="margin-top: 10px">Edit News</button>
+                                    <button type="button" class="btn custom-btn cart-btn" onclick="location.href = 'formeditslider?id=${s.sliderId}'" style="margin-top: 10px">Edit Slider</button>
                                 </div>
                                 <p></br></p>
                             </div>

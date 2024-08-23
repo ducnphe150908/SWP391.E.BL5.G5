@@ -88,7 +88,7 @@
             </div>
         
        
-        <c:forEach var="n" items="${n}">
+        
             <section class="product-detail section-padding">
                 <div class="container">
                     <div class="row">
@@ -125,7 +125,7 @@
                     </div>
                 </div>
             </section>
-        </c:forEach>
+        
 
         <div class="site-footer">
             <div class="container">

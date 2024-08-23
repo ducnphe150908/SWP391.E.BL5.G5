@@ -136,9 +136,10 @@
                         <c:forEach items="${newsList}" var="n">
                             <div class="item">
                                 <div class="animate-box">
-                                    <a href="newsDetails?id=${n.newId}" >
-                                        <img src="data:image/jpg;base64,${n.img}"></a>
-                                </div>
+                                    <a href="newDetails?id=${n.newId}" >
+                                        <img src="data:image/jpg;base64,${n.img}">
+                                    </a>
+                                </div>  
                                 <div class="fh5co-desc">${n.newTitle}</div> 
 
                                 <div class="fh5co-desc">${n.createAt}</div>
