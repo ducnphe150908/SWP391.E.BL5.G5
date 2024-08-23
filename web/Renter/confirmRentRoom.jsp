@@ -80,10 +80,10 @@
             .payment-options button[name="paymentMethod"][value="cash"]:hover {
                 background-color: #218838;
             }
-            .payment-options button[name="paymentMethod"][value="online"] {
+/*            .payment-options button[name="paymentMethod"][value="online"] {
                 background-color: #007bff;
                 color: white;
-            }
+            }*/
             .payment-options button[name="paymentMethod"][value="online"]:hover {
                 background-color: #0056b3;
             }
@@ -100,6 +100,29 @@
 
             .cancel-link:hover {
                 color: #bd2130;
+            }
+            .payment-options button,
+            .payment-options .cancel-link {
+                background-color: #005555;
+                color: white;
+                padding: 10px 20px;
+                text-align: center;
+                display: inline-block;
+                width: 150px; /* ?i?u ch?nh kích th??c theo ý mu?n */
+                text-decoration: none;
+                border: none;
+                cursor: pointer;
+            }
+
+            .payment-options .cancel-link {
+                background-color: #005555;
+                border: 1px solid #005555;
+                padding: 10px 20px;
+                width: 150px;
+                display: inline-block;
+                text-align: center;
+                color: white;
+                border-radius: 5px;
             }
         </style>
     </head>
@@ -188,24 +211,16 @@
                                         <td><%= formattedFeeTotal %>k VND</td> 
                                     </tr>
                                 </table>
-                                    <div class="payment-options">
-                                    <form action="rentercontroller">
-                                        <input type="hidden" name="service" value="request">
+                                <div class="payment-options">
+                                    <form action="VNPay_PaymentController" method="post">
+                                        <input type="hidden" name="roomID" value="<%= roomDetail.getRoomID() %>">
+                                        <input type="hidden" name="amount" value="<%= formattedFeeTotal %>">
                                         <input type="hidden" name="userID" value="<%= userID %>">
-                                        <button type="submit" name="paymentMethod" value="cash">Pay with Cash</button>
-                                    </form>
-                                <form action="VNPay_PaymentController" method="post">
-                                    <input type="hidden" name="roomID" value="<%= roomDetail.getRoomID() %>">
-                                    <input type="hidden" name="amount" value="<%= formattedFeeTotal %>">
-                                    <input type="hidden" name="userID" value="<%= userID %>">
-                                    <input type="hidden" name="flag" value="1">
-                                    
-                                        
+                                        <input type="hidden" name="flag" value="1">
                                         <button type="submit" name="paymentMethod" value="online">Pay Online</button>
-                                        <a href="RenterRoomController?service=cancelRoom&roomID=<%= roomDetail.getRoomID() %>" class="cancel-link">Cancel payment</a>
-                                   
-                                </form>
-                                     </div>
+                                        <a href="RenterRoomController?service=cancelRoom&roomID=<%= roomDetail.getRoomID() %>" class="cancel-link">Cancel</a>
+                                    </form>
+                                </div>
                             </div>
                             <!-- end payment -->
                         </div>

@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package controller.Renter;
 
 import controller.Owner.*;
@@ -16,10 +13,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import model.Guideline;
 
-/**
- *
- * @author DAT
- */
 @WebServlet(name = "RenterGuideController", urlPatterns = {"/renterguideline"})
 public class RenterGuideController extends HttpServlet {
     

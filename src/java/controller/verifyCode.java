@@ -24,11 +24,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.crypto.SecretKey;
 
-
-/**
- *
- * @author quocp
- */
 @WebServlet(urlPatterns = {"/verifyCode"})
 public class verifyCode extends HttpServlet {
 

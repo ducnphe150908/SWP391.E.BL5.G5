@@ -6,9 +6,6 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>HL_Motel</title>
-        
-        
-        
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="Free HTML5 Template by FREEHTML5.CO" />
         <meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive" />
@@ -25,7 +22,7 @@
         <meta name="twitter:url" content="" />
         <meta name="twitter:card" content="" />
 
-      <link rel="shortcut icon" href="./images/favicon.png">
+        <link rel="shortcut icon" href="./images/favicon.png">
 
         <!-- Google Webfonts -->
         <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,100,500' rel='stylesheet' type='text/css'>
@@ -57,7 +54,13 @@
         <!--[if lt IE 9]>
         <script src="js/respond.min.js"></script>
         <![endif]-->
-
+        <style>
+            .fh5co-board-img img {
+                width: 100%;
+                height: 200px; /* Chỉnh chiều cao phù hợp */
+                object-fit: cover; /* Đảm bảo ảnh không bị biến dạng */
+            }
+        </style>
     </head>
     <body>
 
@@ -105,7 +108,7 @@
                         <c:forEach items="${ListN}" var="n">
                             <div class="item">
                                 <div class="animate-box">
-                                    <a href="images/img_1.jpg" class="image-popup fh5co-board-img" title="${n.description}"><img src="data:image/jpg;base64,${n.img}" alt="No IMG"></a>
+                                    <a href="data:image/jpg;base64,${n.img}" class="image-popup fh5co-board-img" title="${n.description}"><img src="data:image/jpg;base64,${n.img}" alt="No IMG"></a>
                                 </div>
                                 <div class="fh5co-desc">${n.newTitle}</div>
                                 <div class="fh5co-desc">${n.description}</div>
@@ -184,7 +187,6 @@
             </div> <!-- /.container -->
         </div> <!-- /.site-footer -->
 
-
         <!-- jQuery -->
         <script src="RenterCSS/js/jquery.min.js"></script>
         <!-- jQuery Easing -->
@@ -199,9 +201,5 @@
         <script src="RenterCSS/js/salvattore.min.js"></script>
         <!-- Main JS -->
         <script src="RenterCSS/js/main.js"></script>
-
-
-
-
     </body>
 </html>

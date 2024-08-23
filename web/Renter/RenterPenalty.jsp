@@ -1,8 +1,3 @@
-<%-- 
-    Document   : SeNews
-    Created on : Jan 18, 2024, 2:59:38 PM
-    Author     : ASUS
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>

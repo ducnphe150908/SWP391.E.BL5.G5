@@ -20,10 +20,6 @@ import java.util.List;
 import model.Renter;
 import model.UserDetail;
 
-/**
- *
- * @author Admin 
- */
 @WebServlet(name="RenterPenaltyController", urlPatterns={"/renpen"})
 public class RenterPenaltyController extends HttpServlet {
    

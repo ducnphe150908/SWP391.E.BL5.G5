@@ -10,7 +10,6 @@
 %>
 <!doctype html>
 <html lang="en">
-
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -46,6 +45,9 @@
                 background-color: #666;
                 color: #fff;
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            }
+            .img-property-slide img {
+                width: 700px;
             }
         </style>
     </head>
@@ -127,7 +129,7 @@
                         Boolean paymentSuccess = (Boolean) request.getAttribute("paymentSuccess");
                         if (paymentSuccess != null) {
                     %>
-                    <script>                       
+                    <script>
                         alert("Payment was successful!");
                     </script>
                     <%
@@ -186,7 +188,7 @@
                             <div  class="col-sm-3">
                                 <h6 class="mb-0">Living expenses</h6>
                             </div>
-                            <div class="col-sm-6 text-secondary">
+                            <div class="col-sm-6 text-secondary" id="livingExpensesValue">
                                 <%= billFormatted %> VND
                             </div>
                             <div class="col-sm-3 text-secondary">
@@ -265,9 +267,16 @@
         <script src="js/main.js"></script>
         <script>
                                     function confirmCancellation() {
-                                        var confirmation = confirm("Are you sure you want to cancel this room?");
-                                        if (confirmation) {
-                                            document.getElementById("cancelForm").submit();
+                                        var livingExpensesText = document.getElementById("livingExpensesValue").innerText;
+                                        var livingExpenses = parseFloat(livingExpensesText.replace(/[^0-9.-]/g, '')); // Chuyển đổi giá trị sang số
+
+                                        if (livingExpenses > 0) {
+                                            alert("You need to pay living expenses before checking out");
+                                        } else {
+                                            var confirmation = confirm("Are you sure you want to cancel this room?");
+                                            if (confirmation) {
+                                                document.getElementById("cancelForm").submit();
+                                            }
                                         }
                                     }
         </script>

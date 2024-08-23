@@ -18,27 +18,14 @@ import java.util.Base64;
 import model.User;
 import model.UserDetail;
 
-/**
- *
- * @author quocp
- */
 @WebServlet(name = "UpdateProfileRenterController", urlPatterns = {"/UpdateProfileRenterController"})
 @MultipartConfig
 public class UpdateProfileRenterController extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
+        
         String service = request.getParameter("service");
         if (service.equals("formRenterUpdateProfile")) {
             formRenterUpdateProfile(request, response);
@@ -48,15 +35,13 @@ public class UpdateProfileRenterController extends HttpServlet {
             updateAvatar(request, response);
         }
     }
-
+    
     private void formRenterUpdateProfile(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Retrieve the session object
         HttpSession session = request.getSession();
-
         // Retrieve email and password from the session attributes
         String email = (String) session.getAttribute("email");
         String password = (String) session.getAttribute("password");
-        
 
         // Check if email and password are available in the session
         if (email != null && password != null) {
@@ -64,13 +49,13 @@ public class UpdateProfileRenterController extends HttpServlet {
             RenterDAO dao = new RenterDAO();
             UserDetail userDetail = dao.RenterBasicDetail(email, password);            
             int userID = userDetail.getUserID();
-            
+
             // Check if userDetail is not null
             if (userDetail != null) {
                 // Set the userDetail object as a request attribute
                 request.setAttribute("userDetail", userDetail);
                 session.setAttribute("userID", userID);
-                
+
                 // Forward the request to the JSP page
                 request.getRequestDispatcher("Renter/RenterUpdateProfile.jsp").forward(request, response);
             } else {
@@ -82,20 +67,20 @@ public class UpdateProfileRenterController extends HttpServlet {
             response.sendRedirect("login.jsp");
         }
     }
-
+    
     private void updateProfileRenter(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RenterDAO dao = new RenterDAO();
         HttpSession session = request.getSession();
-
+        
         int userID = (int) session.getAttribute("userID");
- 
+        
         boolean hasError = false;
         String fullName = request.getParameter("fullName").trim();
         String dob = request.getParameter("dob");
         String gender = request.getParameter("gender");
         String phone = request.getParameter("phone");
         String address = request.getParameter("address");
-
+        
         if (fullName == null || fullName.isEmpty() || fullName.isBlank() || fullName.trim().isEmpty()) {
             hasError = true;
         } else if (phone == null || phone.length() != 10 || !phone.startsWith("0") || !phone.matches("[0-9]+")) {
@@ -103,13 +88,13 @@ public class UpdateProfileRenterController extends HttpServlet {
         } else if (address == null || address.isEmpty() || address.isBlank()) {
             hasError = true;
         }
-
+        
         if (hasError) {
             request.setAttribute("error", "Invalid input information. Please check again.");
             request.getRequestDispatcher("renterprofile").forward(request, response);
         } else {
             boolean updateRenterProfile = dao.updateUser(userID, gender, address, phone, dob, fullName);
-
+            
             request.getRequestDispatcher("renterprofile").forward(request, response);
         }
     }
@@ -119,16 +104,24 @@ public class UpdateProfileRenterController extends HttpServlet {
         HttpSession session = request.getSession();
         
         int userID = (int) session.getAttribute("userID");
+        session.getAttribute("");
+        // lưu ảnh base64
+        
         Part photo = request.getPart("img");
         byte[] avatar_raw = convertInputStreamToByteArray(photo.getInputStream());
         String avatar = Base64.getEncoder().encodeToString(avatar_raw);
         int updateAvatar = dao.updateAvatar(new User(userID, avatar));
+        
+        User user = dao.getUserByID(userID);
+        String imgAvata = user.getUserAvatar();
+        session.removeAttribute(imgAvata);
+        session.setAttribute("imgAvata", imgAvata);
         request.getRequestDispatcher("renterprofile").forward(request, response);
     }
     
     public byte[] convertInputStreamToByteArray(InputStream inputStream) throws IOException {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        byte[] buffer = new byte[4096]; 
+        byte[] buffer = new byte[4096];        
         int bytesRead;
         while ((bytesRead = inputStream.read(buffer)) != -1) {
             outputStream.write(buffer, 0, bytesRead);

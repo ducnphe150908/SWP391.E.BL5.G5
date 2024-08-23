@@ -1,9 +1,3 @@
-<%-- 
-    Document   : login
-    Created on : Jan 9, 2024, 10:22:56 AM
-    Author     : yetvv.piacom
---%>
-
 <% String error = (String) request.getAttribute("error"); %>
 
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
@@ -26,7 +20,7 @@
             <% } %>
             <h3 style="color: #FF0E0E; margin-top: 20px;">${message}</h3>
             <div class="content">
-                <form id="loginForm" action="login" method="post" onsubmit="return validateRecaptcha();">
+                <form id="loginForm" action="login" method="post">
                     <div class="user-details1">
                         <div class="input-box">
                             <span class="details">Email</span>
@@ -36,7 +30,6 @@
                             <span class="details">Password</span>
                             <input type="password" name="password" placeholder="Enter your Password" required>
                         </div>
-                        <div class="g-recaptcha" data-sitekey="6Ld9Ou0pAAAAAF7_lKuiJ9rv_FmYvEfjzGhp7f0k"></div>
                         <br/>
                         <span class="details">
                             Don't have an account?
@@ -62,15 +55,5 @@
             </div>
         </div>
 
-<!--                <script>
-                    function validateRecaptcha() {
-                        var response = grecaptcha.getResponse();
-                        if (response.length == 0) {
-                            alert("Please complete the reCAPTCHA");
-                            return false;
-                        }
-                        return true;
-                    }
-                </script>-->
     </body>
 </html>

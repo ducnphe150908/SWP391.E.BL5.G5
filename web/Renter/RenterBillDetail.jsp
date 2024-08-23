@@ -1,9 +1,3 @@
-<%-- 
-    Document   : SeNews
-    Created on : Jan 18, 2024, 2:59:38 PM
-    Author     : ASUS
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="model.Bill, java.text.DecimalFormat" %>
 
@@ -338,9 +332,6 @@
                 });
             });
         </script>
-
-
-
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
