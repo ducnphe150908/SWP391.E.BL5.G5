@@ -57,10 +57,10 @@ public class NewListServlet extends HttpServlet {
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
-        List<News> ListN = newsDAO.getNewsList(index, pageSize);
+        List<News> ListR = newsDAO.getNewsList(index, pageSize);
         SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
         SimpleDateFormat sds = new SimpleDateFormat("dd-MM-yyyy ");
-        for (News news : ListN) {
+        for (News news : ListR) {
             Date date = null;
             String formattedDate = news.getCreateAt();
 
@@ -75,9 +75,8 @@ public class NewListServlet extends HttpServlet {
             }
         }
 
-        request.setAttribute("newsList", ListN); // Set newsList attribute for JSP
-
-        request.getRequestDispatcher("Renter/NewsPRO.jsp").forward(request, response);
+        request.setAttribute("list", ListR);
+        request.getRequestDispatcher("Security/newList.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -92,6 +91,7 @@ public class NewListServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        processRequest(request, response);
     }
 
     /**
