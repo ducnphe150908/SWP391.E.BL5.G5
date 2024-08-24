@@ -104,20 +104,18 @@
                     </div>
                 </div>
             </div>
-        <%
-            News newDetail = (News) request.getAttribute("news");
-        %>
+       
         <div class="container my-5">
             <h2>Edit News</h2>
             <form action="UpdateNewsController" method="post" enctype="multipart/form-data">
-                <input type="hidden" name="id" value="<%= newDetail.getNewId() %>" />
+                <input type="hidden" name="id" value="${news.newId}" />
                 <div class="form-group mb-3">
                     <label for="title">Title</label>
-                    <input type="text" class="form-control" name="newTitle" value="<%= newDetail.getNewTitle() %>"  required>
+                    <input type="text" class="form-control" name="newTitle" value="${news.newTitle}"  required>
                 </div>
                 <div class="form-group mb-3">
                     <label for="description">Description</label>
-                    <textarea class="form-control" id="description" name="description"  required><%= newDetail.getDescription() %></textarea>
+                    <textarea class="form-control" id="description" name="description"  required>${news.description}</textarea>
                 </div>
                 <div class="form-group mb-3">
                     <label for="img">Image URL</label>
@@ -125,7 +123,7 @@
                 </div>
                 <div class="form-group mb-3">
                     <label for="createAt">Create At</label>
-                    <input type="text" class="form-control" id="createAt" name="createAt" value="<%= newDetail.getCreateAt() %>" required>
+                    <input type="text" class="form-control" id="createAt" name="createAt" value="${news.createAt}" required>
                 </div>
                 <button type="submit" class="btn btn-primary">Update</button>
             </form>
