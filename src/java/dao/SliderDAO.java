@@ -189,4 +189,17 @@ public class SliderDAO extends DBContext{
         }
         return sliders;
     }
+      public int Deleteslider(Slider slider) {
+        int n = 0;
+        String query = "DELETE FROM [dbo].[Slider] WHERE [SliderId] = ?";
+        try {
+            java.sql.Connection conn = connection;
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1, slider.getSliderId());
+            n = ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return n;
+    }
 }

@@ -33,14 +33,18 @@ public class NewPassword extends HttpServlet {
         RequestDispatcher dispatcher = null;
         if (newPassword != null && confPassword != null && newPassword.equals(confPassword)
                 && (newPassword.length() >= 6 && newPassword.length() <= 32)
-                && (confPassword.length() >= 6 && confPassword.length() <= 32)) 
-        {
+                && (confPassword.length() >= 6 && confPassword.length() <= 32)) {
             try {
-                AccountDAO udbc = new AccountDAO();
-                udbc.updateUserPassword(email, newPassword);
-                request.setAttribute("status", "Reset Success");
-                dispatcher = request.getRequestDispatcher("login.jsp");
-                dispatcher.forward(request, response);
+                if (!newPassword.matches("^(?=.*\\d)[A-Za-z\\d]{8,}$")) {
+                    request.setAttribute("status", "Please just enter your password at least 8 characters and 1 numbers and do not have"
+                            + " any special characters");
+                    request.getRequestDispatcher("newPassword.jsp").forward(request, response);
+                } else {
+                    AccountDAO udbc = new AccountDAO();
+                    udbc.updateUserPassword(email, newPassword);
+                    request.setAttribute("status", "Reset Success");
+                    request.getRequestDispatcher("login.jsp").forward(request, response);;
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }

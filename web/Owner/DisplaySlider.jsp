@@ -132,7 +132,7 @@
                     <c:forEach var="s" items="${sliderList}">
                         <li class="list-group-item">
                             <span style="margin-right: 10px;">${s.sliderDate}</span>
-                            <a href="newsDetail?id=${s.sliderId}" style="color: blue">
+                            <a href="DetailsSlider?id=${s.sliderId}" style="color: blue">
                                 <img class="img-fluid product-image" src="data:image/jpg;base64,${s.sliderImg}" width="500" height="auto">
                             </a>
                             <form action="deleteSlider" method="post" style="float: right; margin: 0;">

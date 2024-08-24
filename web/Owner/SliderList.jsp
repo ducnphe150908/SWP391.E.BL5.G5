@@ -1,32 +1,39 @@
-<%@page contentType="text/html" pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%-- 
+    Document   : SliderList
+    Created on : Aug 24, 2024, 8:20:49 PM
+    Author     : quanb
+--%>
+
+<%@page import="model.News"%>
+<%@page import="java.util.List"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
     <head>
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>HL_Motel</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="Free HTML5 Template by FREEHTML5.CO" />
-        <meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive" />
-        <meta name="author" content="FREEHTML5.CO" />
 
-        <!-- Facebook and Twitter integration -->
-        <meta property="og:title" content=""/>
-        <meta property="og:image" content=""/>
-        <meta property="og:url" content=""/>
-        <meta property="og:site_name" content=""/>
-        <meta property="og:description" content=""/>
-        <meta name="twitter:title" content="" />
-        <meta name="twitter:image" content="" />
-        <meta name="twitter:url" content="" />
-        <meta name="twitter:card" content="" />
+        <meta name="description" content="">
+        <meta name="author" content="">
 
-        <link rel="shortcut icon" href="./images/favicon.png">
+        <title>Slider Details</title>
 
-        <!-- Google Webfonts -->
-        <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,100,500' rel='stylesheet' type='text/css'>
-        <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+        <!-- CSS FILES -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;700;900&display=swap" rel="stylesheet">
+
+        <link href="RenterCSS/css/bootstrap.min.css" rel="stylesheet">
+        <link href="RenterCSS/css/bootstrap-icons.css" rel="stylesheet">
+
+        <link rel="stylesheet" href="css/slick.css"/>
+
+        <link href="RenterCSS/css/tooplate-little-fashion.css" rel="stylesheet">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -38,32 +45,14 @@
         <link rel="stylesheet" href="css/tiny-slider.css">
         <link rel="stylesheet" href="css/aos.css">
         <link rel="stylesheet" href="css/style.css">
-        <!-- Animate.css -->
-        <link rel="stylesheet" href="RenterCSS/css/animate.css">
-        <!-- Icomoon Icon Fonts-->
-        <link rel="stylesheet" href="RenterCSS/css/icomoon.css">
-        <!-- Magnific Popup -->
-        <link rel="stylesheet" href="RenterCSS/css/magnific-popup.css">
-        <!-- Salvattore -->
-        <link rel="stylesheet" href="RenterCSS/css/salvattore.css">
-        <!-- Theme Style -->
-        <link rel="stylesheet" href="RenterCSS/css/style.css">
-        <!-- Modernizr JS -->
-        <script src="RenterCSS/js/modernizr-2.6.2.min.js"></script>
-        <!-- FOR IE9 below -->
-        <!--[if lt IE 9]>
-        <script src="js/respond.min.js"></script>
-        <![endif]-->
-        <style>
-            .fh5co-board-img img {
-                width: 100%;
-                height: 200px; /* Chỉnh chiều cao phù hợp */
-                object-fit: cover; /* Đảm bảo ảnh không bị biến dạng */
+        <title>JSP Page</title>
+        <script>
+            .card {
+            margin - top: 20px;
             }
-        </style>
+        </script>
     </head>
     <body>
-
         <div class="site-mobile-menu site-navbar-target">
             <div class="site-mobile-menu-header">
                 <div class="site-mobile-menu-close">
@@ -77,56 +66,78 @@
             <div class="container">
                 <div class="menu-bg-wrap">
                     <div class="site-navigation">
-                        <a href="rentercontroller?service=renterhome" class="logo m-0 float-start">Renter</a>
-                        <jsp:include page="navbar.jsp"></jsp:include>
+                        <a href="displayslider" class="logo m-0 float-start">Owner</a>
+
+                        <jsp:include page = "navbar.jsp"></jsp:include>
+
                             <a href="#" class="burger light me-auto float-end mt-1 site-menu-toggle js-menu-toggle d-inline-block d-lg-none" data-toggle="collapse" data-target="#main-navbar">
                                 <span></span>
                             </a>
+
                         </div>
                     </div>
                 </div>
             </nav>
-            <div class="hero page-inner overlay" style="background-image: url('images/hero_bg_1.jpg');">
 
+            <div class="hero page-inner overlay" style="background-image: url('images/hero_bg_3.jpg');">
                 <div class="container">
                     <div class="row justify-content-center align-items-center">
                         <div class="col-lg-9 text-center mt-5">
-                            <h1 class="heading" >News</h1>
+                            <h1 class="heading" data-aos="fade-up">Slider Detail</h1>
 
-                            <nav aria-label="breadcrumb"  data-aos-delay="200">
-
-                            </nav>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div id="fh5co-main">
+        <c:forEach var="s" items="${slider}">
+            <section class="product-detail section-padding">
                 <div class="container">
                     <div class="row">
-                        <div id="fh5co-board" data-columns>
-                        <c:forEach items="${ListN}" var="n">
-                            <div class="item">
-                                <div class="animate-box">
-                                    <a href="data:image/jpg;base64,${n.img}" class="image-popup fh5co-board-img" title="${n.description}"><img src="data:image/jpg;base64,${n.img}" alt="No IMG"></a>
+
+                        <div class="col-lg-6 col-12">
+                            <div class="product-thumb">
+                                <img class="img-fluid product-image" src="data:image/jpg;base64,${s.sliderImg}" >
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-12">
+                            <div class="product-info d-flex">
+                                <div>
+                                    <h2 class="product-title mb-0">${s.sliderName}</h2>
+                                   <p class="product-p">${s.sliderDate}</p>
+
                                 </div>
-                                <div class="fh5co-desc">${n.newTitle}</div>
-                                <div class="fh5co-desc">${n.description}</div>
-                                <div class="fh5co-desc">${n.createAt}</div>
-                            </div>        
-                        </c:forEach>
+
+                            </div>
+
+                            
+
+                            <div class="product-cart-thumb row">
+
+
+                                <div class="col-lg-6 col-12 mt-4 mt-lg-0">
+                                    <button type="button" class="btn custom-btn cart-btn" onclick="location.href = 'displayslider'">Back To List</button>
+                                    <button type="button" class="btn custom-btn cart-btn" onclick="location.href = 'formeditslider?id=${s.sliderId}'" style="margin-top: 10px">Edit Slider</button>
+                                </div>
+                                <p></br></p>
+                            </div>
+
+                        </div>
+
                     </div>
                 </div>
-            </div>
-        </div>
+            </section>
+        </c:forEach>
 
         <div class="site-footer">
             <div class="container">
+
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="widget">
                             <h3>Contact</h3>
-                            <address>43 Raymouth Rd. Baltemoer, London 3910</address>
+                            <address>Thon 3 Thach Hoa Thach That Ha Noi</address>
                             <ul class="list-unstyled links">
                                 <li><a href="tel://11234567890">+1(123)-456-7890</a></li>
                                 <li><a href="tel://11234567890">+1(123)-456-7890</a></li>
@@ -178,6 +189,12 @@
 
                 <div class="row mt-5">
                     <div class="col-12 text-center">
+                        <!-- 
+**==========
+NOTE: 
+Please don't remove this copyright link unless you buy the license here https://untree.co/license/  
+**==========
+                        -->
 
                         <p>Copyright &copy;<script>document.write(new Date().getFullYear());</script>. All Rights Reserved. &mdash; Designed with love by <a href="https://untree.co">Untree.co</a> <!-- License information: https://untree.co/license/ -->
                         </p>
@@ -187,19 +204,21 @@
             </div> <!-- /.container -->
         </div> <!-- /.site-footer -->
 
-        <!-- jQuery -->
+        
+        <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+        <div id="preloader"></div>
         <script src="RenterCSS/js/jquery.min.js"></script>
-        <!-- jQuery Easing -->
-        <script src="RenterCSS/js/jquery.easing.1.3.js"></script>
-        <!-- Bootstrap -->
-        <script src="RenterCSS/js/bootstrap.min.js"></script>
-        <!-- Waypoints -->
-        <script src="RenterCSS/js/jquery.waypoints.min.js"></script>
-        <!-- Magnific Popup -->
-        <script src="RenterCSS/js/jquery.magnific-popup.min.js"></script>
-        <!-- Salvattore -->
-        <script src="RenterCSS/js/salvattore.min.js"></script>
-        <!-- Main JS -->
-        <script src="RenterCSS/js/main.js"></script>
+        <script src="RenterCSS/js/bootstrap.bundle.min.js"></script>
+        <script src="RenterCSS/js/Headroom.js"></script>
+        <script src="RenterCSS/js/jQuery.headroom.js"></script>
+        <script src="RenterCSS/js/slick.min.js"></script>
+        <script src="RenterCSS/js/custom.js"></script>
+        <script src="js/bootstrap.bundle.min.js"></script>
+        <script src="js/tiny-slider.js"></script>
+        <script src="js/aos.js"></script>
+        <script src="js/navbar.js"></script>
+        <script src="js/counter.js"></script>
+        <script src="js/custom.js"></script>
+
     </body>
 </html>
