@@ -41,7 +41,7 @@ public class ValidateOtp extends HttpServlet {
         } else {
             request.setAttribute("message", "wrong otp");
 
-            dispatcher = request.getRequestDispatcher("EnterOtp.jsp");
+            dispatcher = request.getRequestDispatcher("enterotp.jsp");
             dispatcher.forward(request, response);
         }
     }

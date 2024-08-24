@@ -5,6 +5,7 @@
 package model;
 
 
+import jakarta.annotation.Nullable;
 import java.util.Date;
 
 /**
@@ -72,6 +73,7 @@ public class usage {
         this.createAt = createAt;
     }
 
+    @Nullable
     public Date getPayAt() {
         return payAt;
     }

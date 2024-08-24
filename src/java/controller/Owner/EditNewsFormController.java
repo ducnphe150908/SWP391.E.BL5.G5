@@ -17,7 +17,7 @@ import model.News;
 
 /**
  *
- * @author quan
+ * @author pc
  */
 @WebServlet(name="EditNewsController", urlPatterns={"/formeditnews"})
 public class EditNewsFormController extends HttpServlet {
@@ -62,7 +62,7 @@ public class EditNewsFormController extends HttpServlet {
         News news = dao.getNewsById(id);
         
         request.setAttribute("news", news);
-        request.getRequestDispatcher("Owner/EditNews.jsp").forward(request, response);
+        request.getRequestDispatcher("Owner/Editnews.jsp").forward(request, response);
      
     } 
 

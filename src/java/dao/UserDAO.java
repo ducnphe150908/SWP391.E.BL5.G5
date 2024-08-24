@@ -158,6 +158,7 @@ public class UserDAO extends MyDAO {
                 + "     FROM [User]\n"
                 + "     INNER JOIN Account ON [User].userID = Account.userID\n"
                 + "     WHERE Account.userRole = 3";
+
         try {
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();

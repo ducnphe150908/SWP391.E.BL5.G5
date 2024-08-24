@@ -1,7 +1,7 @@
 <%-- 
     Document   : listRenter
-    Created on : 14 thg 8, 2024, 23:21:05
-    Author     : quan
+    Created on : 4 thg 7, 2024, 23:21:05
+    Author     : quocp
 --%>
 
 <%@page import="dao.RoomDAO,java.util.List"%>
