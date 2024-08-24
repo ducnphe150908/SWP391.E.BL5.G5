@@ -103,7 +103,7 @@ public class AddRenterController extends HttpServlet {
             request.setAttribute("Add renter failed!!", "message");
         }
         
-        request.getRequestDispatcher("Owner/OwnerHome.jsp").forward(request, response);
+        request.getRequestDispatcher("ListRenterController").forward(request, response);
     }
 
     /** 

@@ -135,12 +135,20 @@
                             <a href="DetailsSlider?id=${s.sliderId}" style="color: blue">
                                 <img class="img-fluid product-image" src="data:image/jpg;base64,${s.sliderImg}" width="500" height="auto">
                             </a>
-                            <form action="deleteSlider" method="post" style="float: right; margin: 0;">
-                                <input type="hidden" name="sliderId" value="${s.sliderId}" />
-                                <input type="submit" class="btn btn-primary" value="Delete" onclick="confirmDelete(event)" />
-                            </form>
+                            <div style="float: right;">
+                                <a href="toggleSliderStatus?sid=${s.sliderId}&status=${s.sliderStatus}" class="edit">
+                                    <button class="btn ${s.sliderStatus ? 'btn-success' : 'btn-danger'}">
+                                        ${s.sliderStatus ? 'Show' : 'Hide'}
+                                    </button>
+                                </a>
+                                <form action="deleteSlider" method="post" style="display: inline; margin: 0;">
+                                    <input type="hidden" name="sliderId" value="${s.sliderId}" />
+                                    <input type="submit" class="btn btn-primary" value="Delete" onclick="confirmDelete(event)" />
+                                </form>
+                            </div>
                         </li>
                     </c:forEach>
+
                 </ul>
             </div>
             <script>

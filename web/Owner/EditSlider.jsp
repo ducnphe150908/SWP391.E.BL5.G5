@@ -1,9 +1,10 @@
 <%-- 
-    Document   : Addslider.jsp
-    Created on : Aug 24, 2024, 7:14:02 PM
+    Document   : EditSlider
+    Created on : Aug 24, 2024, 8:31:52 PM
     Author     : quanb
 --%>
 
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="en">
     <head>
@@ -26,10 +27,6 @@
         <link rel="stylesheet" href="css/tiny-slider.css">
         <link rel="stylesheet" href="css/aos.css">
         <link rel="stylesheet" href="css/style.css">
-
-
-
-
 
         <!-- Favicons -->
         <link rel="shortcut icon" href="images/favicon.png">
@@ -84,39 +81,46 @@
             <div class="container">
                 <div class="menu-bg-wrap">
                     <div class="site-navigation">
-                        <a href="addnews" class="logo m-0 float-start">Owner</a>
+                        <a href="displayslider" class="logo m-0 float-start">Owner</a>
 
                         <jsp:include page = "navbar.jsp"></jsp:include>
 
-                        <a href="#" class="burger light me-auto float-end mt-1 site-menu-toggle js-menu-toggle d-inline-block d-lg-none" data-toggle="collapse" data-target="#main-navbar">
-                            <span></span>
-                        </a>
+                            <a href="#" class="burger light me-auto float-end mt-1 site-menu-toggle js-menu-toggle d-inline-block d-lg-none" data-toggle="collapse" data-target="#main-navbar">
+                                <span></span>
+                            </a>
 
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="hero page-inner overlay" style="background-image: url('images/hero_bg_3.jpg');">
+                <div class="container">
+                    <div class="row justify-content-center align-items-center">
+                        <div class="col-lg-9 text-center mt-5">
+                            <h1 class="heading" data-aos="fade-up">Edit Slider</h1>
+
+                        </div>
                     </div>
                 </div>
             </div>
-        </nav>
 
-        <div class="hero page-inner overlay" style="background-image: url('images/hero_bg_3.jpg');">
-            <div class="container">
-                <div class="row justify-content-center align-items-center">
-                    <div class="col-lg-9 text-center mt-5">
-                        <h1 class="heading" data-aos="fade-up">Add Slider</h1>
-
-                    </div>
+            <div class="container my-5">
+                <h2>Edit News</h2>
+                <c:if test="${not empty error}">
+                <div class="alert alert-danger" role="alert">
+                    ${error}
                 </div>
-            </div>
-        </div>
-        <div class="container my-5">
-            <h2>Add Slider</h2>
-            <form action="addslider" method="post" enctype="multipart/form-data">
-                <div class="mb-3">
-                    <label for="name" class="form-label">Name Slider</label>
-                    <input type="text" class="form-control" id="name"  name="name" required>
+            </c:if>
+            <form action="UpdateSliderController" method="post" enctype="multipart/form-data">
+                <input type="text" name="id" value="${slider.sliderId}" readonly="" />
+                <div class="form-group mb-3">
+                    <label for="title">Name Slider</label>
+                    <input type="text" class="form-control" name="name" value="${slider.sliderName}"  required>
                 </div>
-                <div class="mb-3">
+               <div class="mb-3">
                     <label for="image" class="form-label">Upload Image</label>
-                    <input id="fileInput" type="file" class="form-control" name="image" accept="image/jpeg, image/png" required>
+                    <input id="fileInput" type="file" class="form-control" name="img" accept="image/jpeg, image/png" required>
                     <span id="fileError" style="color: red;"></span>
                 </div>
                 <div class="mb-3">
@@ -124,45 +128,44 @@
                     <input type="date" class="form-control" id="date" name="date" required readonly="">
                     
                 </div>
-
-                <button type="submit" class="btn btn-primary" onclick="return validateFile()">Submit</button>
-                <a href="displayslider" class="btn btn-primary">Back to list</a>
+                <button type="submit" class="btn btn-primary" onclick="return validateFile()">Update</button>
+                 <a href="displayslider" class="btn btn-primary">Back to list</a>
             </form>
-            <script>
+                  <script>
 
                 const today = new Date().toISOString().split('T')[0];
 
                 document.getElementById('date').value = today;
             </script>
-            <script>
-                function validateFile() {
-                    const fileInput = document.getElementById('fileInput');
-                    const fileError = document.getElementById('fileError');
-                    fileError.textContent = ''; // Clear previous errors
+             <script>
+                    function validateFile() {
+                        const fileInput = document.getElementById('fileInput');
+                        const fileError = document.getElementById('fileError');
+                        fileError.textContent = ''; // Clear previous errors
 
-                    if (!fileInput.files || fileInput.files.length === 0) {
-                        fileError.textContent = 'Please select a file.';
-                        return false;
+                        if (!fileInput.files || fileInput.files.length === 0) {
+                            fileError.textContent = 'Please select a file.';
+                            return false;
+                        }
+
+                        const file = fileInput.files[0];
+                        const allowedTypes = ['image/jpeg', 'image/png'];
+                        const maxSize = 1 * 1024 * 1024; // 1 MB
+
+                        if (!allowedTypes.includes(file.type)) {
+                            fileError.textContent = 'Only JPEG and PNG files are allowed.';
+                            return false;
+                        }
+
+                        if (file.size > maxSize) {
+                            fileError.textContent = 'File size must be less than 1 MB.';
+                            return false;
+                        }
+
+                        return true;
                     }
-
-                    const file = fileInput.files[0];
-                    const allowedTypes = ['image/jpeg', 'image/png'];
-                    const maxSize = 1 * 1024 * 1024; // 1 MB
-
-                    if (!allowedTypes.includes(file.type)) {
-                        fileError.textContent = 'Only JPEG and PNG files are allowed.';
-                        return false;
-                    }
-
-                    if (file.size > maxSize) {
-                        fileError.textContent = 'File size must be less than 1 MB.';
-                        return false;
-                    }
-
-                    return true;
-                }
-            </script>
-            
+                </script>
+                
         </div>
         <div class="site-footer">
             <div class="container">
