@@ -73,25 +73,28 @@ public class DeleteSliderController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int sldierId = Integer.parseInt(request.getParameter("sliderId"));
-
-        Slider slider = new Slider();
-        slider.setSliderId(sldierId);
-
-        SliderDAO dao = new SliderDAO();
+        String id_raw = request.getParameter("id");
+        try {
+            int id = Integer.parseInt(id_raw);
+            Slider slider = new Slider();
+            slider.setSliderId(id);
+             SliderDAO dao = new SliderDAO();
         int result = dao.Deleteslider(slider);
+        } catch (Exception e) {
+        }
+
+       
         request.getRequestDispatcher("displayslider").forward(request, response);
     }
-        /**
-         * Returns a short description of the servlet.
-         *
-         * @return a String containing servlet description
-         */
-        @Override
-        public String getServletInfo
-        
-            () {
-        return "Short description";
-        }// </editor-fold>
 
-    }
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }// </editor-fold>
+
+}

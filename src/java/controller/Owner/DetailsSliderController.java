@@ -20,8 +20,8 @@ import model.Slider;
  *
  * @author quanb
  */
-@WebServlet(name="SliderDetailsController", urlPatterns={"/sliderDetail"})
-public class SliderDetailsController extends HttpServlet {
+@WebServlet(name="DetailsSliderController", urlPatterns={"/DetailsSlider"})
+public class DetailsSliderController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -36,8 +36,8 @@ public class SliderDetailsController extends HttpServlet {
         SliderDAO dao = new SliderDAO();
         int sliderId = Integer.parseInt(request.getParameter("id"));
         List<Slider> sliderDetails = dao.getSliderDetails(sliderId);
-        request.setAttribute("s", sliderDetails);
-        request.getRequestDispatcher("Owner/SliderDetails.jsp").forward(request, response);
+        request.setAttribute("slider", sliderDetails);
+        request.getRequestDispatcher("Owner/SliderList.jsp").forward(request, response);
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

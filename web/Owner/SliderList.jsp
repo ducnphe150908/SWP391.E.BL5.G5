@@ -1,8 +1,14 @@
 <%-- 
-    Document   : SliderDetails
-    Created on : Aug 24, 2024, 7:27:00 PM
+    Document   : SliderList
+    Created on : Aug 24, 2024, 8:20:49 PM
     Author     : quanb
 --%>
+
+<%@page import="model.News"%>
+<%@page import="java.util.List"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 
 <!DOCTYPE html>
 <html>
@@ -13,7 +19,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Tooplate's Little Fashion</title>
+        <title>Slider Details</title>
 
         <!-- CSS FILES -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -84,11 +90,11 @@
                 </div>
             </div>
 
-        
+        <c:forEach var="s" items="${slider}">
             <section class="product-detail section-padding">
                 <div class="container">
                     <div class="row">
-                        <c:forEach var="s" items="${s}">
+
                         <div class="col-lg-6 col-12">
                             <div class="product-thumb">
                                 <img class="img-fluid product-image" src="data:image/jpg;base64,${s.sliderImg}" >
@@ -99,30 +105,30 @@
                             <div class="product-info d-flex">
                                 <div>
                                     <h2 class="product-title mb-0">${s.sliderName}</h2>
-                                   <p class="product-p">${s.Sliderdate}</p>
+                                   <p class="product-p">${s.sliderDate}</p>
 
                                 </div>
 
                             </div>
 
-                          
+                            
 
                             <div class="product-cart-thumb row">
 
 
                                 <div class="col-lg-6 col-12 mt-4 mt-lg-0">
                                     <button type="button" class="btn custom-btn cart-btn" onclick="location.href = 'displayslider'">Back To List</button>
-                                    <button type="button" class="btn custom-btn cart-btn" onclick="location.href = 'formeditslider?id=${s.sliderId}'" style="margin-top: 10px">Edit Slider</button>
+                                    <button type="button" class="btn custom-btn cart-btn" onclick="location.href = 'formeditnews?id=${news.newId}'" style="margin-top: 10px">Edit News</button>
                                 </div>
                                 <p></br></p>
                             </div>
 
                         </div>
-                       </c:forEach>
+
                     </div>
                 </div>
             </section>
-        
+        </c:forEach>
 
         <div class="site-footer">
             <div class="container">
@@ -198,7 +204,7 @@ Please don't remove this copyright link unless you buy the license here https://
             </div> <!-- /.container -->
         </div> <!-- /.site-footer -->
 
-       
+        
         <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
         <div id="preloader"></div>
         <script src="RenterCSS/js/jquery.min.js"></script>
@@ -216,4 +222,3 @@ Please don't remove this copyright link unless you buy the license here https://
 
     </body>
 </html>
-
