@@ -135,14 +135,14 @@
                                                 <td>${o.penDate}</td>
                                                 <td>${o.ruleName}</td>
                                                 <c:choose>
-                                                    <c:when test="${o.penStatus == true}">
-                                                        <td>done</td>
+                                                    <c:when test="${o.penStatus == 1}">
+                                                        <td>Penalty</td>
                                                     </c:when>
-                                                    <c:when test="${o.penStatus == false}">
-                                                        <td>processing</td>
+                                                    <c:when test="${o.penStatus == 0}">
+                                                        <td>Waiting</td>
                                                     </c:when>
                                                     <c:otherwise>
-                                                        <td>unknown status</td>
+                                                        <td>Removed</td>
                                                     </c:otherwise>
                                                 </c:choose>
 
