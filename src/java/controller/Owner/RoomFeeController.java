@@ -69,7 +69,7 @@ public class RoomFeeController extends HttpServlet {
 //        session.setAttribute("billID", billID);
          String id_raw = request.getParameter("roomID");
          
-         int id = Integer.parseInt(id_raw);
+        int id = Integer.parseInt(id_raw);
         request.setAttribute("roomID", id);
         HttpSession session = request.getSession();
         session.setAttribute("roomID", id);

@@ -20,15 +20,7 @@ import model.Renter;
 @WebServlet(name = "WalletController", urlPatterns = {"/WalletController"})
 public class WalletController extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -38,19 +30,14 @@ public class WalletController extends HttpServlet {
         //get email and password 
         String email = (String) session.getAttribute("email");
         String password = (String) session.getAttribute("password");
-
+ 
         int renterID = 0;
         List<Renter> getBasicRenter = (List<Renter>) renterDAO.getRenterDetail(email, password);
         for (Renter renter : getBasicRenter) {
             renterID = renter.getRenterID();
         }
-        if (renterID == 0) {
-            request.setAttribute("error", "You have to rent a room then you can deposit money and see your balance");
-            request.setAttribute("balanceRenter", 0);
-        } else {
-            int balanceRenter = payment.displayMoney(renterID);
-            request.setAttribute("balanceRenter", balanceRenter);
-        }
+        int balanceRenter = payment.displayMoney(renterID);
+        request.setAttribute("balanceRenter", balanceRenter);
         request.getRequestDispatcher("Renter/wallet.jsp").forward(request, response);
     }
 

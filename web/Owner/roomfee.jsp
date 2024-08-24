@@ -1,9 +1,3 @@
-<%-- 
-    Document   : SeNews
-    Created on : Jan 18, 2024, 2:59:38 PM
-    Author     : ASUS
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
@@ -234,7 +228,7 @@
                                                                                 </div>
                                                                                 <small style="font-style: italic; color: #EF3159">(*) you can edit or delete fee only when renter not paid that fee</small>
                                                                             </div>
-                                                                            <a class="btn btn-primary" style="text-decoration: none; color: #FFF" href="addroomfee?id=${requestScope.roomID}"><i class="fa-solid fa-plus"></i>&nbsp;Add New Fee</a>                                                                                                             
+                                                                            <a class="btn btn-primary" style="text-decoration: none; color: #FFF" href="addroomfee?id=${requestScope.roomID}"><i class="fa-solid fa-plus"></i></a>                                                                                                             
                                                                             <c:set var="page" value="${requestScope.page}"></c:set>
                                                                                 <div class="comment-widgets m-b-20">
 
@@ -266,10 +260,13 @@
                                                                                                         </c:choose></td>
                                                                                                     <td style="font-weight: bold">${bl.total}k VND</td> 
                                                                                                     <td class="d-flex justify-content-center gap-3">
-                                                                                                        <a class="btn btn-info" style="text-decoration: none; color: #FFF" href="roomfeedetail?id=${id}"><i class="fa-solid fa-circle-info"></i>&nbsp;Detail</a>
+                                                                                                        <a class="btn btn-info" style="text-decoration: none; color: #FFF" href="roomfeedetail?id=${id}"><i class="fa-solid fa-circle-info"></i></a>
                                                                                                         <c:choose>
                                                                                                             <c:when test="${bl.payAt eq null}">
-                                                                                                                <a class="btn btn-success" style="text-decoration: none" href="EditRoomFeeController?id=${id}"><i class="fa-regular fa-pen-to-square"></i>&nbsp;Edit</a>
+                                                                                                                <a class="btn btn-success" style="text-decoration: none" href="EditRoomFeeController?id=${id}"><i class="fa-regular fa-pen-to-square"></i></a>
+                                                                                                                <a class="btn btn-danger" style="text-decoration: none; color: #FFF" href="DeleteRoomFeeController?id=${id}" onclick="return confirm('Are you sure you want to delete this fee?');">
+                                                                                                                    <i class="fa-regular fa-trash-alt"></i>
+                                                                                                                </a>
                                                                                                             </c:when>
                                                                                                             <c:otherwise>
                                                                                                             </c:otherwise>
@@ -293,7 +290,7 @@
                                                                         <div class="row" style="margin-top:50px ">
                                                                             <div class="col-md-12">
                                                                                 <div class="form-group d-flex justify-content-center">
-                                                                                    <a style="padding: 10px 20px; font-size: 18px" href="/HL_Motel/ListRenterController" class="btn btn-danger"><i class="fa-solid fa-chevron-left"></i>&nbsp;Back To List</a>
+                                                                                    <a style="padding: 10px 20px; font-size: 18px" href="/SWP391.E.BL5.G5/ListRenterController" class="btn btn-danger"><i class="fa-solid fa-chevron-left"></i>&nbsp;Back To List</a>
                                                                                 </div>
                                                                             </div>
                                                                         </div>

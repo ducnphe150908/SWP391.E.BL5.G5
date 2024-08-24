@@ -37,7 +37,7 @@
 
             <div class="main">
                 <div class="container" style="margin-top: 2em">
-<!--                    <div class="col-3"><a href="insertPenalty"> <button type="button" class="btn btn-primary">Add Penalty</button></div></a>-->
+                    <div class="col-3"><a href="insertPenalty"> <button type="button" class="btn btn-primary">Add Penalty</button></div></a>
                     <table id="guildLineTable" class="display">
                         <thead>
                             <tr>
@@ -98,7 +98,7 @@
                             render: function (data, type, row) {
                                 return '\
             <a href="updatePenalty?id=' + data + '"><button type="button" class="btn btn-success"><i class="fa fa-edit"></i></button></a>\
-<button type="button"class="btn btn-danger" onclick="deleteItem(' + data + ')"><i class="fa fa-trash"></i></button>';
+            ';
                             },
                             orderable: false
                         }
@@ -107,11 +107,6 @@
 
             });
 
-            function deleteItem(data) {
-                var confirmDialog = confirm('Do you want to delete this item ?');
-                if (confirmDialog === true) {
-                    window.location.href = 'deletePenalty?id=' + data;
-                }
-            }
+           
     </script>
 </html>

@@ -79,7 +79,7 @@ public class BillDAO extends MyDAO {
                 + "    [payAt],\n"
                 + "    ([service] + [electric] + [water] + [roomFee] + [other] + [penMoney]) AS total\n"
                 + "FROM \n"
-                + "    [HL_Motel].[dbo].[bill]\n"
+                + "    [bill]\n"
                 + "WHERE [billID] = ?\n"
                 + "ORDER BY \n"
                 + "    [createAt] DESC;";
@@ -286,31 +286,31 @@ public class BillDAO extends MyDAO {
         }
     }
 
-    public static void main(String[] args) {
-        BillDAO dao = new BillDAO();
-//        int billID = 41; // Example room ID
-//        double service = 200.0;
-//        double electric = 150.0;
-//        double water = 100.0;
-//        BigDecimal roomFee = new BigDecimal("9900.00");
-//        double other = 50.0;
-//        double penMoney = 25.0;
-//        String deadline = "2024-12-31";
-//        String createAt = "2024-07-08";
-//        String payAt = null;
+//    public static void main(String[] args) {
+//        BillDAO dao = new BillDAO();
+////        int billID = 41; // Example room ID
+////        double service = 200.0;
+////        double electric = 150.0;
+////        double water = 100.0;
+////        BigDecimal roomFee = new BigDecimal("9900.00");
+////        double other = 50.0;
+////        double penMoney = 25.0;
+////        String deadline = "2024-12-31";
+////        String createAt = "2024-07-08";
+////        String payAt = null;
+////
+////        //Call updateFeeById method and check the result
+////        boolean result = dao.updateFeeById(billID, service, electric, water, roomFee, other, penMoney, deadline, payAt);
+//////     boolean result = dao.addFeeById(billID, service, electric, water, roomFee, other, penMoney, createAt, deadline, payAt);
+////        if (result) {
+////            System.out.println("Fee update successful.");
+////        } else {
+////            System.out.println("Fee update failed.");
+////        }
 //
-//        //Call updateFeeById method and check the result
-//        boolean result = dao.updateFeeById(billID, service, electric, water, roomFee, other, penMoney, deadline, payAt);
-////     boolean result = dao.addFeeById(billID, service, electric, water, roomFee, other, penMoney, createAt, deadline, payAt);
-//        if (result) {
-//            System.out.println("Fee update successful.");
-//        } else {
-//            System.out.println("Fee update failed.");
-//        }
-
-        Bill get = dao.getBillDetailByRoomID(2);
-        System.out.println(get.getDeadline());
-    }
+//        Bill get = dao.getBillDetailByRoomID(2);
+//        System.out.println(get.getDeadline());
+//    }
 
     public Bill getBillDetailByRoomID(int roomId) {
         double total = 0;
@@ -340,7 +340,7 @@ public class BillDAO extends MyDAO {
                 + "    [createAt] DESC;";
 
         try {
-            PreparedStatement ps = connection.prepareStatement(sql);          
+            PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, roomId);
             ResultSet rs = ps.executeQuery();
             rs = ps.executeQuery();
@@ -389,4 +389,31 @@ public class BillDAO extends MyDAO {
         return n;
     }
 
+    public int deleteBill(int billID) {
+        int result = 0;
+        String query = "DELETE FROM [dbo].[bill] WHERE [billID] = ?";
+        try {
+            java.sql.Connection conn = connection;
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1, billID);
+            result = ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+    
+    public static void main(String[] args) {
+        BillDAO dao = new BillDAO();
+        
+        int billIDToDelete = 18; // Replace with an actual bill ID from your database
+        
+        int result = dao.deleteBill(billIDToDelete);
+        
+        if (result > 0) {
+            System.out.println("Bill with ID " + billIDToDelete + " was successfully deleted.");
+        } else {
+            System.out.println("Failed to delete bill with ID " + billIDToDelete + ". It might not exist.");
+        }
+    }
 }

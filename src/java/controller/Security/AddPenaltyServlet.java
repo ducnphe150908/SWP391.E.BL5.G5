@@ -42,7 +42,7 @@ public class AddPenaltyServlet extends HttpServlet {
         String ruleID = request.getParameter("ruleID");
         PenaltyDao penaltyDao = new PenaltyDao();
 
-        penaltyDao.addPenalty(roomID, description, penDate, ruleID);
+        penaltyDao.addPenalty1(roomID, description, penDate, ruleID);
         response.sendRedirect("pen");
 //        request.getRequestDispatcher("security/test.jsp").forward(request, response);
     }
