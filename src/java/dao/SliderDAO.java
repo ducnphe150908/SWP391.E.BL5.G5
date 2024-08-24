@@ -117,9 +117,9 @@ public class SliderDAO extends DBContext{
         String query = "UPDATE [dbo].[Slider] \n"
                 + "SET [SliderName] = ?, \n"
                 + "    [SliderImg] = ?, \n"
-                + "    [SliderDate] = ?, \n"
+                + "    [SliderDate] = ? \n"
                
-                + "WHERE [newID] = ?";
+                + "WHERE [SliderID] = ?";
 
         try {
             java.sql.Connection conn = connection;
@@ -127,6 +127,7 @@ public class SliderDAO extends DBContext{
             ps.setString(1, slider.getSliderName());
             ps.setString(2, slider.getSliderImg());
             ps.setString(3, slider.getSliderDate());
+            ps.setInt(4, slider.getSliderId());
 
             n = ps.executeUpdate();
         } catch (Exception e) {
@@ -144,6 +145,7 @@ public class SliderDAO extends DBContext{
             ps.setInt(1, sliderId);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
+                slider = new Slider();
                  slider.setSliderId(rs.getInt("SliderId"));
                 slider.setSliderName(rs.getString("SliderName"));
                 slider.setSliderImg(rs.getString("SliderImg"));
@@ -201,5 +203,22 @@ public class SliderDAO extends DBContext{
             e.printStackTrace();
         }
         return n;
+    }
+      public static void main(String[] args) {
+        SliderDAO sliderDAO = new SliderDAO();
+        Slider slider = new Slider();
+         slider.setSliderId(1012);  // ID của slider mà bạn muốn cập nhật
+            slider.setSliderName("New Slider Name");
+            slider.setSliderImg("New Image Base64 String");  // Thay thế bằng base64 string thực tế
+            slider.setSliderDate("2024-08-24");
+              int result = sliderDAO.updateSlider(slider);
+
+            // Kiểm tra kết quả
+            if (result > 0) {
+                System.out.println("Slider updated successfully!");
+            } else {
+                System.out.println("Failed to update slider.");
+            }
+
     }
 }
