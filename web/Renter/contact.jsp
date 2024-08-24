@@ -141,47 +141,7 @@
             </div>
         </div>
 
-        <div class="section">
-            <div class="container">
-                <h2>History Request</h2>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Title</th>
-                            <th>Description</th>
-                            <th>Type</th>
-                            <th>Created At</th>
-                            <th>Status</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <c:forEach items="${requests}" var="request">
-                            <tr>
-                                <td>${request.requestID}</td>
-                                <td>${request.title}</td>
-                                <td>${request.description}</td>
-                                <td>${request.typeName}</td>
-                                <td>${request.createAt}</td>
-                                <td>${request.resStatus}</td>
-                                <td>
-                                    <form action="editRequest" method="GET">
-                                        <input type="hidden" name="id" value="${request.requestID}">
-                                        <i class="fas fa-edit btn-icon" style ="cursor: pointer" onclick="this.parentNode.submit()"></i>
-                                    </form>
-                                       <form action="request" method="POST">
-                                    <input type="hidden" name="action" value="delete">
-                                    <input type="hidden" name="id" value="${request.requestID}">
-                                    <i class="fas fa-trash-alt btn-icon" style="cursor: pointer" onclick="return confirmDelete(this)"></i>
-                                </form>
-                                </td>
-                            </tr>
-                        </c:forEach>
-                    </tbody>
-
-                </table>
-            </div>
-        </div>
+        
 
         <div class="site-footer">
             <div class="container">
