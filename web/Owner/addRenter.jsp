@@ -90,24 +90,24 @@
                     </div>
                 </div>
             </div>
-                            
-            <% if (message != null) { %>
-            <p style="color: red"> <%= message %> </p>
-            <%}%>
 
-            <section class="product-detail section-padding">
-                <div class="container">
-                    <form action="AddRenterController" method="post" style="margin-bottom: 100px">
-                        <div class="row">
-                            <div class="col-lg-6 col-12">
-                                <div class="product-info d-flex"></div>
-                                <div class="product-description">
-                                    <strong class="d-block mt-4 mb-2">Renter</strong>
-                                    <p class="lead mb-5">Pick User You Want To Add</p>
-                                </div>
-                                <div class="product-cart-thumb row">
-                                    <div class="col-lg-6 col-12">
-                                        <select style="font-size: 15px" class="form-select cart-form-select" id="inputGroupSelect01" name="userID">
+        <% if (message != null) { %>
+        <p style="color: red"> <%= message %> </p>
+        <%}%>
+
+        <section class="product-detail section-padding">
+            <div class="container">
+                <form id="addRenterForm" action="AddRenterController" method="post" style="margin-bottom: 100px">
+                    <div class="row">
+                        <div class="col-lg-6 col-12">
+                            <div class="product-info d-flex"></div>
+                            <div class="product-description">
+                                <strong class="d-block mt-4 mb-2">Renter</strong>
+                                <p class="lead mb-5">Pick User You Want To Add</p>
+                            </div>
+                            <div class="product-cart-thumb row">
+                                <div class="col-lg-6 col-12">
+                                    <select style="font-size: 15px" class="form-select cart-form-select" id="inputGroupSelect01" name="userID">
                                         <% for (User user : listUserAvailable) { %>
                                         <option selected="" hidden="" disabled=""></option>
                                         <option value="<%= user.getUserID() %>"><%= user.getUserName() %>- <%= user.getUserPhone()%></option>
@@ -139,6 +139,12 @@
                         </div>
                     </div>
                 </form>
+                <script type="text/javascript">
+                    document.getElementById("addRenterForm").addEventListener("submit", function (event) {
+                        alert("Add Success");
+                        // Không c?n ph?i ch?n vi?c g?i form n?u b?n mu?n form ???c g?i ?i sau khi thông báo
+                    });
+                </script>
             </div>
         </section>
 
