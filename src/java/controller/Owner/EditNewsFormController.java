@@ -62,7 +62,7 @@ public class EditNewsFormController extends HttpServlet {
         News news = dao.getNewsById(id);
         
         request.setAttribute("news", news);
-        request.getRequestDispatcher("Owner/Editnews.jsp").forward(request, response);
+        request.getRequestDispatcher("Owner/EditNews.jsp").forward(request, response);
      
     } 
 

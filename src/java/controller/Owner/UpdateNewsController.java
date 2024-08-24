@@ -2,10 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-
 package controller.Owner;
 
 import dao.NewDAO;
+import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -22,57 +22,31 @@ import model.News;
 
 /**
  *
- * @author quocp
+ * @author quan
  */
-@WebServlet(name="UpdateNewsController", urlPatterns={"/UpdateNewsController"})
+@WebServlet(name = "UpdateNewsController", urlPatterns = {"/UpdateNewsController"})
 @MultipartConfig
 public class UpdateNewsController extends HttpServlet {
-   
-    /** 
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        int id = Integer.parseInt(request.getParameter("id"));
-        String title = request.getParameter("newTitle");
-        String description = request.getParameter("description");
-        Part imagePart = request.getPart("img");
-        String createAt = request.getParameter("creatAt");
-         if (title == null || title.isEmpty() || description == null || description.isEmpty() || imagePart == null || createAt == null || createAt.isEmpty()) {
-            request.setAttribute("error", "All fields are required.");
-            request.getRequestDispatcher("Owner/Editnews.jsp").forward(request, response);
-            return;
-        }
 
-        byte[] photo = convertInputStreamToByteArray(imagePart.getInputStream());
-        String imgBase64 = Base64.getEncoder().encodeToString(photo);
-        
-         NewDAO dao = new NewDAO();
-         News news = new News(title, description, imgBase64, createAt);
-         dao.updateNews(news);
-    } 
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
+    /**
      * Handles the HTTP <code>GET</code> method.
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        processRequest(request, response);
-    } 
-
-    /** 
-     * Handles the HTTP <code>POST</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -80,10 +54,48 @@ public class UpdateNewsController extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        processRequest(request, response);
+            throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        String title = request.getParameter("newTitle");
+        String description = request.getParameter("description");
+        Part imagePart = request.getPart("img");
+        String createAt = request.getParameter("createAt");
+        if (title == null || title.isEmpty() || description == null || description.isEmpty() || imagePart == null || createAt == null || createAt.isEmpty()) {
+            request.setAttribute("error", "All fields are required.");
+            request.getRequestDispatcher("Owner/EditNews.jsp").forward(request, response);
+            return;
+        }
+
+        byte[] photo = convertInputStreamToByteArray(imagePart.getInputStream());
+        String imgBase64 = Base64.getEncoder().encodeToString(photo);
+
+        NewDAO dao = new NewDAO();
+        News news = new News(title, description, imgBase64, createAt);
+        news.setNewId(id);
+        int result = dao.updateNews(news);
+        if (result > 0) {
+            response.sendRedirect("displayNews");
+        } else {
+            request.setAttribute("errorMessage", "Error updating news");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("Owner/Editnews.jsp");
+            dispatcher.forward(request, response);
+        }
+
     }
-     private byte[] convertInputStreamToByteArray(InputStream inputStream) throws IOException {
+
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+//    @Override
+//    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+//            throws ServletException, IOException {
+//    }
+    private byte[] convertInputStreamToByteArray(InputStream inputStream) throws IOException {
         try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream()) {
             byte[] buffer = new byte[4096];
             int bytesRead;
@@ -94,8 +106,9 @@ public class UpdateNewsController extends HttpServlet {
         }
     }
 
-    /** 
+    /**
      * Returns a short description of the servlet.
+     *
      * @return a String containing servlet description
      */
     @Override
