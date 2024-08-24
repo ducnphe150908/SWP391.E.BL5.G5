@@ -1,9 +1,3 @@
-<%-- 
-    Document   : RenterProfile
-    Created on : 7 thg 7, 2024, 22:43:48
-    Author     : quocp
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="dao.RoomDAO, dao.RenterDAO, java.util.List,java.util.Vector"%>
 <%@page import="model.Room, model.User, model.Account" %>
