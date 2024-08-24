@@ -20,15 +20,7 @@ import model.Renter;
 @WebServlet(name = "WalletController", urlPatterns = {"/WalletController"})
 public class WalletController extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -38,7 +30,7 @@ public class WalletController extends HttpServlet {
         //get email and password 
         String email = (String) session.getAttribute("email");
         String password = (String) session.getAttribute("password");
-
+ 
         int renterID = 0;
         List<Renter> getBasicRenter = (List<Renter>) renterDAO.getRenterDetail(email, password);
         for (Renter renter : getBasicRenter) {
