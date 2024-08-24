@@ -2,10 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.Renter;
+package controller.Owner;
 
-import dao.PaymentDAO;
-import dao.RenterDAO;
+import dao.SliderDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,12 +12,14 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.util.List;
-import model.Renter;
+import model.Slider;
 
-@WebServlet(name = "WalletController", urlPatterns = {"/WalletController"})
-public class WalletController extends HttpServlet {
+/**
+ *
+ * @author quanb
+ */
+@WebServlet(name = "DeleteSliderController", urlPatterns = {"/deleteSlider"})
+public class DeleteSliderController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,21 +33,18 @@ public class WalletController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PaymentDAO payment = new PaymentDAO();
-        RenterDAO renterDAO = new RenterDAO();
-        HttpSession session = request.getSession();
-        //get email and password 
-        String email = (String) session.getAttribute("email");
-        String password = (String) session.getAttribute("password");
-
-        int renterID = 0;
-        List<Renter> getBasicRenter = (List<Renter>) renterDAO.getRenterDetail(email, password);
-        for (Renter renter : getBasicRenter) {
-            renterID = renter.getRenterID();
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet DeleteSliderController</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet DeleteSliderController at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
-        int balanceRenter = payment.displayMoney(renterID);
-        request.setAttribute("balanceRenter", balanceRenter);
-        request.getRequestDispatcher("Renter/wallet.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -75,7 +73,18 @@ public class WalletController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String id_raw = request.getParameter("id");
+        try {
+            int id = Integer.parseInt(id_raw);
+            Slider slider = new Slider();
+            slider.setSliderId(id);
+             SliderDAO dao = new SliderDAO();
+        int result = dao.Deleteslider(slider);
+        } catch (Exception e) {
+        }
+
+       
+        request.getRequestDispatcher("displayslider").forward(request, response);
     }
 
     /**

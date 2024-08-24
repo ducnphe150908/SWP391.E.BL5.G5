@@ -1,19 +1,43 @@
-<% int balanceRenter = (int) request.getAttribute("balanceRenter"); %>
-<% String error = (String) request.getAttribute("error"); %>
-<!doctype html>
-<html lang="en">
+<%-- 
+    Document   : SliderList
+    Created on : Aug 24, 2024, 8:20:49 PM
+    Author     : quanb
+--%>
+
+<%@page import="model.News"%>
+<%@page import="java.util.List"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+
+<!DOCTYPE html>
+<html>
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="author" content="Untree.co">
-        <link rel="shortcut icon" href="favicon.png">
 
-        <meta name="description" content="" />
-        <meta name="keywords" content="bootstrap, bootstrap5" />
+        <meta name="description" content="">
+        <meta name="author" content="">
 
+        <title>Slider Details</title>
+
+        <!-- CSS FILES -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;700;900&display=swap" rel="stylesheet">
+
+        <link href="RenterCSS/css/bootstrap.min.css" rel="stylesheet">
+        <link href="RenterCSS/css/bootstrap-icons.css" rel="stylesheet">
+
+        <link rel="stylesheet" href="css/slick.css"/>
+
+        <link href="RenterCSS/css/tooplate-little-fashion.css" rel="stylesheet">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 
         <link rel="stylesheet" href="fonts/icomoon/style.css">
         <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
@@ -21,70 +45,14 @@
         <link rel="stylesheet" href="css/tiny-slider.css">
         <link rel="stylesheet" href="css/aos.css">
         <link rel="stylesheet" href="css/style.css">
-
-        <title>Wallet</title>
-        <style>
-            .wallet-container {
-                background: #ffffff;
-                border-radius: 12px;
-                padding: 20px;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                text-align: center;
-                border: 1px solid #ddd;
-                max-width: 400px;
-                margin: auto;
+        <title>JSP Page</title>
+        <script>
+            .card {
+            margin - top: 20px;
             }
-            .wallet-title {
-                font-size: 1.5em;
-                color: #333;
-                margin-bottom: 20px;
-                font-weight: 600;
-            }
-            .wallet-amount {
-                font-size: 2em;
-                color: #28a745;
-                margin-bottom: 20px;
-                border-bottom: 2px solid #28a745;
-                padding-bottom: 10px;
-            }
-            .wallet-button {
-                margin-top: 20px;
-                padding: 10px 20px;
-                font-size: 1em;
-                border-radius: 8px;
-                transition: background-color 0.3s ease;
-            }
-            .wallet-button:hover {
-                background-color: #218838;
-            }
-            .additional-info {
-                margin-top: 30px;
-                font-size: 1.1em;
-                color: #666;
-                border-top: 1px solid #ddd;
-                padding-top: 20px;
-            }
-            .not-renter-message {
-                background-color: #f8d7da;
-                color: #721c24;
-                border: 1px solid #f5c6cb;
-                padding: 20px;
-                border-radius: 8px;
-                text-align: center;
-                font-size: 1.2em;
-                font-weight: 500;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                max-width: 600px;
-                margin: 0 auto;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-            }
-        </style>
+        </script>
     </head>
     <body>
-
         <div class="site-mobile-menu site-navbar-target">
             <div class="site-mobile-menu-header">
                 <div class="site-mobile-menu-close">
@@ -98,7 +66,7 @@
             <div class="container">
                 <div class="menu-bg-wrap">
                     <div class="site-navigation">
-                        <a href="rentercontroller?service=renterhome" class="logo m-0 float-start">Property</a>
+                        <a href="displayslider" class="logo m-0 float-start">Owner</a>
 
                         <jsp:include page = "navbar.jsp"></jsp:include>
 
@@ -111,51 +79,69 @@
                 </div>
             </nav>
 
-            <div class="hero page-inner overlay" style="background-image: url('images/hero_bg_1.jpg');">
-
+            <div class="hero page-inner overlay" style="background-image: url('images/hero_bg_3.jpg');">
                 <div class="container">
                     <div class="row justify-content-center align-items-center">
                         <div class="col-lg-9 text-center mt-5">
-                            <h1 class="heading" data-aos="fade-up">Your Wallet</h1>
+                            <h1 class="heading" data-aos="fade-up">Slider Detail</h1>
 
-                            <nav aria-label="breadcrumb" data-aos="fade-up" data-aos-delay="200">
-                                <ol class="breadcrumb text-center justify-content-center">
-                                    <li class="breadcrumb-item "><a href="rentercontroller?service=renterhome">Home</a></li>
-                                </ol>
-                            </nav>
                         </div>
                     </div>
                 </div>
             </div>
 
+        <c:forEach var="s" items="${slider}">
+            <section class="product-detail section-padding">
+                <div class="container">
+                    <div class="row">
 
-            <div class="section bg-light">
-            
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-md-8 col-lg-6">
-                        <div class="wallet-container">
-                            <div class="wallet-title">Your Balance</div>
-                            <div class="wallet-amount" id="balance-amount"><%= balanceRenter %></div>
-                            <a href="paymentList" class="btn btn-primary wallet-button">View list of payments</a>
+                        <div class="col-lg-6 col-12">
+                            <div class="product-thumb">
+                                <img class="img-fluid product-image" src="data:image/jpg;base64,${s.sliderImg}" >
+                            </div>
                         </div>
+
+                        <div class="col-lg-6 col-12">
+                            <div class="product-info d-flex">
+                                <div>
+                                    <h2 class="product-title mb-0">${s.sliderName}</h2>
+                                   <p class="product-p">${s.sliderDate}</p>
+
+                                </div>
+
+                            </div>
+
+                            
+
+                            <div class="product-cart-thumb row">
+
+
+                                <div class="col-lg-6 col-12 mt-4 mt-lg-0">
+                                    <button type="button" class="btn custom-btn cart-btn" onclick="location.href = 'displayslider'">Back To List</button>
+                                    <button type="button" class="btn custom-btn cart-btn" onclick="location.href = 'formeditslider?id=${s.sliderId}'" style="margin-top: 10px">Edit Slider</button>
+                                </div>
+                                <p></br></p>
+                            </div>
+
+                        </div>
+
                     </div>
                 </div>
-            </div>
-        </div>
-
+            </section>
+        </c:forEach>
 
         <div class="site-footer">
             <div class="container">
+
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="widget">
                             <h3>Contact</h3>
-                            <address>fpt university</address>
+                            <address>Thon 3 Thach Hoa Thach That Ha Noi</address>
                             <ul class="list-unstyled links">
                                 <li><a href="tel://11234567890">+1(123)-456-7890</a></li>
                                 <li><a href="tel://11234567890">+1(123)-456-7890</a></li>
-                                <li><a href="mailto:info@mydomain.com">HolaMotel@gmail.com</a></li>
+                                <li><a href="mailto:info@mydomain.com">info@mydomain.com</a></li>
                             </ul>
                         </div> <!-- /.widget -->
                     </div> <!-- /.col-lg-4 -->
@@ -169,6 +155,14 @@
                                 <li><a href="#">Mission</a></li>
                                 <li><a href="#">Terms</a></li>
                                 <li><a href="#">Privacy</a></li>
+                            </ul>
+                            <ul class="list-unstyled float-start links">
+                                <li><a href="#">Partners</a></li>
+                                <li><a href="#">Business</a></li>
+                                <li><a href="#">Careers</a></li>
+                                <li><a href="#">Blog</a></li>
+                                <li><a href="#">FAQ</a></li>
+                                <li><a href="#">Creative</a></li>
                             </ul>
                         </div> <!-- /.widget -->
                     </div> <!-- /.col-lg-4 -->
@@ -192,25 +186,39 @@
                         </div> <!-- /.widget -->
                     </div> <!-- /.col-lg-4 -->
                 </div> <!-- /.row -->
+
+                <div class="row mt-5">
+                    <div class="col-12 text-center">
+                        <!-- 
+**==========
+NOTE: 
+Please don't remove this copyright link unless you buy the license here https://untree.co/license/  
+**==========
+                        -->
+
+                        <p>Copyright &copy;<script>document.write(new Date().getFullYear());</script>. All Rights Reserved. &mdash; Designed with love by <a href="https://untree.co">Untree.co</a> <!-- License information: https://untree.co/license/ -->
+                        </p>
+
+                    </div>
+                </div>
             </div> <!-- /.container -->
         </div> <!-- /.site-footer -->
 
+        
+        <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+        <div id="preloader"></div>
+        <script src="RenterCSS/js/jquery.min.js"></script>
+        <script src="RenterCSS/js/bootstrap.bundle.min.js"></script>
+        <script src="RenterCSS/js/Headroom.js"></script>
+        <script src="RenterCSS/js/jQuery.headroom.js"></script>
+        <script src="RenterCSS/js/slick.min.js"></script>
+        <script src="RenterCSS/js/custom.js"></script>
         <script src="js/bootstrap.bundle.min.js"></script>
         <script src="js/tiny-slider.js"></script>
         <script src="js/aos.js"></script>
         <script src="js/navbar.js"></script>
         <script src="js/counter.js"></script>
         <script src="js/custom.js"></script>
-        <script>
-            function formatNumber(number) {
-                return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            }
 
-            document.addEventListener("DOMContentLoaded", function () {
-                var balanceElement = document.getElementById("balance-amount");
-                var balance = parseInt(balanceElement.innerText.replace(/,/g, '')); 
-                balanceElement.innerText = formatNumber(balance) + ' VND';
-            });
-        </script>
     </body>
 </html>
