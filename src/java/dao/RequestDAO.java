@@ -35,7 +35,7 @@ public class RequestDAO extends DBContext {
 
     public List<RequestList> getReqListByID(int userID) {
         List<RequestList> requests = new ArrayList<>();
-        String sql = "SELECT u.userID, u.userName, r.requestID, r.title, r.description, rt.typeName, r.createAt, r.resStatus "
+        String sql = "SELECT DISTINCT  u.userID, u.userName, r.requestID, r.title, r.description, rt.typeName, r.createAt, r.resStatus "
                 + "FROM request r "
                 + "JOIN [user] u ON r.userID = u.userID "
                 + "JOIN requestType rt ON r.requestType = rt.reqTypeID "

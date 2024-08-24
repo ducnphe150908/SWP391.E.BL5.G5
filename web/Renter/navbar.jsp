@@ -35,7 +35,7 @@
             <li class="${param.service == null || param.service == 'renterhome' ? 'active' : ''}">
                 <a href="rentercontroller?service=renterhome">Home</a>
             </li>
-            <li class="has-children ${(param.service == 'listRoom') || (param.service == 'guideandrule') || (param.service == 'RenterRoomDetail') ? 'active' : ''}">
+            <li class="has-children ${(param.service == 'listRoom') ||  (param.service == 'guideandrule') || (param.service == 'RenterRoomDetail') ? 'active' : ''}">
                 <a href="#">View</a>
                 <ul class="dropdown">
                     <li><a href="RenterRoomController?service=listRoom&index=1">List Of Rooms</a></li>
@@ -47,6 +47,7 @@
             </li>               
             <li class="${param.service == "paymentList" ? "active" : ''}"><a href="WalletController">Wallet</a></li>
             <li><a href="rentercontroller?service=request">Contact Us</a></li>
+            <li><a href="listrequest1?service=request">List Request</a></li>
             <li><a href="logout">Logout</a></li>
             <li>
                 <a href="rentercontroller?service=renterprofile">
