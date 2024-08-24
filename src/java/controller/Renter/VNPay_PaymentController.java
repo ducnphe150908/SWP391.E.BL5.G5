@@ -46,7 +46,7 @@ public class VNPay_PaymentController extends HttpServlet {
         String vnp_TxnRef = VNPayConfig.getRandomNumber(8);
         String vnp_IpAddr = VNPayConfig.getIpAddress(request);
         String vnp_CreateDate = VNPayConfig.getCurrentDate();
-        String vnp_ExpireDate = VNPayConfig.getExpireDate(3);
+        String vnp_ExpireDate = VNPayConfig.getExpireDate(15);
 
         Map<String, String> vnp_Params = new HashMap<>();
         vnp_Params.put("vnp_Version", "2.1.0");
