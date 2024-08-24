@@ -4,7 +4,7 @@
     Author     : pc
 --%>
 <%@page import="model.News"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="en">
     <head>
@@ -107,6 +107,11 @@
        
         <div class="container my-5">
             <h2>Edit News</h2>
+            <c:if test="${not empty error}">
+        <div class="alert alert-danger" role="alert">
+            ${error}
+        </div>
+    </c:if>
             <form action="UpdateNewsController" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="id" value="${news.newId}" />
                 <div class="form-group mb-3">
@@ -119,14 +124,51 @@
                 </div>
                 <div class="form-group mb-3">
                     <label for="img">Image URL</label>
-                    <input type="file" class="form-control" id="img" name="img"   required>
+                    <input id="fileInput" type="file" class="form-control" id="img" name="img" accept="image/jpeg, image/png"  required>
+                    <span id="fileError" style="color: red;"></span>
                 </div>
                 <div class="form-group mb-3">
                     <label for="createAt">Create At</label>
-                    <input type="text" class="form-control" id="createAt" name="createAt" value="${news.createAt}" required>
+                    <input type="text" class="form-control" id="createAt" name="createAt" value="${news.createAt}" readonly="">
                 </div>
-                <button type="submit" class="btn btn-primary">Update</button>
+                <button type="submit" class="btn btn-primary" onclick="return validateFile()">Update</button>
+                <a href="displayNews" class="btn btn-primary">Back to list</a>
             </form>
+                 <script>
+
+                const today = new Date().toISOString().split('T')[0];
+
+                document.getElementById('createAt').value = today;
+            </script>
+            <script>
+                    function validateFile() {
+                        const fileInput = document.getElementById('fileInput');
+                        const fileError = document.getElementById('fileError');
+                        fileError.textContent = ''; // Clear previous errors
+
+                        if (!fileInput.files || fileInput.files.length === 0) {
+                            fileError.textContent = 'Please select a file.';
+                            return false;
+                        }
+
+                        const file = fileInput.files[0];
+                        const allowedTypes = ['image/jpeg', 'image/png'];
+                        const maxSize = 1 * 1024 * 1024; // 1 MB
+
+                        if (!allowedTypes.includes(file.type)) {
+                            fileError.textContent = 'Only JPEG and PNG files are allowed.';
+                            return false;
+                        }
+
+                        if (file.size > maxSize) {
+                            fileError.textContent = 'File size must be less than 1 MB.';
+                            return false;
+                        }
+
+                        return true;
+                    }
+                </script>
+            
         </div>
         <div class="site-footer">
             <div class="container">
