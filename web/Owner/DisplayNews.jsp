@@ -74,28 +74,56 @@
 
                         <jsp:include page = "navbar.jsp"></jsp:include>
 
-                        <a href="#" class="burger light me-auto float-end mt-1 site-menu-toggle js-menu-toggle d-inline-block d-lg-none" data-toggle="collapse" data-target="#main-navbar">
-                            <span></span>
-                        </a>
+                            <a href="#" class="burger light me-auto float-end mt-1 site-menu-toggle js-menu-toggle d-inline-block d-lg-none" data-toggle="collapse" data-target="#main-navbar">
+                                <span></span>
+                            </a>
 
+                        </div>
                     </div>
                 </div>
-            </div>
-        </nav>
+            </nav>
 
-                        <div class="hero page-inner overlay" style="background-image: url('images/hero_bg_3.jpg');">
-                            <div class="container">
-                                <div class="row justify-content-center align-items-center">
-                                    <div class="col-lg-9 text-center mt-5">
-                                        <h1 class="heading" data-aos="fade-up">List News</h1>
-
-                                    </div>
-                                </div>
-                            </div>
+            <div class="hero page-inner overlay" style="background-image: url('images/hero_bg_3.jpg');">
+                <div class="container">
+                    <div class="row justify-content-center align-items-center">
+                        <div class="col-lg-9 text-center mt-5">
+                            <h1 class="heading" data-aos="fade-up">List News</h1>
                         </div>
-            <!-- Main Content -->
-            <div class="container my-5">
-                <div class="d-flex justify-content-between align-items-center mb-4">
+                    </div>
+                    <!-- Search Form -->
+                    </br>
+                <div class="col-md-6">
+                    <!-- Search Form -->
+                    <form action="displayNews" method="post" class="input-group mb-3">
+                        <input type="text" name="search" placeholder="Search Title" class="form-control" aria-label="Search Title">
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-primary">Search</button>
+                        </div>
+                    </form>
+
+                    <!-- Pagination Form -->
+                    <form id="myform" action="displayNews" method="get" class="form-inline d-flex align-items-center">
+                        <label for="page-size-select" class="ps-3 me-2">News per page:</label>
+                        <select name="pageSize" id="page-size-select" class="form-select me-2" onchange="document.getElementById('myform').submit()">
+                            <option value="5" <c:if test="${pageSize == 5}">selected</c:if>>5</option>
+                            <option value="10" <c:if test="${pageSize == 10}">selected</c:if>>10</option>
+                            <option value="15" <c:if test="${pageSize == 15}">selected</c:if>>15</option>
+                            <option value="20" <c:if test="${pageSize == 20}">selected</c:if>>20</option>
+                        </select>
+                        <input type="hidden" name="index" value="1">
+                        <input type="hidden" name="productName" value="${pi}">
+                        <noscript>
+                            <button type="submit" class="btn btn-primary">Go</button>
+                        </noscript>
+                    </form>
+                
+            </div>
+                   
+        </div>
+
+        <!-- Main Content -->
+        <div class="container my-5">
+            <div class="d-flex justify-content-between align-items-center mb-4">
                 <c:if test="${not empty message}">
                     <div class="alert alert-success">
                         <c:out value="${message}" />
@@ -118,11 +146,11 @@
         <script>
             function confirmDelete(event) {
                 if (!confirm("Are you sure you want to delete this post?")) {
-                    event.preventDefault(); 
+                    event.preventDefault();
                 }
             }
         </script>
-        
+
         <div class="site-footer">
             <div class="container">
 

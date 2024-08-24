@@ -5,7 +5,7 @@
 
 package controller.Owner;
 
-import dao.NewDAO;
+import dao.SliderDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,15 +13,17 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
-import model.News;
+import model.Slider;
 
 /**
  *
- * @author quan
+ * @author quanb
  */
-@WebServlet(name="newDetailController", urlPatterns={"/newsDetail"})
-public class newDetailController extends HttpServlet {
+@WebServlet(name="displaySliderController", urlPatterns={"/displayslider"})
+public class displaySliderController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -32,14 +34,38 @@ public class newDetailController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-       NewDAO dao = new NewDAO();
-       String newId_raw = request.getParameter("id");
-       int newId = Integer.parseInt(newId_raw);
-       List<News> newsDetail =dao.getNewsDetails(newId);
-       request.setAttribute("news", newsDetail);
-       request.getRequestDispatcher("Owner/NewsList.jsp").forward(request, response);
-        
+          response.setContentType("text/html;charset=UTF-8");
+        SliderDAO dao = new SliderDAO(); 
+
+        String indexParam = request.getParameter("index");
+        int index = 1;
+        try {
+            if (indexParam != null && !indexParam.isEmpty()) {
+                index = Integer.parseInt(indexParam);
+            }
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+
+        // Get the page size from the request, defaulting to 5 if not provided or invalid
+        String pageSizeParam = request.getParameter("pageSize");
+        int pageSize = 5;
+        try {
+            if (pageSizeParam != null && !pageSizeParam.isEmpty()) {
+                pageSize = Integer.parseInt(pageSizeParam);
+            }
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+        // Get paginated products
+        List<Slider> ListS = dao.getSliderList(index, pageSize);
+       
+
+        request.setAttribute("sliderList", ListS); // Set newsList attribute for JSP
+
+        request.setAttribute("pageSize", pageSize);
+        request.setAttribute("currentPage", index);
+        request.getRequestDispatcher("Owner/DisplaySlider.jsp").forward(request, response); // Forward to JSP for display
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -1,21 +1,29 @@
-<%-- 
-    Document   : Addnews
-    Created on : Jun 28, 2024, 9:28:01 AM
-    Author     : pc
---%>
-<%@page import="model.News"%>
-
-<!doctype html>
-<html lang="en">
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<html>
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="author" content="Untree.co">
-        <link rel="shortcut icon" href="favicon.png">
 
-        <meta name="description" content="" />
-        <meta name="keywords" content="bootstrap, bootstrap5" />
+        <meta name="description" content="">
+        <meta name="author" content="">
 
+        <title>Tooplate's Little Fashion</title>
+
+        <!-- CSS FILES -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;700;900&display=swap" rel="stylesheet">
+
+        <link href="RenterCSS/css/bootstrap.min.css" rel="stylesheet">
+        <link href="RenterCSS/css/bootstrap-icons.css" rel="stylesheet">
+
+        <link rel="stylesheet" href="css/slick.css"/>
+
+        <link href="RenterCSS/css/tooplate-little-fashion.css" rel="stylesheet">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -27,47 +35,14 @@
         <link rel="stylesheet" href="css/tiny-slider.css">
         <link rel="stylesheet" href="css/aos.css">
         <link rel="stylesheet" href="css/style.css">
-
-        <!-- Favicons -->
-        <link rel="shortcut icon" href="images/favicon.png">
-        <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
-
-        <!-- Google Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
-
-        <!-- Bootstrap CSS File -->
-        <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-        <!-- Libraries CSS Files -->
-        <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-        <link href="lib/animate/animate.min.css" rel="stylesheet">
-        <link href="lib/ionicons/css/ionicons.min.css" rel="stylesheet">
-        <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-
-        <!-- Main Stylesheet File -->
-        <link href="css/style_owner.css" rel="stylesheet">
-
-        <title>HoLa Motel</title>
-        <style>
-            /* Override text color */
-            body {
-                color: #000; /* Black text */
+        <title>JSP Page</title>
+        <script>
+            .card {
+            margin - top: 20px;
             }
-
-            /* Style labels to be black */
-            label {
-                color: #000; /* Black text */
-
-            }
-            .bg-image {
-
-                height: 100px;
-                width: 1920px;
-            }
-        </style>
+        </script>
     </head>
     <body>
-
         <div class="site-mobile-menu site-navbar-target">
             <div class="site-mobile-menu-header">
                 <div class="site-mobile-menu-close">
@@ -81,7 +56,7 @@
             <div class="container">
                 <div class="menu-bg-wrap">
                     <div class="site-navigation">
-                        <a href="" class="logo m-0 float-start">Owner</a>
+                        <a href="addnews" class="logo m-0 float-start">Owner</a>
 
                         <jsp:include page = "navbar.jsp"></jsp:include>
 
@@ -98,36 +73,58 @@
                 <div class="container">
                     <div class="row justify-content-center align-items-center">
                         <div class="col-lg-9 text-center mt-5">
-                            <h1 class="heading" data-aos="fade-up">Edit News</h1>
+                            <h1 class="heading" data-aos="fade-up">News Detail</h1>
 
                         </div>
                     </div>
                 </div>
             </div>
-       
-        <div class="container my-5">
-            <h2>Edit News</h2>
-            <form action="UpdateNewsController" method="post" enctype="multipart/form-data">
-                <input type="hidden" name="id" value="${news.newId}" />
-                <div class="form-group mb-3">
-                    <label for="title">Title</label>
-                    <input type="text" class="form-control" name="newTitle" value="${news.newTitle}"  required>
+
+        <c:forEach var="news" items="${news}">
+            <section class="product-detail section-padding">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-lg-6 col-12">
+                            <div class="product-thumb">
+                                <img class="img-fluid product-image" src="data:image/jpg;base64,${news.img}" >
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-12">
+                            <div class="product-info d-flex">
+                                <div>
+                                    <h2 class="product-title mb-0">${news.newTitle}</h2>
+                                   <p class="product-p">${news.createAt}</p>
+
+                                </div>
+
+                            </div>
+
+                            <div class="product-description">
+
+                                <strong class="d-block mt-4 mb-2">Description</strong>
+
+                                <p class="lead mb-5">${news.description}</p>
+                            </div>
+
+                            <div class="product-cart-thumb row">
+
+
+                                <div class="col-lg-6 col-12 mt-4 mt-lg-0">
+                                    <button type="button" class="btn custom-btn cart-btn" onclick="location.href = 'news'">Back To List</button>
+                                   
+                                </div>
+                                <p></br></p>
+                            </div>
+
+                        </div>
+
+                    </div>
                 </div>
-                <div class="form-group mb-3">
-                    <label for="description">Description</label>
-                    <textarea class="form-control" id="description" name="description"  required>${news.description}</textarea>
-                </div>
-                <div class="form-group mb-3">
-                    <label for="img">Image URL</label>
-                    <input type="file" class="form-control" id="img" name="img"   required>
-                </div>
-                <div class="form-group mb-3">
-                    <label for="createAt">Create At</label>
-                    <input type="text" class="form-control" id="createAt" name="createAt" value="${news.createAt}" required>
-                </div>
-                <button type="submit" class="btn btn-primary">Update</button>
-            </form>
-        </div>
+            </section>
+        </c:forEach>
+
         <div class="site-footer">
             <div class="container">
 
@@ -202,10 +199,15 @@ Please don't remove this copyright link unless you buy the license here https://
             </div> <!-- /.container -->
         </div> <!-- /.site-footer -->
 
+       
         <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
         <div id="preloader"></div>
-
-
+        <script src="RenterCSS/js/jquery.min.js"></script>
+        <script src="RenterCSS/js/bootstrap.bundle.min.js"></script>
+        <script src="RenterCSS/js/Headroom.js"></script>
+        <script src="RenterCSS/js/jQuery.headroom.js"></script>
+        <script src="RenterCSS/js/slick.min.js"></script>
+        <script src="RenterCSS/js/custom.js"></script>
         <script src="js/bootstrap.bundle.min.js"></script>
         <script src="js/tiny-slider.js"></script>
         <script src="js/aos.js"></script>
@@ -213,19 +215,5 @@ Please don't remove this copyright link unless you buy the license here https://
         <script src="js/counter.js"></script>
         <script src="js/custom.js"></script>
 
-
-        <!-- JavaScript Libraries -->
-        <script src="lib/jquery/jquery.min.js"></script>
-        <script src="lib/jquery/jquery-migrate.min.js"></script>
-        <script src="lib/popper/popper.min.js"></script>
-        <script src="lib/bootstrap/js/bootstrap.min.js"></script>
-        <script src="lib/easing/easing.min.js"></script>
-        <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-        <script src="lib/scrollreveal/scrollreveal.min.js"></script>
-
-
-        <!-- Template Main Javascript File -->
-        <script src="js/main_owner.js"></script>
     </body>
 </html>
-

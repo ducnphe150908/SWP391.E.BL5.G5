@@ -50,14 +50,15 @@
             </li>               
             <li><a class="<%= "addrenter".equals(service) ? "active" : "" %>" href="AddRenterController?service=addrenter">Add Renter</a></li>
             <li><a href="ListRenterController">Renter Management</a></li>
-            <li class="dropdown has-children <%=("displayNews".equals(service) || "addnews".equals(service) || "ruleList".equals(service) || "addGuideline".equals(service)
-                    || "penaltys".equals(service)) ? "active" : "" %>">
+            <li class="dropdown has-children <%=("displayNews".equals(service) || "addnews".equals(service) || "ruleList".equals(service) || "addGuideline".equals(service) || "displayslider".equals(service)
+                    || "penaltys".equals(service))  ? "active" : "" %>">
                 <a href="#">Manage</a>
                 <ul class="dropdown">
                     <li><a href="ruleList?service=ruleList">Rule</a></li>
                     <li><a href="displayNews?service=displayNews">News</a></li>
                     <li><a href="guidelines?service=guidelines">GuildLine</a></li>
                     <li><a href="penaltys?service=penaltys">Penalty</a></li>
+                    <li><a href="displayslider?service=displayslider">Slider</a></li>
                     <li><a href="ExcelFee.jsp">Add fee by excel</a></li>
                 </ul>
             </li>
