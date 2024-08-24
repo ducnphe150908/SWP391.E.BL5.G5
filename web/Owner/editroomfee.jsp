@@ -199,7 +199,7 @@
                                                 <div class="col-md-12"> 
                                                     <div class="form-group">
                                                         <label class="label" for="subject">Change Deadline: </label>
-                                                        <input type="datetime" class="form-control positive-number" value="${bl.deadline}" name="deadline" required>
+                                                        <input type="datetime-local" class="form-control positive-number" value="${bl.deadline}" name="deadline" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6"> 
