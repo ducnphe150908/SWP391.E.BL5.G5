@@ -31,7 +31,7 @@
             <!-- Navbar Search-->
             <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
                 <div class="input-group">
-                    
+
                 </div>
             </form>
 
@@ -56,11 +56,11 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Dashboard
                             </a>
-                            
-                           
-                            
+
+
+
                             <div class="sb-sidenav-menu-heading">Addons</div>
-                            
+
                             <a class="nav-link" href="shift">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 Shift
@@ -100,7 +100,7 @@
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active">Dashboard</li>
                         </ol>
-                        
+
                         <div class="row">
                             <div class="col-xl-6">
                                 <div class="card mb-4">
@@ -121,7 +121,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                     </div>
                 </main>
                 <footer class="py-4 bg-light mt-auto">

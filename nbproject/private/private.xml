@@ -31,5 +31,21 @@
             <file>file:/D:/SWP_Block/SWP391.E.BL5.G5/src/java/controller/Owner/DeleteNewsController.java</file>
             <file>file:/D:/SWP_Block/SWP391.E.BL5.G5/src/java/dao/SliderDAO.java</file>
         </group>
+        <group>
+            <file>file:/D:/SWP391/New%20folder%20(2)/SWP391.E.BL5.G5/src/java/dao/PenaltyDao.java</file>
+            <file>file:/D:/SWP391/New%20folder%20(2)/SWP391.E.BL5.G5/src/java/controller/Owner/EditRoomFeeController.java</file>
+            <file>file:/D:/SWP391/New%20folder%20(2)/SWP391.E.BL5.G5/web/Security/newdetail.jsp</file>
+            <file>file:/D:/SWP391/New%20folder%20(2)/SWP391.E.BL5.G5/src/java/model/Bill.java</file>
+            <file>file:/D:/SWP391/New%20folder%20(2)/SWP391.E.BL5.G5/web/Owner/roomfeedetail.jsp</file>
+            <file>file:/D:/SWP391/New%20folder%20(2)/SWP391.E.BL5.G5/src/java/controller/Owner/AddRoomFeeControler.java</file>
+            <file>file:/D:/SWP391/New%20folder%20(2)/SWP391.E.BL5.G5/src/java/controller/Guest/GuestController.java</file>
+            <file>file:/D:/SWP391/New%20folder%20(2)/SWP391.E.BL5.G5/web/Owner/roomfee.jsp</file>
+            <file>file:/D:/SWP391/New%20folder%20(2)/SWP391.E.BL5.G5/src/java/controller/Owner/DeleteRoomFeeController.java</file>
+            <file>file:/D:/SWP391/New%20folder%20(2)/SWP391.E.BL5.G5/src/java/controller/Owner/RoomFeeController.java</file>
+            <file>file:/D:/SWP391/New%20folder%20(2)/SWP391.E.BL5.G5/src/java/controller/Owner/newDetailController.java</file>
+            <file>file:/D:/SWP391/New%20folder%20(2)/SWP391.E.BL5.G5/src/java/dao/BillDAO.java</file>
+            <file>file:/D:/SWP391/New%20folder%20(2)/SWP391.E.BL5.G5/web/Owner/editroomfee.jsp</file>
+            <file>file:/D:/SWP391/New%20folder%20(2)/SWP391.E.BL5.G5/web/Security/newList.jsp</file>
+        </group>
     </open-files>
 </project-private>
