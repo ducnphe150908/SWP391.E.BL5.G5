@@ -118,16 +118,13 @@
                                 <input type="text" id="RuleName" name="RuleName" class="form-control" value="${detail.ruleName}" readonly>
                             </div>
                             <br>
-                            <div class="form-group">
-                                <label for="penStatus" class="form-label">Status:</label>
-                                <div>
-                                    <input type="radio" id="penStatusTrue" name="penStatus" value="true" class="form-check-input" ${detail.penStatus ? 'checked' : ''}>
-                                    <label for="penStatusTrue" class="form-check-label">True</label>
-                                </div>
-                                <div>
-                                    <input type="radio" id="penStatusFalse" name="penStatus" value="false" class="form-check-input" ${!detail.penStatus ? 'checked' : ''}>
-                                    <label for="penStatusFalse" class="form-check-label">False</label>
-                                </div>
+                            <div  class="form-group">
+                                <label for="rule" class="form-label">Status: </label>
+                                <select class="form-select" name="status">
+                                    <option value="-1" ${detail.penStatus==-1?"Selected":""}>Removed</option>
+                                    <option value="0" ${detail.penStatus==0?"Selected":""}>Waiting</option>
+                                    <option value="1" ${detail.penStatus==1?"Selected":""}>Penalty</option>
+                                </select>
                             </div>
                             <br>
                             <div class="modal-footer">

@@ -22,8 +22,6 @@ public class Penalty {
     private String evidenceImg;
 
     public Penalty() {
-        
-        
     }
 
     public Penalty(int penID, Room roomID, String description, Date penDate, Rule ruleID, int penStatus, String evidenceImg) {
@@ -36,8 +34,6 @@ public class Penalty {
         this.evidenceImg = evidenceImg;
     }
 
-    
-    
     public int getPenID() {
         return penID;
     }
@@ -94,4 +90,10 @@ public class Penalty {
         this.evidenceImg = evidenceImg;
     }
 
+    @Override
+    public String toString() {
+        return "Penalty{" + "penID=" + penID + ", roomID=" + roomID + ", description=" + description + ", penDate=" + penDate + ", ruleID=" + ruleID + ", penStatus=" + penStatus + ", evidenceImg=" + evidenceImg + '}';
+    }
+
+    
 }

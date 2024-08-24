@@ -12,7 +12,7 @@ import java.util.Date;
  */
 public class PenaltyList {
 
-    private int penId;
+   private int penId;
     private int reportID;
     private int accuseId;
     private int roomId;
@@ -21,13 +21,13 @@ public class PenaltyList {
     private Date penDate;
     private int ruleId;
     private String ruleName;
-    public boolean penStatus;
+    public int penStatus;
     public int renterID;
 
     public PenaltyList() {
     }
 
-    public PenaltyList(int penId, int reportID, int accuseId, int roomId, String description, Date penDate, int ruleId, String ruleName, boolean penStatus, int renterID) {
+    public PenaltyList(int penId, int reportID, int accuseId, int roomId, String description, Date penDate, int ruleId, String ruleName, int penStatus, int renterID) {
         this.penId = penId;
         this.reportID = reportID;
         this.accuseId = accuseId;
@@ -42,7 +42,7 @@ public class PenaltyList {
 
     
 
-    public PenaltyList(int penId, int roomId, int reportID, int accuseId, String description, Date penDate, int ruleId, String ruleName, boolean penStatus) {
+    public PenaltyList(int penId, int roomId, int reportID, int accuseId, String description, Date penDate, int ruleId, String ruleName, int penStatus) {
         this.penId = penId;
         this.roomId = roomId;
         this.reportID = reportID;
@@ -127,13 +127,15 @@ public class PenaltyList {
         this.ruleName = ruleName;
     }
 
-    public boolean isPenStatus() {
+    public int getPenStatus() {
         return penStatus;
     }
 
-    public void setPenStatus(boolean penStatus) {
+    public void setPenStatus(int penStatus) {
         this.penStatus = penStatus;
     }
+
+
 
     public int getRenterID() {
         return renterID;
@@ -147,4 +149,5 @@ public void setRenterID(int renterID) {
     public String toString() {
         return penId + ", " + reportID + ", " + accuseId + ", " + roomId + ", " + description + ", " + penDate + ", " + ruleId + ", " + ruleName + ", " + penStatus;
     }
+    
 }

@@ -6,9 +6,9 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>HL_Motel</title>
-        
-        
-        
+
+
+
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="Free HTML5 Template by FREEHTML5.CO" />
         <meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive" />
@@ -25,7 +25,7 @@
         <meta name="twitter:url" content="" />
         <meta name="twitter:card" content="" />
 
-      <link rel="shortcut icon" href="./images/favicon.png">
+        <link rel="shortcut icon" href="./images/favicon.png">
 
         <!-- Google Webfonts -->
         <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,100,500' rel='stylesheet' type='text/css'>
@@ -64,7 +64,7 @@
                 border-radius: 5px;
                 padding: 5px;
                 margin-bottom: 50px;
-                box-shadow: 0px 0px 1px 3px lightgray;                
+                box-shadow: 0px 0px 1px 3px lightgray;
             }
             th{
                 color: black
@@ -117,54 +117,55 @@
                 <div class="container">
                     <div class="pentable">
                         <table id="datatablesSimple" class="table table-bordered">
-                                    <thead>
-                                        <tr>
+                            <thead>
+                                <tr>
 
-                                            <th>Room</th>
-                                            <th>Description</th>
-                                            <th>Date</th>
-                                            <th>Rule</th>
-                                            <th>Status</th>
+                                    <th>Room</th>
+                                    <th>Description</th>
+                                    <th>Date</th>
+                                    <th>Rule</th>
+                                    <th>Status</th>
 
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Room</th>
-                                            <th>Description</th>
-                                            <th>Date</th>
-                                            <th>Rule</th>
-                                            <th>Status</th>
-                                        </tr>
-                                    </tfoot>
-                                    <tbody>
-                                    <c:forEach var="o" items="${list}">
-                                        <tr>
-                                            
-                                            <td>${o.roomId}</td>
-                                            <td>${o.description}</td>
-                                            <td>${o.penDate}</td>
-                                            <td>${o.ruleName}</td>
-                                            <c:choose>
-                                                    <c:when test="${o.penStatus == true}">
-                                                        <td>done</td>
-                                                    </c:when>
-                                                    <c:when test="${o.penStatus == false}">
-                                                        <td>processing</td>
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <td>unknown status</td>
-                                                    </c:otherwise>
-                                                </c:choose>
-                                            
-                                            
-                                            
-                                        </tr>
-                                    </c:forEach>
-                                    
-                                    </tbody>
-                                </table>
-                        </div>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>Room</th>
+                                    <th>Description</th>
+                                    <th>Date</th>
+                                    <th>Rule</th>
+                                    <th>Status</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                            <c:forEach var="o" items="${list}">
+                                <tr>
+
+                                    <td>${o.roomId}</td>
+                                    <td>${o.description}</td>
+                                    <td>${o.penDate}</td>
+                                    <td>${o.ruleName}</td>
+                                    <c:choose>
+                                        <c:when test="${o.penStatus == 1}">
+                                            <td>Penalty</td>
+                                        </c:when>
+                                        <c:when test="${o.penStatus == 0}">
+                                            <td>Waiting</td>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <td>Removed</td>
+                                        </c:otherwise>
+                                    </c:choose>
+
+
+
+
+                                </tr>
+                            </c:forEach>
+
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
@@ -250,7 +251,7 @@
         <script src="RenterCSS/js/salvattore.min.js"></script>
         <!-- Main JS -->
         <script src="RenterCSS/js/main.js"></script>
-        
+
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
         <script src="SecurityCSS/js/datatables-simple-demo.js"></script>
 

@@ -34,8 +34,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#!">Settings</a></li>
-                        <li><a class="dropdown-item" href="#!">Activity Log</a></li>
+                        
                         <li><hr class="dropdown-divider" /></li>
                         <li><a class="dropdown-item" href="logout">Logout</a></li>
                     </ul>
@@ -54,9 +53,7 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 Account
                             </a>
-                            <a class="nav-link" href="manageUser">
-                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                User
+                           
                             </a>
                             <a class="nav-link" href="selist">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>

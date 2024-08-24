@@ -33,10 +33,10 @@ public class PenaltyDao extends DBContext {
                             "      ,[penDate]\n" +
                             "      ,r.[ruleName]\n" +
                             "      ,[penStatus]\n" +
-                            "  FROM [HL_Motel].[dbo].[penalty]\n" +
-                            "  join [rule] r on r.ruleID = penalty.ruleID\n" +
-                            "  join [room] v on v.roomID = penalty.roomID";
-
+                            "  FROM [HL_Motel].[dbo].[penaltys]\n" +
+                            "  join [rule] r on r.ruleID = penaltys.ruleID\n" +
+                            "  join [room] v on v.roomID = penaltys.roomID";
+        System.out.println(sql);
         try {
             java.sql.Connection conn = connection;
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -51,7 +51,7 @@ public class PenaltyDao extends DBContext {
                 PenaltyList.setDescription(rs.getString("description"));
                 PenaltyList.setPenDate(rs.getDate("penDate"));
                 PenaltyList.setRuleName(rs.getString("ruleName"));
-                PenaltyList.setPenStatus(rs.getBoolean("penStatus"));
+                PenaltyList.setPenStatus(rs.getInt("penStatus"));
                 lpen.add(PenaltyList);
             }
         } catch (Exception e) {
@@ -61,9 +61,9 @@ public class PenaltyDao extends DBContext {
     }
 
     public PenaltyList selectUpdateByPenID(String id) {
-        String sql = "select penID, reportID,accuseID,roomID,description,penDate,penalty.ruleID,[rule].ruleName,penStatus\n"
-                + "from penalty join [rule] \n"
-                + "on penalty.ruleID = [rule].ruleID\n"
+        String sql = "select penID,roomID,description,penDate,penaltys.ruleID,[rule].ruleName,penStatus\n"
+                + "from penaltys join [rule] \n"
+                + "on penaltys.ruleID = [rule].ruleID\n"
                 + "where penID = ?";
         try {
             java.sql.Connection conn = connection;
@@ -74,14 +74,14 @@ public class PenaltyDao extends DBContext {
 
             if (rs.next()) {
                 return new PenaltyList(rs.getInt(1),
+                        rs.getInt(1),
+                        rs.getInt(1),
                         rs.getInt(2),
-                        rs.getInt(3),
-                        rs.getInt(4),
-                        rs.getString(5),
-                        rs.getDate(6),
-                        rs.getInt(7),
-                        rs.getString(8),
-                        rs.getBoolean(9));
+                        rs.getString(3),
+                        rs.getDate(4),
+                        rs.getInt(5),
+                        rs.getString(6),
+                        rs.getInt(7));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -90,21 +90,23 @@ public class PenaltyDao extends DBContext {
 
     }
 
-    public void addPenalty(String roomID, String description, String penDate, String ruleID) {
-        String sql = "INSERT INTO HL_Motel.dbo.penalty (roomID, reportID, accuseID, description, penDate, ruleID, penStatus) VALUES (?,1,1, ?, ?, ?, 'false')";
+    public void addPenalty1(String roomID, String description, String penDate, String ruleID) {
+        String sql = "  INSERT INTO HL_Motel.dbo.penaltys (roomID, [description], [penDate], ruleID, [penStatus], [evidenceImg]) VALUES (?, ?, ?, ?, 0, 'img')";
+        System.out.println(sql);
         try (Connection conn = connection; PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, roomID);
             ps.setString(2, description);
             ps.setString(3, penDate);
             ps.setString(4, ruleID);
-            ps.executeUpdate();
+                      ps.executeUpdate();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
     public void updatePenalty(String penStatus, String penId) {
-        String sql = "UPDATE HL_Motel.dbo.penalty SET  penStatus =? WHERE penID =?";
+        String sql = "UPDATE HL_Motel.dbo.penaltys SET  penStatus =? WHERE penID =?";
         try (Connection conn = connection; PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setString(1, penStatus);
@@ -117,7 +119,7 @@ public class PenaltyDao extends DBContext {
     }
 
     public void deletePenalty(String penId) {
-        String sql = "DELETE FROM HL_Motel.dbo.penalty WHERE penID = ?";
+        String sql = "DELETE FROM HL_Motel.dbo.penaltys WHERE penID = ?";
         try (Connection conn = connection; PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, penId);
             ps.executeUpdate();
@@ -128,7 +130,7 @@ public class PenaltyDao extends DBContext {
 
     public Penalty findById(int id) {
         try {
-            String sql = "select * from penalty where penID = ?";
+            String sql = "select * from penaltys where penID = ?";
             PreparedStatement ps;
             ResultSet rs;
             ps = connection.prepareStatement(sql);
@@ -145,7 +147,7 @@ public class PenaltyDao extends DBContext {
 
     public int insert(Penalty model) {
         try {
-            String sql = "insert into penalty(roomID, description, penDate, ruleID, penStatus, evidenceImg) values (?,?,?,?,?,?)";
+            String sql = "insert into penaltys(roomID, description, penDate, ruleID, penStatus, evidenceImg) values (?,?,?,?,?,?)";
             PreparedStatement ps;
             ps = connection.prepareStatement(sql);
             ps.setInt(1, model.getRoomID().getRoomID());
@@ -164,7 +166,7 @@ public class PenaltyDao extends DBContext {
 
     public int update(Penalty model) {
         try {
-            String sql = "update penalty set roomID = ?, description = ?, penDate = ?, ruleID = ?, penStatus = ?, evidenceImg = ? where penID = ?";
+            String sql = "update penaltys set roomID = ?, description = ?, penDate = ?, ruleID = ?, penStatus = ?, evidenceImg = ? where penID = ?";
             PreparedStatement ps;
             ps = connection.prepareStatement(sql);
             ps.setInt(1, model.getRoomID().getRoomID());
@@ -184,7 +186,7 @@ public class PenaltyDao extends DBContext {
 
     public int remove(int id) {
         try {
-            String sql = "delete from penalty where penID = ?";
+            String sql = "delete from penaltys where penID = ?";
             PreparedStatement ps;
             ps = connection.prepareStatement(sql);
             ps.setInt(1, id);
@@ -254,7 +256,7 @@ public class PenaltyDao extends DBContext {
     public ArrayList<Penalty> findAll() {
         ArrayList<Penalty> penaltys = new ArrayList<>();
         try {
-            String sql = "select * from penalty";
+            String sql = "select * from penaltys";
             PreparedStatement ps;
             ResultSet rs;
             ps = connection.prepareStatement(sql);
@@ -297,15 +299,15 @@ public class PenaltyDao extends DBContext {
                 + "      ,penDate\n"
                 + "      ,c.ruleName\n"
                 + "      ,penStatus\n"
-                + "  FROM HL_Motel.dbo.penalty a \n"
+                + "  FROM HL_Motel.dbo.penaltys a \n"
                 + "   INNER JOIN renter b ON a.roomID = b.roomID\n"
                 + "	INNER JOIN [rule] c ON a.ruleID = c.ruleID\n"
-                + "  where b.renterID = ?";
+                + "  where b.userID = "+renterID;
 
         try {
+            System.out.println(sql);
             java.sql.Connection conn = connection;
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1, renterID);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -314,12 +316,13 @@ public class PenaltyDao extends DBContext {
                 PenaltyList.setDescription(rs.getString("description"));
                 PenaltyList.setPenDate(rs.getDate("penDate"));
                 PenaltyList.setRuleName(rs.getString("ruleName"));
-                PenaltyList.setPenStatus(rs.getBoolean("penStatus"));
+                PenaltyList.setPenStatus(rs.getInt("penStatus"));
                 lpen.add(PenaltyList);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+        System.out.println(lpen);
         return lpen;
     }
 }
