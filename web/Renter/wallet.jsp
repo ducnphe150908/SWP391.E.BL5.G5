@@ -130,11 +130,7 @@
 
 
             <div class="section bg-light">
-            <% if (error != null) { %>   
-            <div class="not-renter-message text-center" style="margin-bottom: 20px">
-                <p>You have to rent a room then you can deposit money and see your balance</p>
-            </div>
-            <%} else {%>
+            
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-md-8 col-lg-6">
@@ -146,7 +142,6 @@
                     </div>
                 </div>
             </div>
-            <%}%>
         </div>
 
 

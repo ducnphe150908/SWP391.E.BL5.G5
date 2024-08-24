@@ -44,13 +44,8 @@ public class WalletController extends HttpServlet {
         for (Renter renter : getBasicRenter) {
             renterID = renter.getRenterID();
         }
-        if (renterID == 0) {
-            request.setAttribute("error", "You have to rent a room then you can deposit money and see your balance");
-            request.setAttribute("balanceRenter", 0);
-        } else {
-            int balanceRenter = payment.displayMoney(renterID);
-            request.setAttribute("balanceRenter", balanceRenter);
-        }
+        int balanceRenter = payment.displayMoney(renterID);
+        request.setAttribute("balanceRenter", balanceRenter);
         request.getRequestDispatcher("Renter/wallet.jsp").forward(request, response);
     }
 
