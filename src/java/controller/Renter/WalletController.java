@@ -17,10 +17,6 @@ import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import model.Renter;
 
-/**
- *
- * @author nguye
- */
 @WebServlet(name = "WalletController", urlPatterns = {"/WalletController"})
 public class WalletController extends HttpServlet {
 
@@ -51,11 +47,10 @@ public class WalletController extends HttpServlet {
         if (renterID == 0) {
             request.setAttribute("error", "You have to rent a room then you can deposit money and see your balance");
             request.setAttribute("balanceRenter", 0);
-            request.getRequestDispatcher("Renter/wallet.jsp").forward(request, response);
+        } else {
+            int balanceRenter = payment.displayMoney(renterID);
+            request.setAttribute("balanceRenter", balanceRenter);
         }
-        int balanceRenter = payment.displayMoney(renterID);
-
-        request.setAttribute("balanceRenter", balanceRenter);
         request.getRequestDispatcher("Renter/wallet.jsp").forward(request, response);
     }
 

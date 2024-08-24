@@ -20,10 +20,6 @@ import model.Bill;
 import model.RentDetail;
 import model.Renter;
 
-/**
- *
- * @author nguye
- */
 @WebServlet(name="RenterRoomDetail", urlPatterns={"/RenterRoomDetail"})
 public class RenterRoomDetail extends HttpServlet {
    

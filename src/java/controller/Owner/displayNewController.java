@@ -33,78 +33,10 @@ public class displayNewController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        
-        NewDAO newsDAO = new NewDAO(); // Assuming NewsDAO handles database operations
-       String indexParam = request.getParameter("index");
-        int index = 1;
-        try {
-            if (indexParam != null && !indexParam.isEmpty()) {
-                index = Integer.parseInt(indexParam);
-            }
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
-        }
-
-        // Get the page size from the request, defaulting to 5 if not provided or invalid
-        String pageSizeParam = request.getParameter("pageSize");
-        int pageSize = 5;
-        try {
-            if (pageSizeParam != null && !pageSizeParam.isEmpty()) {
-                pageSize = Integer.parseInt(pageSizeParam);
-            }
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
-        }
-        List<News> ListN = newsDAO.getNewsList(index, pageSize);
-       SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
-       SimpleDateFormat sds = new SimpleDateFormat("dd-MM-yyyy ");
-        for (News news : ListN) {
-            Date date = null;
-            String formattedDate = news.getCreateAt();
-        
-        try {
-            // Chuyển chuỗi gốc thành đối tượng Date
-         date = inputFormat.parse(formattedDate);
-            // Chuyển đối tượng Date thành chuỗi theo định dạng mong muốn
-            formattedDate = sds.format(date);
-            news.setCreateAt(formattedDate);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        }
-       
-        request.setAttribute("newsList", ListN); // Set newsList attribute for JSP
-
-        request.getRequestDispatcher("Owner/DisplayNews.jsp").forward(request, response); // Forward to JSP for display
-    } 
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
-     * Handles the HTTP <code>GET</code> method.
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);                                                                  
-    }
-
-    /** 
-     * Handles the HTTP <code>POST</code> method.
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        String raw_search = request.getParameter("search");
+        response.setContentType("text/html;charset=UTF-8");
+        NewDAO newsDAO = new NewDAO(); // Assuming NewsDAO handles database operations
+//        List<News> ListN = newsDAO.getNewsList(); // Fetch news list from DAO
         String indexParam = request.getParameter("index");
         int index = 1;
         try {
@@ -125,16 +57,102 @@ public class displayNewController extends HttpServlet {
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
-        NewDAO newsDAO = new NewDAO();
-        List<News> ListN = newsDAO.searchByText(index, pageSize, raw_search);
-        System.out.println(ListN.size());
+        // Get paginated products
+        List<News> ListN = newsDAO.getNewsList(index, pageSize);
+        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-dd-MM HH:mm:ss.S");
+        SimpleDateFormat sds = new SimpleDateFormat("dd-MM-yyyy ");
+        for (News news : ListN) {
+            Date date = null;
+            String formattedDate = news.getCreateAt();
+
+            try {
+                // Chuyển chuỗi gốc thành đối tượng Date
+                date = inputFormat.parse(formattedDate);
+                // Chuyển đối tượng Date thành chuỗi theo định dạng mong muốn
+                formattedDate = sds.format(date);
+                news.setCreateAt(formattedDate);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
         request.setAttribute("newsList", ListN); // Set newsList attribute for JSP
 
         request.setAttribute("pageSize", pageSize);
         request.setAttribute("currentPage", index);
-        request.setAttribute("search", raw_search);
+        request.getRequestDispatcher("Owner/DisplayNews.jsp").forward(request, response); // Forward to JSP for display
+    }
+
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String search = request.getParameter("search");
+        NewDAO newsDAO = new NewDAO();
+
+        String indexParam = request.getParameter("index");
+        int index = 1;
+        try {
+            if (indexParam != null && !indexParam.isEmpty()) {
+                index = Integer.parseInt(indexParam);
+            }
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+
+        String pageSizeParam = request.getParameter("pageSize");
+        int pageSize = 5;
+        try {
+            if (pageSizeParam != null && !pageSizeParam.isEmpty()) {
+                pageSize = Integer.parseInt(pageSizeParam);
+            }
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+
+        List<News> ListN = newsDAO.searchByText(index, pageSize, search);
+        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-dd-MM HH:mm:ss.S");
+        SimpleDateFormat sds = new SimpleDateFormat("dd-MM-yyyy ");
+        for (News news : ListN) {
+            Date date = null;
+            String formattedDate = news.getCreateAt();
+
+            try {
+                date = inputFormat.parse(formattedDate);
+                formattedDate = sds.format(date);
+                news.setCreateAt(formattedDate);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        request.setAttribute("newsList", ListN);
+        request.setAttribute("pageSize", pageSize);
+        request.setAttribute("currentPage", index);
+        request.setAttribute("search", search);
         request.getRequestDispatcher("Owner/DisplayNews.jsp").forward(request, response);
-    
     }
 
     /** 

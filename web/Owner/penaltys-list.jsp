@@ -37,7 +37,7 @@
 
             <div class="main">
                 <div class="container" style="margin-top: 2em">
-                  <div class="col-3"><a href="insertPenalty"> <button type="button" class="btn btn-primary">Add Penalty</button></div></a>
+<!--                    <div class="col-3"><a href="insertPenalty"> <button type="button" class="btn btn-primary">Add Penalty</button></div></a>-->
                     <table id="guildLineTable" class="display">
                         <thead>
                             <tr>

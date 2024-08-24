@@ -1,3 +1,9 @@
+<%-- 
+    Document   : dashboard
+    Created on : 27 thg 5, 2024, 09:10:20
+    Author     : Admin
+--%>
+
 <!DOCTYPE html>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -247,4 +253,3 @@
         </script>
     </body>
 </html>
-

@@ -1,3 +1,9 @@
+<%-- 
+    Document   : navbar
+    Created on : 25 thg 5, 2024, 15:32:37
+    Author     : quocp
+--%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <% String service = (String) request.getParameter("service"); %>
 <!DOCTYPE html>

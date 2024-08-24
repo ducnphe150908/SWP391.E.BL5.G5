@@ -5,7 +5,6 @@
 package controller.Guest;
 
 import dao.RoomDAO;
-import dao.SliderDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -17,7 +16,6 @@ import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import model.RoomDetailSe;
 import model.Rooms;
-import model.Slider;
 import model.UserDetail;
 
 /**
@@ -64,8 +62,7 @@ public class GuestController extends HttpServlet {
     private void GuestHome(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RoomDAO dao = new RoomDAO();
         List<Rooms> listRoom = dao.pagingRoom(1, 0);
-        List<Slider> slider = new SliderDAO().getAllSliders();
-        request.setAttribute("s", slider);
+
         request.setAttribute("listRoom", listRoom);
         request.getRequestDispatcher("Guest/GuestHome.jsp").forward(request, response);
     }
@@ -102,6 +99,15 @@ public class GuestController extends HttpServlet {
         request.getRequestDispatcher("Guest/RoomDetail.jsp").forward(request, response);
     }
 
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

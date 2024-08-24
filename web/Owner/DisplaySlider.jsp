@@ -1,8 +1,9 @@
 <%-- 
     Document   : DisplaySlider
-    Created on : Jul 4, 2024, 3:32:14 PM
-    Author     : quan
+    Created on : Aug 24, 2024, 6:04:38 PM
+    Author     : quanb
 --%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -70,7 +71,7 @@
             <div class="container">
                 <div class="menu-bg-wrap">
                     <div class="site-navigation">
-                        <a href="addnews" class="logo m-0 float-start">Owner</a>
+                        <a href="displayslider" class="logo m-0 float-start">Owner</a>
 
                         <jsp:include page = "navbar.jsp"></jsp:include>
 
@@ -88,168 +89,163 @@
                     <div class="row justify-content-center align-items-center">
                         <div class="col-lg-9 text-center mt-5">
                             <h1 class="heading" data-aos="fade-up">List Slider</h1>
-
                         </div>
                     </div>
+                    <!-- Search Form -->
+                    </br>
+                    <div class="col-md-6">
+                        <!-- Search Form -->
+
+
+                        <!-- Pagination Form -->
+                        <form id="myform" action="displayslider" method="get" class="form-inline d-flex align-items-center">
+                            <label for="page-size-select" class="ps-3 me-2">News per page:</label>
+                            <select name="pageSize" id="page-size-select" class="form-select me-2" onchange="document.getElementById('myform').submit()">
+                                <option value="5" <c:if test="${pageSize == 5}">selected</c:if>>5</option>
+                            <option value="10" <c:if test="${pageSize == 10}">selected</c:if>>10</option>
+                            <option value="15" <c:if test="${pageSize == 15}">selected</c:if>>15</option>
+                            <option value="20" <c:if test="${pageSize == 20}">selected</c:if>>20</option>
+                            </select>
+                            <input type="hidden" name="index" value="1">
+                            <input type="hidden" name="productName" value="${pi}">
+                        <noscript>
+                        <button type="submit" class="btn btn-primary">Go</button>
+                        </noscript>
+                    </form>
+
                 </div>
+
             </div>
+
             <!-- Main Content -->
             <div class="container my-5">
                 <div class="d-flex justify-content-between align-items-center mb-4">
-                <c:if test="${not empty message}">
-                    <div class="alert alert-success">
-                        <c:out value="${message}" />
-                    </div>
-                </c:if>
-                <h2 class="mb-0">Slider List</h2>
-                <a href="addslider" class="btn btn-primary">ADD SLIDER</a>
-            </div>
-            
-            <div class="text-black row mb-3">
-                <form id="myform" action="displayslider" class="form-inline">
-                    <label for="page-size-select" class="ps-3">Products per page:</label>
-                    <select name="pageSize" id="page-size-select" class="form-control" onchange="document.getElementById('myform').submit()">
-                        <option value="5" <c:if test="${pageSize == 5}">selected</c:if>>5</option>
-                        <option value="10" <c:if test="${pageSize == 10}">selected</c:if>>10</option>
-                        <option value="15" <c:if test="${pageSize == 15}">selected</c:if>>15</option>
-                        <option value="20" <c:if test="${pageSize == 20}">selected</c:if>>20</option>
-                        </select>
-                        <input type="hidden" name="index" value="1" />
-                        <input type="hidden" name="blogName" value="${pi}" />
-                    <noscript>
-                    <button type="submit" class="btn btn-primary">Go</button>
-                    </noscript>
-                </form>
-
-            </div> 
-            <ul class="list-group">
-                <c:forEach var="slider" items="${sliderList}">
-                    <li class="list-group-item">
-                        <span style="margin-right: 10px;">${slider.sliderDate}</span>
-                        <a href="sliderDetail?id=${slider.sliderId}" style="color: blue">
-                            <img class="img-fluid product-image" src="data:image/jpg;base64,${slider.sliderImg}" style="width: 500px; height: auto;"/>
-                        </a>
-                        <div style="float: right;">
-                            <!-- Nút trạng thái -->
-                            <a href="toggleSliderStatus?pid=${slider.sliderId}&status=${slider.sliderStatus}" class="edit">
-                                <button class="btn ${slider.sliderStatus ? 'btn-success' : 'btn-danger'}">
-                                    ${slider.sliderStatus ? 'Show' : 'Hide'}
-                                </button>
+                    <c:if test="${not empty message}">
+                        <div class="alert alert-success">
+                            <c:out value="${message}" />
+                        </div>
+                    </c:if>
+                    <h2 class="mb-0">Slider List</h2>
+                    <a href="addslider" class="btn btn-primary">Add Slider</a>
+                </div>
+                <ul class="list-group">
+                    <c:forEach var="s" items="${sliderList}">
+                        <li class="list-group-item">
+                            <span style="margin-right: 10px;">${s.sliderDate}</span>
+                            <a href="newsDetail?id=${s.sliderId}" style="color: blue">
+                                <img class="img-fluid product-image" src="data:image/jpg;base64,${s.sliderImg}" width="500" height="auto">
                             </a>
-
-                            <!-- Nút delete -->
-                            <form action="deleteslider" method="post" style="display: inline; margin-left: 5px;">
-                                <input type="hidden" name="sliderId" value="${slider.sliderId}" />
+                            <form action="deleteSlider" method="post" style="float: right; margin: 0;">
+                                <input type="hidden" name="sliderId" value="${s.sliderId}" />
                                 <input type="submit" class="btn btn-primary" value="Delete" onclick="confirmDelete(event)" />
                             </form>
-                        </div>
-                    </li>
-                </c:forEach>
-            </ul>
-        </div>
-        <script>
-            function confirmDelete(event) {
-                if (!confirm("Are you sure you want to delete this post?")) {
-                    event.preventDefault();
+                        </li>
+                    </c:forEach>
+                </ul>
+            </div>
+            <script>
+                function confirmDelete(event) {
+                    if (!confirm("Are you sure you want to delete this post?")) {
+                        event.preventDefault();
+                    }
                 }
-            }
-        </script>
+            </script>
 
-        <div class="site-footer">
-            <div class="container">
+            <div class="site-footer">
+                <div class="container">
 
-                <div class="row">
-                    <div class="col-lg-4">
-                        <div class="widget">
-                            <h3>Contact</h3>
-                            <address>Thon 3 Thach Hoa Thach That Ha Noi</address>
-                            <ul class="list-unstyled links">
-                                <li><a href="tel://11234567890">+1(123)-456-7890</a></li>
-                                <li><a href="tel://11234567890">+1(123)-456-7890</a></li>
-                                <li><a href="mailto:info@mydomain.com">info@mydomain.com</a></li>
-                            </ul>
-                        </div> <!-- /.widget -->
-                    </div> <!-- /.col-lg-4 -->
-                    <div class="col-lg-4">
-                        <div class="widget">
-                            <h3>Sources</h3>
-                            <ul class="list-unstyled float-start links">
-                                <li><a href="#">About us</a></li>
-                                <li><a href="#">Services</a></li>
-                                <li><a href="#">Vision</a></li>
-                                <li><a href="#">Mission</a></li>
-                                <li><a href="#">Terms</a></li>
-                                <li><a href="#">Privacy</a></li>
-                            </ul>
-                            <ul class="list-unstyled float-start links">
-                                <li><a href="#">Partners</a></li>
-                                <li><a href="#">Business</a></li>
-                                <li><a href="#">Careers</a></li>
-                                <li><a href="#">Blog</a></li>
-                                <li><a href="#">FAQ</a></li>
-                                <li><a href="#">Creative</a></li>
-                            </ul>
-                        </div> <!-- /.widget -->
-                    </div> <!-- /.col-lg-4 -->
-                    <div class="col-lg-4">
-                        <div class="widget">
-                            <h3>Links</h3>
-                            <ul class="list-unstyled links">
-                                <li><a href="#">Our Vision</a></li>
-                                <li><a href="#">About us</a></li>
-                                <li><a href="#">Contact us</a></li>
-                            </ul>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="widget">
+                                <h3>Contact</h3>
+                                <address>Thon 3 Thach Hoa Thach That Ha Noi</address>
+                                <ul class="list-unstyled links">
+                                    <li><a href="tel://11234567890">+1(123)-456-7890</a></li>
+                                    <li><a href="tel://11234567890">+1(123)-456-7890</a></li>
+                                    <li><a href="mailto:info@mydomain.com">info@mydomain.com</a></li>
+                                </ul>
+                            </div> <!-- /.widget -->
+                        </div> <!-- /.col-lg-4 -->
+                        <div class="col-lg-4">
+                            <div class="widget">
+                                <h3>Sources</h3>
+                                <ul class="list-unstyled float-start links">
+                                    <li><a href="#">About us</a></li>
+                                    <li><a href="#">Services</a></li>
+                                    <li><a href="#">Vision</a></li>
+                                    <li><a href="#">Mission</a></li>
+                                    <li><a href="#">Terms</a></li>
+                                    <li><a href="#">Privacy</a></li>
+                                </ul>
+                                <ul class="list-unstyled float-start links">
+                                    <li><a href="#">Partners</a></li>
+                                    <li><a href="#">Business</a></li>
+                                    <li><a href="#">Careers</a></li>
+                                    <li><a href="#">Blog</a></li>
+                                    <li><a href="#">FAQ</a></li>
+                                    <li><a href="#">Creative</a></li>
+                                </ul>
+                            </div> <!-- /.widget -->
+                        </div> <!-- /.col-lg-4 -->
+                        <div class="col-lg-4">
+                            <div class="widget">
+                                <h3>Links</h3>
+                                <ul class="list-unstyled links">
+                                    <li><a href="#">Our Vision</a></li>
+                                    <li><a href="#">About us</a></li>
+                                    <li><a href="#">Contact us</a></li>
+                                </ul>
 
-                            <ul class="list-unstyled social">
-                                <li><a href="#"><span class="icon-instagram"></span></a></li>
-                                <li><a href="#"><span class="icon-twitter"></span></a></li>
-                                <li><a href="#"><span class="icon-facebook"></span></a></li>
-                                <li><a href="#"><span class="icon-linkedin"></span></a></li>
-                                <li><a href="#"><span class="icon-pinterest"></span></a></li>
-                                <li><a href="#"><span class="icon-dribbble"></span></a></li>
-                            </ul>
-                        </div> <!-- /.widget -->
-                    </div> <!-- /.col-lg-4 -->
-                </div> <!-- /.row -->
+                                <ul class="list-unstyled social">
+                                    <li><a href="#"><span class="icon-instagram"></span></a></li>
+                                    <li><a href="#"><span class="icon-twitter"></span></a></li>
+                                    <li><a href="#"><span class="icon-facebook"></span></a></li>
+                                    <li><a href="#"><span class="icon-linkedin"></span></a></li>
+                                    <li><a href="#"><span class="icon-pinterest"></span></a></li>
+                                    <li><a href="#"><span class="icon-dribbble"></span></a></li>
+                                </ul>
+                            </div> <!-- /.widget -->
+                        </div> <!-- /.col-lg-4 -->
+                    </div> <!-- /.row -->
 
-                <div class="row mt-5">
-                    <div class="col-12 text-center">
-                        <!-- 
-**==========
-NOTE: 
-Please don't remove this copyright link unless you buy the license here https://untree.co/license/  
-**==========
-                        -->
+                    <div class="row mt-5">
+                        <div class="col-12 text-center">
+                            <!-- 
+    **==========
+    NOTE: 
+    Please don't remove this copyright link unless you buy the license here https://untree.co/license/  
+    **==========
+                            -->
 
-                        <p>Copyright &copy;<script>document.write(new Date().getFullYear());</script>. All Rights Reserved. &mdash; Designed with love by <a href="https://untree.co">Untree.co</a> <!-- License information: https://untree.co/license/ -->
-                        </p>
+                            <p>Copyright &copy;<script>document.write(new Date().getFullYear());</script>. All Rights Reserved. &mdash; Designed with love by <a href="https://untree.co">Untree.co</a> <!-- License information: https://untree.co/license/ -->
+                            </p>
 
+                        </div>
                     </div>
-                </div>
-            </div> <!-- /.container -->
-        </div> <!-- /.site-footer -->
+                </div> <!-- /.container -->
+            </div> <!-- /.site-footer -->
 
-        <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
-        <div id="preloader"></div>
-        <script src="js/bootstrap.bundle.min.js"></script>
-        <script src="js/tiny-slider.js"></script>
-        <script src="js/aos.js"></script>
-        <script src="js/navbar.js"></script>
-        <script src="js/counter.js"></script>
-        <script src="js/custom.js"></script>
-
-
-        <!-- JavaScript Libraries -->
-        <script src="lib/jquery/jquery.min.js"></script>
-        <script src="lib/jquery/jquery-migrate.min.js"></script>
-        <script src="lib/popper/popper.min.js"></script>
-        <script src="lib/bootstrap/js/bootstrap.min.js"></script>
-        <script src="lib/easing/easing.min.js"></script>
-        <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-        <script src="lib/scrollreveal/scrollreveal.min.js"></script>
+            <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+            <div id="preloader"></div>
+            <script src="js/bootstrap.bundle.min.js"></script>
+            <script src="js/tiny-slider.js"></script>
+            <script src="js/aos.js"></script>
+            <script src="js/navbar.js"></script>
+            <script src="js/counter.js"></script>
+            <script src="js/custom.js"></script>
 
 
-        <!-- Template Main Javascript File -->
-        <script src="js/main_owner.js"></script>
+            <!-- JavaScript Libraries -->
+            <script src="lib/jquery/jquery.min.js"></script>
+            <script src="lib/jquery/jquery-migrate.min.js"></script>
+            <script src="lib/popper/popper.min.js"></script>
+            <script src="lib/bootstrap/js/bootstrap.min.js"></script>
+            <script src="lib/easing/easing.min.js"></script>
+            <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+            <script src="lib/scrollreveal/scrollreveal.min.js"></script>
+
+
+            <!-- Template Main Javascript File -->
+            <script src="js/main_owner.js"></script>
     </body>
 </html>

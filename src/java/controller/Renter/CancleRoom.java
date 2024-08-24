@@ -1,9 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
+
 package controller.Renter;
 
+import dao.PaymentDAO;
 import dao.RenterDAO;
 import dao.RoomDAO;
 import java.io.IOException;
@@ -17,36 +15,26 @@ import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import model.Renter;
 
-/**
- *
- * @author nguye
- */
 @WebServlet(name = "CancleRoom", urlPatterns = {"/CancleRoom"})
 public class CancleRoom extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
         RoomDAO dao = new RoomDAO();
         RenterDAO renterDAO = new RenterDAO();
+        PaymentDAO pdao = new PaymentDAO();
         //get email and password 
         String email = (String) session.getAttribute("email");
         String password = (String) session.getAttribute("password");
 
         int renterID = 0;
+        int userID = 0;
         List<Renter> getBasicRenter = (List<Renter>) renterDAO.getRenterDetail(email, password);
         for (Renter renter : getBasicRenter) {
             renterID = renter.getRenterID();
+            userID = renter.getUserID();
         }
 
         int roomID = Integer.parseInt(request.getParameter("roomId"));
@@ -55,6 +43,7 @@ public class CancleRoom extends HttpServlet {
 
         if (cancleRoom > 0) {
             request.setAttribute("Successfully canceled the room", "message");
+            pdao.deleteMoney(userID);
             request.getRequestDispatcher("Renter/RenterRoomDetail.jsp").forward(request, response);
         }
     }
