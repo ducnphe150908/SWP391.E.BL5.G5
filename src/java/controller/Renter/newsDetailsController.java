@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package controller.Owner;
+package controller.Renter;
 
 import dao.NewDAO;
 import java.io.IOException;
@@ -18,10 +18,10 @@ import model.News;
 
 /**
  *
- * @author quan
+ * @author quanb
  */
-@WebServlet(name="newDetailController", urlPatterns={"/newsDetail"})
-public class newDetailController extends HttpServlet {
+@WebServlet(name="newsDetailsController", urlPatterns={"/newsdetails"})
+public class newsDetailsController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -38,7 +38,7 @@ public class newDetailController extends HttpServlet {
        int newId = Integer.parseInt(newId_raw);
        List<News> newsDetail =dao.getNewsDetails(newId);
        request.setAttribute("news", newsDetail);
-       request.getRequestDispatcher("Owner/NewsList.jsp").forward(request, response);
+       request.getRequestDispatcher("Renter/new-details.jsp").forward(request, response);
         
     } 
 

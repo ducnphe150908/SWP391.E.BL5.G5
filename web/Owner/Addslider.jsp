@@ -1,9 +1,8 @@
 <%-- 
-    Document   : Addnews
-    Created on : Jun 28, 2024, 9:28:01 AM
-    Author     : pc
+    Document   : Addslider.jsp
+    Created on : Aug 24, 2024, 7:14:02 PM
+    Author     : quanb
 --%>
-<%@page import="model.News"%>
 
 <!doctype html>
 <html lang="en">
@@ -27,6 +26,10 @@
         <link rel="stylesheet" href="css/tiny-slider.css">
         <link rel="stylesheet" href="css/aos.css">
         <link rel="stylesheet" href="css/style.css">
+
+
+
+
 
         <!-- Favicons -->
         <link rel="shortcut icon" href="images/favicon.png">
@@ -81,52 +84,94 @@
             <div class="container">
                 <div class="menu-bg-wrap">
                     <div class="site-navigation">
-                        <a href="" class="logo m-0 float-start">Owner</a>
+                        <a href="addnews" class="logo m-0 float-start">Owner</a>
 
                         <jsp:include page = "navbar.jsp"></jsp:include>
 
-                            <a href="#" class="burger light me-auto float-end mt-1 site-menu-toggle js-menu-toggle d-inline-block d-lg-none" data-toggle="collapse" data-target="#main-navbar">
-                                <span></span>
-                            </a>
+                        <a href="#" class="burger light me-auto float-end mt-1 site-menu-toggle js-menu-toggle d-inline-block d-lg-none" data-toggle="collapse" data-target="#main-navbar">
+                            <span></span>
+                        </a>
 
-                        </div>
-                    </div>
-                </div>
-            </nav>
-
-            <div class="hero page-inner overlay" style="background-image: url('images/hero_bg_3.jpg');">
-                <div class="container">
-                    <div class="row justify-content-center align-items-center">
-                        <div class="col-lg-9 text-center mt-5">
-                            <h1 class="heading" data-aos="fade-up">Edit News</h1>
-
-                        </div>
                     </div>
                 </div>
             </div>
-       
+        </nav>
+
+        <div class="hero page-inner overlay" style="background-image: url('images/hero_bg_3.jpg');">
+            <div class="container">
+                <div class="row justify-content-center align-items-center">
+                    <div class="col-lg-9 text-center mt-5">
+                        <h1 class="heading" data-aos="fade-up">Add Slider</h1>
+
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="container my-5">
-            <h2>Edit News</h2>
-            <form action="UpdateNewsController" method="post" enctype="multipart/form-data">
-                <input type="hidden" name="id" value="${news.newId}" />
-                <div class="form-group mb-3">
-                    <label for="title">Title</label>
-                    <input type="text" class="form-control" name="newTitle" value="${news.newTitle}"  required>
+            <h2>Add Slider</h2>
+            <form action="addslider" method="post" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name Slider</label>
+                    <input type="text" class="form-control" id="name"  name="name" required>
                 </div>
-                <div class="form-group mb-3">
-                    <label for="description">Description</label>
-                    <textarea class="form-control" id="description" name="description"  required>${news.description}</textarea>
+                <div class="mb-3">
+                    <label for="image" class="form-label">Upload Image</label>
+                    <input type="file" class="form-control" name="image" accept="image/jpeg, image/png" required>
                 </div>
-                <div class="form-group mb-3">
-                    <label for="img">Image URL</label>
-                    <input type="file" class="form-control" id="img" name="img"   required>
+                <div class="mb-3">
+                    <label for="date" class="form-label">Date:</label>
+                    <input type="date" class="form-control" id="date" name="date" required readonly="">
                 </div>
-                <div class="form-group mb-3">
-                    <label for="createAt">Create At</label>
-                    <input type="text" class="form-control" id="createAt" name="createAt" value="${news.createAt}" required>
-                </div>
-                <button type="submit" class="btn btn-primary">Update</button>
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <a href="displayslider" class="btn btn-primary">Back to list</a>
             </form>
+            <script>
+
+                const today = new Date().toISOString().split('T')[0];
+
+                document.getElementById('date').value = today;
+            </script>
+            <script>
+                function validateFile() {
+                    const fileInput = document.getElementById('fileInput');
+                    const fileError = document.getElementById('fileError');
+                    fileError.textContent = ''; // Clear previous errors
+
+                    if (!fileInput.files || fileInput.files.length === 0) {
+                        fileError.textContent = 'Please select a file.';
+                        return false;
+                    }
+
+                    const file = fileInput.files[0];
+                    const allowedTypes = ['image/jpeg', 'image/png'];
+                    const maxSize = 5 * 1024 * 1024; // 5 MB
+
+                    if (!allowedTypes.includes(file.type)) {
+                        fileError.textContent = 'Only JPEG and PNG files are allowed.';
+                        return false;
+                    }
+
+                    if (file.size > maxSize) {
+                        fileError.textContent = 'File size must be less than 5 MB.';
+                        return false;
+                    }
+
+                    return true;
+                }
+            </script>
+            <script>
+                function checkImageFile() {
+                    var fileInput = document.getElementById('files');
+                    var filePath = fileInput.value;
+                    var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+                    if (!allowedExtensions.exec(filePath)) {
+                        alert('Ch? cho phép t?i lên các file có ??nh d?ng: .jpeg/.jpg/.png/.gif');
+                        fileInput.value = '';
+                        return false;
+                    }
+                }
+            </script>
         </div>
         <div class="site-footer">
             <div class="container">
@@ -228,4 +273,3 @@ Please don't remove this copyright link unless you buy the license here https://
         <script src="js/main_owner.js"></script>
     </body>
 </html>
-
