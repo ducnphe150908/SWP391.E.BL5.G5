@@ -108,10 +108,12 @@
                         <c:forEach items="${ListN}" var="n">
                             <div class="item">
                                 <div class="animate-box">
-                                    <a href="data:image/jpg;base64,${n.img}" class="image-popup fh5co-board-img" title="${n.description}"><img src="data:image/jpg;base64,${n.img}" alt="No IMG"></a>
-                                </div>
-                                <div class="fh5co-desc">${n.newTitle}</div>
-                                <div class="fh5co-desc">${n.description}</div>
+                                    <a href="newDetails?id=${n.newId}" >
+                                        <img src="data:image/jpg;base64,${n.img}">
+                                    </a>
+                                </div>  
+                                <div class="fh5co-desc">${n.newTitle}</div> 
+
                                 <div class="fh5co-desc">${n.createAt}</div>
                             </div>        
                         </c:forEach>
